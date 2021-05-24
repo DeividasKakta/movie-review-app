@@ -1,6 +1,7 @@
 package lt.codeacademy.moviereview.api.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.exception.MovieNotFoundException;
 import lt.codeacademy.moviereview.api.model.entity.Movie;
 import lt.codeacademy.moviereview.api.repository.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,18 @@ public class MovieService {
     }
 
     public void updateMovie(Movie movie) {
-        movieRepository.save(movie);
+        if (movieRepository.findById(movie.getId()).isPresent()) {
+            movieRepository.save(movie);
+        } else {
+            throw new MovieNotFoundException();
+        }
     }
 
     public void deleteMovieById(UUID uuid) {
-        movieRepository.deleteById(uuid);
+        try {
+            movieRepository.deleteById(uuid);
+        } catch (Exception e) {
+            throw new MovieNotFoundException();
+        }
     }
 }
