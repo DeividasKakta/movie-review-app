@@ -6,6 +6,7 @@ import lt.codeacademy.moviereview.api.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -14,5 +15,17 @@ public class MovieService {
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
+    }
+
+    public void createMovie(Movie movie) {
+        movieRepository.save(movie);
+    }
+
+    public void updateMovie(Movie movie) {
+        movieRepository.save(movie);
+    }
+
+    public void deleteMovieById(UUID uuid) {
+        movieRepository.deleteById(uuid);
     }
 }
