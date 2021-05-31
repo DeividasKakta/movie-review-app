@@ -2,7 +2,14 @@ import Header from "./components/Header/Header";
 import Content from "./components/Content/Content";
 import Footer from "./components/Footer/Footer";
 import {BrowserRouter as Router} from "react-router-dom";
-import {Container, createMuiTheme, makeStyles, MuiThemeProvider} from "@material-ui/core";
+import {
+    Container,
+    makeStyles,
+    MuiThemeProvider,
+    unstable_createMuiStrictModeTheme as createMuiTheme
+} from "@material-ui/core";
+import DateFnsUtils from "@date-io/date-fns";
+import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,15 +41,17 @@ function App() {
 
     return (
         <Router>
-            <MuiThemeProvider theme={theme}>
-                <div className={classes.root}>
-                    <Header/>
-                    <Container maxWidth="lg">
-                        <Content/>
-                    </Container>
-                    <Footer/>
-                </div>
-            </MuiThemeProvider>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <MuiThemeProvider theme={theme}>
+                    <div className={classes.root}>
+                        <Header/>
+                        <Container maxWidth="lg">
+                            <Content/>
+                        </Container>
+                        <Footer/>
+                    </div>
+                </MuiThemeProvider>
+            </MuiPickersUtilsProvider>
         </Router>
     );
 }
