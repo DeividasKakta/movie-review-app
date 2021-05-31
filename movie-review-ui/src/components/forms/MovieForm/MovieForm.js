@@ -13,6 +13,7 @@ import {
     Typography
 } from "@material-ui/core";
 import {KeyboardDatePicker} from "@material-ui/pickers";
+import {createMovie} from "../../../api/moviesApi";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,11 +45,13 @@ const MovieForm = () => {
         }}
                 onSubmit={
                     (values, helpers) => {
-                        // call api
                         helpers.setSubmitting(true)
-                        setTimeout(() => {
-                            helpers.setSubmitting(false)
-                        }, 2000)
+
+                        createMovie(values)
+                            .then(() => console.log("success"))
+                            .catch((errors) => console.log(errors))
+                            .finally(() => helpers.setSubmitting(false))
+
                     }
                 }
                 validationSchema={validationSchema}
