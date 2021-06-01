@@ -18,6 +18,11 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public Movie getMovieById(UUID uuid) {
+        return movieRepository.findById(uuid)
+                .orElseThrow(MovieNotFoundException::new);
+    }
+
     public void createMovie(Movie movie) {
         movieRepository.save(movie);
     }
