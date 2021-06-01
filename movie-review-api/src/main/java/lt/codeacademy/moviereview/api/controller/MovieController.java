@@ -1,6 +1,7 @@
 package lt.codeacademy.moviereview.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.config.Endpoint;
 import lt.codeacademy.moviereview.api.model.entity.Movie;
 import lt.codeacademy.moviereview.api.service.MovieService;
 import org.springframework.http.HttpStatus;
@@ -11,8 +12,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
+import static lt.codeacademy.moviereview.api.config.Endpoint.*;
+
 @RestController
-@RequestMapping("/api/movies")
+@RequestMapping(API_ROOT + MOVIES)
 @RequiredArgsConstructor
 public class MovieController {
 
@@ -29,15 +32,15 @@ public class MovieController {
         movieService.createMovie(movie);
     }
 
-    @PutMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateMovie(@PathVariable UUID uuid, @Valid @RequestBody Movie movie) {
+    @PutMapping(value = BY_UUID, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateMovie(@PathVariable(UUID) UUID uuid, @Valid @RequestBody Movie movie) {
         movie.setId(uuid);
         movieService.updateMovie(movie);
     }
 
-    @DeleteMapping("/{uuid}")
+    @DeleteMapping(BY_UUID)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMovie(@PathVariable UUID uuid) {
+    public void deleteMovie(@PathVariable(UUID) UUID uuid) {
         movieService.deleteMovieById(uuid);
     }
 }
