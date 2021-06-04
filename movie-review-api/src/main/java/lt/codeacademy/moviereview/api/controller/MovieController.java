@@ -21,18 +21,23 @@ public class MovieController {
 
     private final MovieService movieService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(BY_UUID)
+    public Movie getMovieById(@PathVariable(UUID) UUID uuid) {
+        return movieService.getMovieById(uuid);
+    }
+
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createMovie(@Valid @RequestBody Movie movie) {
         movieService.createMovie(movie);
     }
 
-    @PutMapping(value = BY_UUID, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(BY_UUID)
     public void updateMovie(@PathVariable(UUID) UUID uuid, @Valid @RequestBody Movie movie) {
         movie.setId(uuid);
         movieService.updateMovie(movie);
