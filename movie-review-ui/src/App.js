@@ -1,6 +1,6 @@
-import Header from "./components/Header/Header";
-import Content from "./components/Content/Content";
-import Footer from "./components/Footer/Footer";
+import Header from "./components/main/Header/Header";
+import Content from "./components/main/Content/Content";
+import Footer from "./components/main/Footer/Footer";
 import {BrowserRouter as Router} from "react-router-dom";
 import {
     Container,

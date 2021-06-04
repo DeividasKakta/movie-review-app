@@ -1,6 +1,6 @@
 import {Switch, Route} from "react-router-dom"
-import LandingPage from "../../pages/LandingPage/LandingPage";
-import MovieCreationPage from "../../pages/MovieCreationPage/MovieCreationPage";
+import LandingPage from "../../../pages/LandingPage/LandingPage";
+import MovieCreationPage from "../../../pages/MovieCreationPage/MovieCreationPage";
 
 const Content = () => {
 
