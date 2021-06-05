@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Date;
 import java.util.UUID;
 
 @Setter
@@ -28,6 +29,9 @@ public class Review {
     @Size(min = 5, max = 1000)
     @Column(columnDefinition = "VARCHAR(1000)")
     private String content;
+
+    @NotNull
+    private Date date;
 
     @Min(1)
     @Max(10)
