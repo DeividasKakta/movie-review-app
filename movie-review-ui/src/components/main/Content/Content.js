@@ -2,6 +2,7 @@ import {Switch, Route} from "react-router-dom"
 import LandingPage from "../../../pages/LandingPage/LandingPage";
 import MovieCreationPage from "../../../pages/MovieCreationPage/MovieCreationPage";
 import MoviePage from "../../../pages/MoviePage/MoviePage";
+import LoginPage from "../../../pages/LoginPage/LoginPage";
 
 const Content = () => {
 
@@ -11,10 +12,17 @@ const Content = () => {
                 <Route exact path="/">
                     <LandingPage/>
                 </Route>
+
                 <Route path="/movies/create">
                     <MovieCreationPage/>
                 </Route>
+
                 <Route path="/movies/:id" children={<MoviePage/>}/>
+
+                <Route path="/login">
+                    <LoginPage/>
+                </Route>
+
             </Switch>
         </>
     )

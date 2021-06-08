@@ -41,7 +41,11 @@ const Header = () => {
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         Add new movie
                     </Link>
-                    <Button color="inherit">Login</Button>
+                    <Button color="secondary" variant="outlined" to="/login"
+                            className={classes.link} component={NavLink}>
+                        Login
+                    </Button>
+
                 </Toolbar>
             </AppBar>
         </>
