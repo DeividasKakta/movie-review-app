@@ -1,16 +1,18 @@
 package lt.codeacademy.moviereview.api.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.codeacademy.moviereview.api.config.Endpoint;
+import lt.codeacademy.moviereview.api.model.dto.RatedMovieDto;
 import lt.codeacademy.moviereview.api.model.entity.Movie;
 import lt.codeacademy.moviereview.api.service.MovieService;
+import lt.codeacademy.moviereview.api.utils.mapper.RatedMovieDtoMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static lt.codeacademy.moviereview.api.config.Endpoint.*;
 
@@ -20,15 +22,23 @@ import static lt.codeacademy.moviereview.api.config.Endpoint.*;
 public class MovieController {
 
     private final MovieService movieService;
+    private final RatedMovieDtoMapper movieDtoMapper;
 
     @GetMapping
-    public List<Movie> getAllMovies() {
-        return movieService.getAllMovies();
+    public List<RatedMovieDto> getAllMovies() {
+        List<Movie> movies = movieService.getAllMovies();
+
+        return movies.stream()
+                .map(movieDtoMapper::mapToDto)
+                .sorted(Comparator.comparing(RatedMovieDto::getReleaseYear))
+                .collect(Collectors.toList());
     }
 
     @GetMapping(BY_UUID)
-    public Movie getMovieById(@PathVariable(UUID) UUID uuid) {
-        return movieService.getMovieById(uuid);
+    public RatedMovieDto getRatedMovieById(@PathVariable(UUID) UUID uuid) {
+        Movie movie = movieService.getMovieById(uuid);
+
+        return movieDtoMapper.mapToDto(movie);
     }
 
     @PostMapping
@@ -48,4 +58,6 @@ public class MovieController {
     public void deleteMovie(@PathVariable(UUID) UUID uuid) {
         movieService.deleteMovieById(uuid);
     }
+
+
 }
