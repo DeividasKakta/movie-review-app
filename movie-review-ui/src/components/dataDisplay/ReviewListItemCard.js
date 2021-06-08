@@ -1,4 +1,6 @@
-import {Card, CardContent, Divider, Grid, Hidden, ListItem, makeStyles, Typography} from "@material-ui/core";
+import {Button, Card, CardContent, Divider, Grid, Hidden, ListItem, makeStyles, Typography} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     },
     verticalDivider: {
         marginRight: "-1px"
+    },
+    mainCard: {
+        flexGrow: 1
     }
 }))
 
@@ -26,13 +31,32 @@ const ReviewListItemCard = ({username, rating, date, content}) => {
     return (
         <ListItem alignItems="flex-start" className={classes.listItem}>
 
-            <Card>
+            <Card className={classes.mainCard}>
                 <Grid container>
                     <Grid item xs={12} sm={3} md={2}>
                         <CardContent className={classes.itemContent}>
-                            <Typography variant="subtitle2">
-                                {username}
-                            </Typography>
+
+                            <Hidden xsDown>
+                                <Typography variant="subtitle2" noWrap>
+                                    {username}
+                                </Typography>
+                            </Hidden>
+
+                            <Hidden smUp>
+                                <div className={classes.reviewHeader}>
+                                    <Typography variant="subtitle2" display="inline" className={classes.leftItem}>
+                                        {username}
+                                    </Typography>
+
+                                    <Button color="secondary">
+                                        <EditIcon/>
+                                    </Button>
+                                    <Button color="primary">
+                                        <DeleteIcon/>
+                                    </Button>
+                                </div>
+                            </Hidden>
+
                         </CardContent>
                     </Grid>
 
@@ -53,6 +77,16 @@ const ReviewListItemCard = ({username, rating, date, content}) => {
                                 <Typography variant="subtitle2" display="inline" className={classes.leftItem}>
                                     Rating: {rating}/10
                                 </Typography>
+
+                                <Hidden xsDown>
+                                    <Button color="secondary">
+                                        <EditIcon/>
+                                    </Button>
+                                    <Button color="primary">
+                                        <DeleteIcon/>
+                                    </Button>
+                                </Hidden>
+
                                 <Typography variant="subtitle1" color="textSecondary" align="right" display="inline">
                                     {date}
                                 </Typography>
