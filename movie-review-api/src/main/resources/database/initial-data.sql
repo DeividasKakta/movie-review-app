@@ -6,10 +6,20 @@ INSERT INTO movie (id, title, description, cast, release_date) VALUES
         'Integer malesuada nunc vel risus commodo viverra maecenas accumsan. Donec massa sapien faucibus et molestie ac. Aliquam ut porttitor leo a diam sollicitudin tempor id. Et ultrices neque ornare aenean euismod elementum nisi quis. Porta non pulvinar neque laoreet suspendisse interdum consectetur. Diam in arcu cursus euismod quis viverra nibh cras. Nibh venenatis cras sed felis eget velit aliquet. Dui nunc mattis enim ut tellus elementum.',
         'Thomas Crane, Miranda Shaffer, Bradyn Kramer, Alvaro Mcgee', '2019-07-15');
 
+INSERT INTO role (id, name) VALUES
+('e37f1daf-49c6-4ac1-bd1c-71056e224537', 'USER'),
+('af4abdf2-9ba9-11eb-a8b3-0242ac130799', 'ADMIN');
+
 INSERT INTO user (id, username, password) VALUES
     ('af4abdf2-9ba9-11eb-a8b3-0242ac130799', 'admin', '{bcrypt}$2y$12$jTtuvT/AazGVykRoiOP8JOQmoCsYrk.QpwpaVKVreNWJZhTDvMJom'), --admin
     ('af4abdf2-9ba9-11eb-a8b3-0242ac130111', 'user', '{bcrypt}$2y$12$dVmx09FiZcWBf2kE3mRRgO4DVeC0wdVZHLKH/aDrCiaKz/80AWAJC'), --pass
     ('af4abdf2-9ba9-11eb-a8b3-0242ac130222', 'another', '{bcrypt}$2y$12$dVmx09FiZcWBf2kE3mRRgO4DVeC0wdVZHLKH/aDrCiaKz/80AWAJC'); --pass
+
+INSERT INTO user_roles (user_id, roles_id) VALUES
+('af4abdf2-9ba9-11eb-a8b3-0242ac130799', 'af4abdf2-9ba9-11eb-a8b3-0242ac130799'),
+('af4abdf2-9ba9-11eb-a8b3-0242ac130799', 'e37f1daf-49c6-4ac1-bd1c-71056e224537'),
+('af4abdf2-9ba9-11eb-a8b3-0242ac130111', 'e37f1daf-49c6-4ac1-bd1c-71056e224537'),
+('af4abdf2-9ba9-11eb-a8b3-0242ac130222', 'e37f1daf-49c6-4ac1-bd1c-71056e224537');
 
 INSERT INTO review (id, user_id, movie_id, content, date, rating) VALUES
     ('af4abdf2-9ba9-11eb-a8bc-2242ac130799', 'af4abdf2-9ba9-11eb-a8b3-0242ac130799', '0c9d9f98-c90a-459d-af35-0ff5c2105127',
