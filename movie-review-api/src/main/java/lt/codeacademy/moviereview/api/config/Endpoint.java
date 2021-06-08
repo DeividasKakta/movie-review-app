@@ -12,5 +12,6 @@ public interface Endpoint {
     String MOVIES = "/movies";
     String REVIEWS = "/reviews";
     String REVIEW_BY_MOVIE = "/movie" + BY_UUID;
+    String LOGIN = "/login";
 
 }
