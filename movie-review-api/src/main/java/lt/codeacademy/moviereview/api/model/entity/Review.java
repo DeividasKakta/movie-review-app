@@ -1,12 +1,13 @@
 package lt.codeacademy.moviereview.api.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 @Setter
@@ -19,10 +20,13 @@ public class Review {
     @Type(type = "uuid-char")
     private UUID id;
 
+//    @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+//    @NotNull
+    @JsonIgnore
+    @ManyToOne
     private Movie movie;
 
     @NotBlank
@@ -31,7 +35,8 @@ public class Review {
     private String content;
 
     @NotNull
-    private Date date;
+    @Column(updatable = false)
+    private Date date = new Date(System.currentTimeMillis());
 
     @Min(1)
     @Max(10)
