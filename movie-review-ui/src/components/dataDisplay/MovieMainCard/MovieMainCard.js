@@ -4,9 +4,15 @@ const useStyles = makeStyles({
     cardMedia: {
         height: 450
     },
+    flexItem: {
+        display: "flex"
+    },
+    leftItem: {
+        flexGrow: 1
+    }
 })
 
-const MovieMainCard = ({title, releaseDate, description, cast}) => {
+const MovieMainCard = ({title, releaseDate, description, cast, rating}) => {
     const classes = useStyles();
 
     return (
@@ -20,9 +26,20 @@ const MovieMainCard = ({title, releaseDate, description, cast}) => {
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <CardContent>
-                        <Typography variant="h3">
-                            {title}
-                        </Typography>
+
+                        <div className={classes.flexItem}>
+                            <Typography variant="h3" display="inline" className={classes.leftItem}>
+                                {title}
+                            </Typography>
+
+                            <Typography variant="h4" color="secondary">
+                                {
+                                    rating === 0 ? "N/A" :
+                                        rating?.toFixed(1)
+                                }
+                            </Typography>
+                        </div>
+
                         <Typography variant="subtitle1" color="textSecondary">
                             {new Date(releaseDate).getFullYear().toString()}
                         </Typography>
