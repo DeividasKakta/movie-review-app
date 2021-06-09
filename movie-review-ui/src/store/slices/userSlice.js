@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {saveToSessionStorage} from "../../utils/sessionStorage";
+import {loadFromSessionStorage, saveToSessionStorage} from "../../utils/sessionStorage";
 
 
 const initialState = {
@@ -31,7 +31,7 @@ export const subscribeToUserChanges = (store) => {
     })
 }
 
-export const loadUserFromSessionStorage = () => loadUserFromSessionStorage("user") || undefined
+export const loadUserFromSessionStorage = () => loadFromSessionStorage("user") || undefined
 
 export default userSlice.reducer
 export const { login } = userSlice.actions
