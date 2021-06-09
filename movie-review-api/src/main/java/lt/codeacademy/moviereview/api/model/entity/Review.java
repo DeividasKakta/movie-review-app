@@ -21,7 +21,7 @@ public class Review {
     private UUID id;
 
 //    @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private User user;
 
 //    @NotNull
