@@ -11,7 +11,6 @@ public class ReviewDtoMapper {
         return ReviewDto.builder()
                 .reviewId(review.getId())
                 .movieId(review.getMovie().getId())
-                .userId(review.getUser().getId())
                 .reviewDate(review.getDate())
                 .username(review.getUser().getUsername())
                 .content(review.getContent())
