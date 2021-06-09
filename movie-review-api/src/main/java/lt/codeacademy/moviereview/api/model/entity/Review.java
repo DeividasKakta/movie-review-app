@@ -7,7 +7,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Setter
@@ -36,7 +36,7 @@ public class Review {
 
     @NotNull
     @Column(updatable = false)
-    private Date date = new Date(System.currentTimeMillis());
+    private Date date = new Date();
 
     @Min(1)
     @Max(10)

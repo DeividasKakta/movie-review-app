@@ -35,7 +35,7 @@ public class ReviewController {
 
         return reviewsByMovieId.stream()
                 .map(reviewDtoMapper::mapToDto)
-                .sorted(Comparator.comparing(ReviewDto::getReviewDate))
+                .sorted(Comparator.comparing(ReviewDto::getReviewDate).reversed())
                 .collect(Collectors.toList());
     }
 
