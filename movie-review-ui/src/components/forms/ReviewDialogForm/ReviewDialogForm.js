@@ -25,13 +25,13 @@ const validationSchema = Yup.object().shape({
         .required()
 })
 
-const ReviewDialogForm = ({handleCloseDialog, handleOnSubmit, openError, handleErrorClose}) => {
+const ReviewDialogForm = ({content = '', rating = '', handleCloseDialog, handleOnSubmit, openError, handleErrorClose, errorMessage = 'Unexpected error'}) => {
     const ratingArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
         <Formik initialValues={{
-            content: '',
-            rating: '',
+            content: content,
+            rating: rating,
         }}
                 onSubmit={handleOnSubmit}
                 validationSchema={validationSchema}
@@ -88,7 +88,7 @@ const ReviewDialogForm = ({handleCloseDialog, handleOnSubmit, openError, handleE
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleErrorClose}
-                                    message="Unexpected error creating review"
+                                    message={errorMessage}
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>
