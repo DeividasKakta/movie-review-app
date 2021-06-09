@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static lt.codeacademy.moviereview.api.config.Endpoint.*;
 
 @RestController
-@RequestMapping(API_ROOT + MOVIES)
+@RequestMapping(MOVIES)
 @RequiredArgsConstructor
 public class MovieController {
 

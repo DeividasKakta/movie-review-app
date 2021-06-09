@@ -7,7 +7,6 @@ public interface Endpoint {
     String USER = "user";
 
     // Endpoints
-    String API_ROOT = "/api";
     String BY_UUID = "/{" + UUID + "}";
     String MOVIES = "/movies";
     String REVIEWS = "/reviews";
