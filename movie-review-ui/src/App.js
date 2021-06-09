@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {MuiPickersUtilsProvider} from "@material-ui/pickers";
+import {Provider} from "react-redux";
+import store from "./store/store";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,19 +42,21 @@ function App() {
     const classes = useStyles();
 
     return (
-        <Router>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <MuiThemeProvider theme={theme}>
-                    <div className={classes.root}>
-                        <Header/>
-                        <Container maxWidth="lg">
-                            <Content/>
-                        </Container>
-                        <Footer/>
-                    </div>
-                </MuiThemeProvider>
-            </MuiPickersUtilsProvider>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <MuiThemeProvider theme={theme}>
+                        <div className={classes.root}>
+                            <Header/>
+                            <Container maxWidth="lg">
+                                <Content/>
+                            </Container>
+                            <Footer/>
+                        </div>
+                    </MuiThemeProvider>
+                </MuiPickersUtilsProvider>
+            </Router>
+        </Provider>
     );
 }
 
