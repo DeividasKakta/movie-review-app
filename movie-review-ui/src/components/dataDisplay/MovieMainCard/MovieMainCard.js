@@ -1,4 +1,5 @@
 import {Card, CardContent, CardMedia, Grid, makeStyles, Typography} from "@material-ui/core";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
     cardMedia: {
@@ -19,10 +20,15 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating, picture})
         <Card>
             <Grid container>
                 <Grid item xs={12} sm={4}>
-                    <CardMedia className={classes.cardMedia}
-                               image={picture}
-                               title="Random"
-                    />
+                    {
+                        picture ?
+                        <CardMedia className={classes.cardMedia}
+                                   image={picture}
+                                   title="Random"
+                        />  :
+                            <CircularProgress />
+                    }
+
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <CardContent>
