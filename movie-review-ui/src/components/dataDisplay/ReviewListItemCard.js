@@ -1,6 +1,8 @@
 import {Button, Card, CardContent, Divider, Grid, Hidden, ListItem, makeStyles, Typography} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {useSelector} from "react-redux";
+import {loggedInUser} from "../../store/slices/userSlice";
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -24,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ReviewListItemCard = ({username, rating, date, content}) => {
+const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview, handleOnDeleteReview}) => {
     const classes = useStyles();
-
+    const currentUser = useSelector(loggedInUser)
 
     return (
         <ListItem alignItems="flex-start" className={classes.listItem}>
@@ -47,13 +49,18 @@ const ReviewListItemCard = ({username, rating, date, content}) => {
                                     <Typography variant="subtitle2" display="inline" className={classes.leftItem}>
                                         {username}
                                     </Typography>
+                                    {
+                                        currentUser?.username === username &&
+                                        <>
+                                            <Button color="secondary" onClick={handleOnEditReview}>
+                                                <EditIcon/>
+                                            </Button>
+                                            <Button color="primary" onClick={handleOnDeleteReview}>
+                                                <DeleteIcon/>
+                                            </Button>
+                                        </>
+                                    }
 
-                                    <Button color="secondary">
-                                        <EditIcon/>
-                                    </Button>
-                                    <Button color="primary">
-                                        <DeleteIcon/>
-                                    </Button>
                                 </div>
                             </Hidden>
 
@@ -79,12 +86,17 @@ const ReviewListItemCard = ({username, rating, date, content}) => {
                                 </Typography>
 
                                 <Hidden xsDown>
-                                    <Button color="secondary">
-                                        <EditIcon/>
-                                    </Button>
-                                    <Button color="primary">
-                                        <DeleteIcon/>
-                                    </Button>
+                                    {
+                                        currentUser?.username === username &&
+                                        <>
+                                            <Button color="secondary" onClick={handleOnEditReview}>
+                                                <EditIcon/>
+                                            </Button>
+                                            <Button color="primary" onClick={handleOnDeleteReview}>
+                                                <DeleteIcon/>
+                                            </Button>
+                                        </>
+                                    }
                                 </Hidden>
 
                                 <Typography variant="subtitle1" color="textSecondary" align="right" display="inline">

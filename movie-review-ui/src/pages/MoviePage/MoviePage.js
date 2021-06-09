@@ -1,9 +1,9 @@
-import {Button, Dialog, DialogTitle, List, makeStyles, Typography} from "@material-ui/core";
+import {Button, Dialog, DialogActions, DialogTitle, List, makeStyles, Typography} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchRatedMovieById} from "../../api/moviesApi";
 import {useParams} from "react-router-dom";
 import ReviewListItemCard from "../../components/dataDisplay/ReviewListItemCard";
-import {createReview, fetchReviewsByMovieId} from "../../api/reviewApi";
+import {createReview, deleteReview, editReview, fetchReviewsByMovieId} from "../../api/reviewApi";
 import MovieMainCard from "../../components/dataDisplay/MovieMainCard/MovieMainCard";
 import ReviewDialogForm from "../../components/forms/ReviewDialogForm/ReviewDialogForm";
 import CustomSnackbar from "../../components/feedback/CustomSnackbar";
@@ -21,21 +21,24 @@ const useStyles = makeStyles((theme) => ({
 
 const MoviePage = () => {
     const classes = useStyles();
-    const [movie, setMovie] = useState({
-        title: ''
-    });
+    const [movie, setMovie] = useState({title: ''});
     const [reviews, setReviews] = useState([]);
+    const [editableReview, setEditableReview] = useState({});
+    const [deletableReviewId, setDeletableReviewId] = useState({});
 
     const [openCreateReview, setOpenCreateReview] = useState(false);
-
+    const [openEditReview, setOpenEditReview] = useState(false);
+    const [openDeleteReview, setOpenDeleteReview] = useState(false);
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
+    const [openEditSuccess, setOpenEditSuccess] = useState(false);
 
     const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpenSuccess(false);
+        setOpenEditSuccess(false);
     };
 
     const postReview = (data, {setSubmitting}) => {
@@ -44,7 +47,15 @@ const MoviePage = () => {
         createReview(data, movie.movieId)
             .then(() => {
                 setOpenCreateReview(false)
-                    setOpenSuccess(true)
+
+                fetchRatedMovieById(id)
+                    .then(({data}) => setMovie(data))
+
+                fetchReviewsByMovieId(id)
+                    .then(({data}) => {
+                        setReviews(data)
+                        setOpenSuccess(true)
+                    })
             })
             .catch(() => setOpenError(true))
             .finally(() => {
@@ -52,6 +63,59 @@ const MoviePage = () => {
                     setSubmitting(false)
                 }, 300)
             })
+    }
+
+    const handleEditReviewClick = (review) => {
+        setEditableReview(review)
+
+        setOpenEditReview(true)
+    }
+
+    const postEditReview = (data, {setSubmitting}) => {
+        setSubmitting(true)
+
+        editReview(data, editableReview.reviewId)
+            .then(() => {
+                setOpenEditReview(false)
+
+                fetchRatedMovieById(id)
+                    .then(({data}) => setMovie(data))
+
+                fetchReviewsByMovieId(id)
+                    .then(({data}) => {
+                        setReviews(data)
+                        setOpenEditSuccess(true)
+                    })
+            })
+            .catch(() => setOpenError(true))
+            .finally(() => {
+                setTimeout(() => {
+                    setSubmitting(false)
+                }, 300)
+            })
+    }
+
+    const postDeleteReview = (reviewId) => {
+        deleteReview(reviewId)
+            .then(() => {
+                setOpenDeleteReview(false)
+
+                fetchRatedMovieById(id)
+                    .then(({data}) => setMovie(data))
+
+                fetchReviewsByMovieId(id)
+                    .then(({data}) => {
+                        setReviews(data)
+                        setOpenEditSuccess(true) // change msg
+                    })
+            })
+            .catch(() => setOpenError(true))
+
+    }
+
+    const handleDeleteReviewClick = (reviewId) => {
+        setDeletableReviewId(reviewId)
+        setOpenDeleteReview(true)
     }
 
     const {id} = useParams();
@@ -87,22 +151,74 @@ const MoviePage = () => {
 
                 <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
                                   handleOnSubmit={postReview}
-                                  handleErrorClose={() => setOpenError(false)} openError={openError}/>
-
-                <CustomSnackbar open={openSuccess}
-                                duration={5000}
-                                handleClose={handleSuccessClose}
-                                message="Review created successfully!"
-                                elevation={3}
-                                variant="filled"
-                                severity="success"/>
+                                  handleErrorClose={() => setOpenError(false)}
+                                  openError={openError} />
 
             </Dialog>
 
+            <CustomSnackbar open={openSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message="Review created successfully!"
+                            elevation={3}
+                            variant="filled"
+                            severity="success"/>
+
+            <CustomSnackbar open={openEditSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message="Review updated successfully!"
+                            elevation={3}
+                            variant="filled"
+                            severity="success"/>
 
             <Typography variant="h4" style={{paddingTop: 8}}>
                 Reviews
             </Typography>
+
+
+
+            <Dialog open={openEditReview}
+                    onClose={() => setOpenEditReview(false)}
+                    aria-labelledby="edit-review">
+
+                <DialogTitle id="edit-review">Write your review</DialogTitle>
+
+                <ReviewDialogForm handleCloseDialog={() => setOpenEditReview(false)}
+                                  handleOnSubmit={postEditReview}
+                                  handleErrorClose={() => setOpenError(false)}
+                                  openError={openError}
+                                  errorMessage="Error updating review"
+                                  content={editableReview.content}
+                                  rating={editableReview.rating}/>
+
+            </Dialog>
+
+
+
+            <Dialog
+                open={openDeleteReview}
+                onClose={() => setOpenDeleteReview(false)}
+                aria-labelledby="delete-review"
+            >
+                <DialogTitle id="delete-review">{"Delete this review?"}</DialogTitle>
+                {/*<DialogContent>*/}
+                {/*    <DialogContentText id="alert-dialog-description">*/}
+                {/*        Let Google help apps determine location. This means sending anonymous location data to*/}
+                {/*        Google, even when no apps are running.*/}
+                {/*    </DialogContentText>*/}
+                {/*</DialogContent>*/}
+                <DialogActions>
+                    <Button onClick={() => setOpenDeleteReview(false)} color="primary">
+                        Cancel
+                    </Button>
+                    <Button onClick={() => postDeleteReview(deletableReviewId)} color="primary" autoFocus>
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+
 
             <List>
                 {reviews.map((review) => (
@@ -110,7 +226,9 @@ const MoviePage = () => {
                                         username={review.username}
                                         rating={review.rating}
                                         date={review.reviewDate}
-                                        content={review.content}/>
+                                        content={review.content}
+                                        handleOnEditReview={() => handleEditReviewClick(review)}
+                                        handleOnDeleteReview={() => handleDeleteReviewClick(review.reviewId)}/>
                 ))}
 
             </List>
