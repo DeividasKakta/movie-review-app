@@ -16,7 +16,9 @@ public class RatedMovieDtoMapper {
                 .title(movie.getTitle())
                 .description(movie.getDescription())
                 .cast(movie.getCast())
-                .releaseYear(movie.getReleaseDate())
+                .releaseDate(movie.getReleaseDate())
+                .creationDate(movie.getCreationDate())
+                .picture(movie.getPicture())
                 .averageRating(
                         BigDecimal.valueOf(
                             movie.getReviews().stream()

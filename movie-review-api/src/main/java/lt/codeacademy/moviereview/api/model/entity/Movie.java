@@ -33,11 +33,17 @@ public class Movie {
     private String description;
 
     @NotBlank
+    private String picture;
+
+    @NotBlank
     @Size(min = 5, max = 256)
     private String cast;
 
     @NotNull
     private Date releaseDate;
+
+    @NotNull
+    private java.util.Date creationDate = new java.util.Date();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
     private List<Review> reviews = new ArrayList<>();

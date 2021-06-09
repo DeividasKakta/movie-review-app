@@ -1,10 +1,10 @@
-INSERT INTO movie (id, title, description, cast, release_date) VALUES
-        ('0c9d9f98-c90a-459d-af35-0ff5c2105127', 'Kodzilla versus Gang',
+INSERT INTO movie (id, title, picture, description, cast, release_date, creation_date) VALUES
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105127', 'Kodzilla versus Gang', 'https://source.unsplash.com/random',
         'Faucibus a pellentesque sit amet porttitor eget. Egestas integer eget aliquet nibh praesent. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Lorem sed risus ultricies tristique nulla. Nunc eget lorem dolor sed viverra. Sed id semper risus in hendrerit gravida rutrum quisque.',
-        'Cierra Vega, Alden Cantrell, Kierra Gentry, Pierre Cox', '2021-03-31'),
-        ('0c9d9f98-c90a-459d-af35-0ff5c2105100', 'Revengers - Last Game',
+        'Cierra Vega, Alden Cantrell, Kierra Gentry, Pierre Cox', '2021-03-31', '2021-06-05'),
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105100', 'Revengers - Last Game', 'https://source.unsplash.com/random',
         'Integer malesuada nunc vel risus commodo viverra maecenas accumsan. Donec massa sapien faucibus et molestie ac. Aliquam ut porttitor leo a diam sollicitudin tempor id. Et ultrices neque ornare aenean euismod elementum nisi quis. Porta non pulvinar neque laoreet suspendisse interdum consectetur. Diam in arcu cursus euismod quis viverra nibh cras. Nibh venenatis cras sed felis eget velit aliquet. Dui nunc mattis enim ut tellus elementum.',
-        'Thomas Crane, Miranda Shaffer, Bradyn Kramer, Alvaro Mcgee', '2019-07-15');
+        'Thomas Crane, Miranda Shaffer, Bradyn Kramer, Alvaro Mcgee', '2019-07-15', '2021-06-04');
 
 INSERT INTO role (id, name) VALUES
 ('e37f1daf-49c6-4ac1-bd1c-71056e224537', 'USER'),

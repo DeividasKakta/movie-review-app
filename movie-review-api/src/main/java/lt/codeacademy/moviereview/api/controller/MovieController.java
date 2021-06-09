@@ -30,7 +30,7 @@ public class MovieController {
 
         return movies.stream()
                 .map(movieDtoMapper::mapToDto)
-                .sorted(Comparator.comparing(RatedMovieDto::getReleaseYear))
+                .sorted(Comparator.comparing(RatedMovieDto::getCreationDate).reversed())
                 .collect(Collectors.toList());
     }
 
