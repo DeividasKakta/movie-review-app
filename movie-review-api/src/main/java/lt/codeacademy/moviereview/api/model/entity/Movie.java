@@ -43,6 +43,7 @@ public class Movie {
     private Date releaseDate;
 
     @NotNull
+    @Column(updatable = false)
     private java.util.Date creationDate = new java.util.Date();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
