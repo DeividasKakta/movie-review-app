@@ -4,6 +4,10 @@ import {Form, Formik} from "formik";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
 import {useState} from "react";
+import {login} from "../../../api/userApi";
+import {useDispatch} from "react-redux";
+import {login as setLogin} from "../../../store/slices/userSlice";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +26,10 @@ const LoginForm = () => {
     const classes = useStyles()
     const [openError, setOpenError] = useState(false);
 
+    const dispatch = useDispatch()
+    const history = useHistory()
+    // const location = useLocation()
+
     const handleErrorClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -32,6 +40,13 @@ const LoginForm = () => {
     const postForm = (data, {setSubmitting}) => {
         setSubmitting(true)
 
+        login(data)
+            .then(({data: loggedInUser, headers: {authorization}}) => {
+                dispatch(setLogin({loggedInUser, jwt: authorization}))
+
+                history.push('/')
+            })
+            .finally(() => setSubmitting(false))
     }
 
     return (
@@ -76,7 +91,7 @@ const LoginForm = () => {
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleErrorClose}
-                                    message="Error creating movie"
+                                    message="Error while trying to login"
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>
