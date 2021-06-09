@@ -53,7 +53,7 @@ const LandingPage = () => {
                                             {movie.averageRating?.toFixed(1)}
                                         </Typography>
                                         <Typography variant="subtitle1" color="textSecondary">
-                                            {new Date(movie.releaseYear).getFullYear()}
+                                            {new Date(movie.releaseDate).getFullYear()}
                                         </Typography>
                                             <Typography variant="subtitle1" paragraph>
                                                 {movie.description}
@@ -64,7 +64,7 @@ const LandingPage = () => {
                                     </CardContent>
                                 </div>
                                 <Hidden xsDown>
-                                    <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random"
+                                    <CardMedia className={classes.cardMedia} image={movie.picture}
                                                title="Random"/>
                                 </Hidden>
                             </Card>

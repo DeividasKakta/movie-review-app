@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     }
 })
 
-const MovieMainCard = ({title, releaseDate, description, cast, rating}) => {
+const MovieMainCard = ({title, releaseDate, description, cast, rating, picture}) => {
     const classes = useStyles();
 
     return (
@@ -20,7 +20,7 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating}) => {
             <Grid container>
                 <Grid item xs={12} sm={4}>
                     <CardMedia className={classes.cardMedia}
-                               image="https://source.unsplash.com/random"
+                               image={picture}
                                title="Random"
                     />
                 </Grid>

@@ -28,6 +28,8 @@ const validationSchema = Yup.object().shape({
         .required(),
     cast: Yup.string()
         .required(),
+    picture: Yup.string()
+        .required(),
     releaseDate: Yup.date()
         .required()
 })
@@ -71,7 +73,8 @@ const MovieForm = () => {
             title: '',
             description: '',
             cast: '',
-            releaseDate: now
+            releaseDate: now,
+            picture: ''
         }}
                 onSubmit={postForm}
                 validationSchema={validationSchema}
@@ -117,6 +120,14 @@ const MovieForm = () => {
                                                          placeholder="Enter movie cast..."
                                                          multiline
                                                          rows={2}/>
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    <OutlinedFormikInput name="picture"
+                                                         label="Picture URL"
+                                                         error={props.touched.picture && !!props.errors.picture}
+                                                         placeholder="Enter movie picture URL..."
+                                                         />
                                 </Grid>
 
                             </Grid>

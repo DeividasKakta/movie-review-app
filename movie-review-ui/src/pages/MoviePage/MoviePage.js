@@ -68,9 +68,11 @@ const MoviePage = () => {
         <main className={classes.mainContainer}>
 
             <MovieMainCard title={movie.title}
-                           releaseDate={movie.releaseYear}
+                           releaseDate={movie.releaseDate}
                            description={movie.description}
-                           cast={movie.cast} rating={movie.averageRating}/>
+                           cast={movie.cast}
+                           rating={movie.averageRating}
+                           picture={movie.picture}/>
 
             <Button variant="outlined" color="primary" onClick={() => setOpenCreateReview(true)}>
                 Leave a review
