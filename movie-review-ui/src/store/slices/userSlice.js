@@ -33,5 +33,7 @@ export const subscribeToUserChanges = (store) => {
 
 export const loadUserFromSessionStorage = () => loadFromSessionStorage("user") || undefined
 
+export const loggedInUser = ( { user } ) => user.loggedInUser
+
 export default userSlice.reducer
 export const { login } = userSlice.actions
