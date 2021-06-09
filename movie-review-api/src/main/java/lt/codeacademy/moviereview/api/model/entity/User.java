@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
@@ -25,10 +26,12 @@ public class User implements UserDetails {
 
     @NotBlank
     @Column(unique = true)
+    @Size(min = 4, max = 16)
     private String username;
 
     @NotBlank
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+    @Size(min = 8, max = 32)
     private String password;
 
     @ManyToMany
