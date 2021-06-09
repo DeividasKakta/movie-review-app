@@ -1,6 +1,7 @@
 package lt.codeacademy.moviereview.api.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.exception.ReviewNotFoundException;
 import lt.codeacademy.moviereview.api.model.entity.Review;
 import lt.codeacademy.moviereview.api.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,18 @@ public class ReviewService {
 
     public void createReview(Review review) {
         reviewRepository.save(review);
+    }
+
+    public void updateReview(Review review) {
+        reviewRepository.save(review);
+    }
+
+    public Review getReviewById(UUID uuid) {
+        return reviewRepository.findById(uuid)
+                .orElseThrow(ReviewNotFoundException::new);
+    }
+
+    public void deleteReviewById(UUID uuid) {
+        reviewRepository.deleteById(uuid);
     }
 }

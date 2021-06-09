@@ -54,4 +54,24 @@ public class ReviewController {
         reviewService.createReview(review);
     }
 
+    @PutMapping(BY_UUID)
+    public void updateReview(@Valid @RequestBody Review review,
+                             @PathVariable(UUID) UUID uuid,
+                             @AuthenticationPrincipal String username) {
+        Review oldReview = reviewService.getReviewById(uuid);
+
+        oldReview.setContent(review.getContent());
+        oldReview.setRating(review.getRating());
+
+//        User user = userService.loadUserByUsername(username);
+//
+//        review.setUser(user);
+
+        reviewService.updateReview(oldReview);
+    }
+
+    @DeleteMapping(BY_UUID)
+    public void deleteReview(@PathVariable(UUID) UUID uuid, @AuthenticationPrincipal String username) {
+        reviewService.deleteReviewById(uuid);
+    }
 }
