@@ -24,7 +24,7 @@ const MoviePage = () => {
     const [movie, setMovie] = useState({title: ''});
     const [reviews, setReviews] = useState([]);
     const [editableReview, setEditableReview] = useState({});
-    const [deletableReviewId, setDeletableReviewId] = useState({});
+    const [deletableReview, setDeletableReview] = useState({});
 
     const [openCreateReview, setOpenCreateReview] = useState(false);
     const [openEditReview, setOpenEditReview] = useState(false);
@@ -95,8 +95,11 @@ const MoviePage = () => {
             })
     }
 
-    const postDeleteReview = (reviewId) => {
-        deleteReview(reviewId)
+    const postDeleteReview = (review) => {
+        let reviewId = review.reviewId
+        let reviewUsername = review.username
+
+        deleteReview(reviewId, reviewUsername)
             .then(() => {
                 setOpenDeleteReview(false)
 
@@ -113,8 +116,8 @@ const MoviePage = () => {
 
     }
 
-    const handleDeleteReviewClick = (reviewId) => {
-        setDeletableReviewId(reviewId)
+    const handleDeleteReviewClick = (review) => {
+        setDeletableReview(review)
         setOpenDeleteReview(true)
     }
 
@@ -212,7 +215,7 @@ const MoviePage = () => {
                     <Button onClick={() => setOpenDeleteReview(false)} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => postDeleteReview(deletableReviewId)} color="primary" autoFocus>
+                    <Button onClick={() => postDeleteReview(deletableReview)} color="primary" autoFocus>
                         Delete
                     </Button>
                 </DialogActions>
@@ -228,7 +231,7 @@ const MoviePage = () => {
                                         date={review.reviewDate}
                                         content={review.content}
                                         handleOnEditReview={() => handleEditReviewClick(review)}
-                                        handleOnDeleteReview={() => handleDeleteReviewClick(review.reviewId)}/>
+                                        handleOnDeleteReview={() => handleDeleteReviewClick(review)}/>
                 ))}
 
             </List>
