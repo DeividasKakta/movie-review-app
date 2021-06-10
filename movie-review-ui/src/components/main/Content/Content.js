@@ -3,6 +3,7 @@ import LandingPage from "../../../pages/LandingPage/LandingPage";
 import MovieCreationPage from "../../../pages/MovieCreationPage/MovieCreationPage";
 import MoviePage from "../../../pages/MoviePage/MoviePage";
 import LoginPage from "../../../pages/LoginPage/LoginPage";
+import RegisterPage from "../../../pages/RegisterPage/RegisterPage";
 
 const Content = () => {
 
@@ -21,6 +22,10 @@ const Content = () => {
 
                 <Route path="/login">
                     <LoginPage/>
+                </Route>
+
+                <Route path="/register">
+                    <RegisterPage/>
                 </Route>
 
             </Switch>

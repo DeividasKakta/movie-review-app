@@ -1,106 +1,117 @@
 import Container from "@material-ui/core/Container";
-import {Paper} from "@material-ui/core";
+import {Grid, makeStyles, Paper} from "@material-ui/core";
 import {Form, Formik} from "formik";
 import Button from "@material-ui/core/Button";
 import * as Yup from "yup";
-import {createUser} from "../../api/usersApi";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
+import {register} from "../../../api/userApi";
+import CustomSnackbar from "../../feedback/CustomSnackbar";
+import {useState} from "react";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        padding: theme.spacing(2, 1)
+    }
+}));
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .required(),
-    surname: Yup.string()
-        .required(),
-    email: Yup.string()
-        .email()
-        .required(),
+    username: Yup.string()
+        .required("Field can not be empty")
+        .min(4, "Username must be at least 4 symbols long")
+        .max(16, "Username can not be longer than 16 symbols"),
     password: Yup.string()
-        .required()
-        .min(5),
+        .matches(/^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\\d]{8,}/, "Password must contain at least 1 number and letter")
+        .required("Field can not be empty")
+        .min(8, "Password must be at least 8 symbols long")
+        .max(32, "Password can not be longer than 32 symbols"),
     repeatPassword: Yup.string()
-        .required()
+        .required("Field can not be empty")
         .oneOf([Yup.ref('password')], 'Passwords must match')
 })
 
-const UserRegistration = () => {
+const RegisterForm = () => {
+    const classes = useStyles()
+    const [openError, setOpenError] = useState(false);
 
+    const handleErrorClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenError(false);
+    };
 
     return (
         <Formik initialValues={{
-            name: '',
-            surname: '',
-            email: '',
+            username: '',
             password: '',
             repeatPassword: ''
         }}
                 onSubmit={
                     (values, helpers) => {
 
-                        createUser(values)
+                        register(values)
                             .then(() => console.log(values))
-                            .catch(error => console.log(error))
+                            .catch(() => setOpenError(true))
 
                         helpers.setSubmitting(true)
                         setTimeout(() => {
                             helpers.setSubmitting(false)
-                        }, 3000)
+                        }, 300)
                     }
                 }
                 validationSchema={validationSchema}
         >
             {props => (
-                <>
-                    <Container maxWidth="sm">
-                        <h2>Register</h2>
+                <Container maxWidth="sm">
+                    <Paper elevation={3} className={classes.root}>
+                        <Form>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <OutlinedFormikInput name="username"
+                                                         label="Username"
+                                                         placeholder="Enter an username..."
+                                                         error={props.touched.username && !!props.errors.username}/>
+                                </Grid>
 
-                        <Paper elevation={3}>
-                            <Form>
-                                <div>
-                                    <OutlinedFormikInput name="name"
-                                                         label="Name"
-                                                         error={props.touched.name && !!props.errors.name}/>
-                                </div>
-
-                                <div>
-                                    <OutlinedFormikInput name="surname"
-                                                         label="Surname"
-                                                         error={props.touched.surname && !!props.errors.surname}/>
-                                </div>
-
-                                <div>
-                                    <OutlinedFormikInput name="email"
-                                                         label="Email"
-                                                         error={props.touched.email && !!props.errors.email}/>
-                                </div>
-
-                                <div>
+                                <Grid item xs={12}>
                                     <OutlinedFormikInput name="password"
                                                          label="Password"
                                                          type="password"
+                                                         placeholder="Enter a password..."
                                                          error={props.touched.password && !!props.errors.password}/>
-                                </div>
+                                </Grid>
 
-                                <div>
+                                <Grid item xs={12}>
                                     <OutlinedFormikInput name="repeatPassword"
                                                          label="Repeat password"
                                                          type="password"
+                                                         placeholder="Repeat password..."
                                                          error={props.touched.repeatPassword && !!props.errors.repeatPassword}/>
-                                </div>
+                                </Grid>
 
-                                <Button variant="contained"
-                                        style={{marginBottom: 10, marginTop: 10}}
-                                        fullWidth
-                                        color="primary"
-                                        disabled={props.isSubmitting}
-                                        type="submit">Submit</Button>
-                            </Form>
-                        </Paper>
+                            </Grid>
 
-                    </Container>
-                </>
+                            <Button variant="contained"
+                                    fullWidth
+                                    color="primary"
+                                    disabled={props.isSubmitting}
+                                    type="submit">Submit</Button>
+
+                        </Form>
+                    </Paper>
+
+                    <CustomSnackbar open={openError}
+                                    duration={5000}
+                                    handleClose={handleErrorClose}
+                                    message="Username already exists"
+                                    elevation={3}
+                                    variant="filled"
+                                    severity="error"/>
+
+                </Container>
             )}
         </Formik>
     )
 }
 
-export default UserRegistration;
+export default RegisterForm;

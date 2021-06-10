@@ -46,6 +46,7 @@ const LoginForm = () => {
 
                 history.push('/')
             })
+            .catch(() => setOpenError(true))
             .finally(() => setSubmitting(false))
     }
 

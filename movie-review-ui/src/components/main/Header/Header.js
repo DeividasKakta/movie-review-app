@@ -1,6 +1,8 @@
 import {AppBar, Button, IconButton, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu"
 import {NavLink} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {loggedInUser} from "../../../store/slices/userSlice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
     const classes = useStyles();
+    const currentUser = useSelector(loggedInUser)
 
     return (
         <>
@@ -41,10 +44,24 @@ const Header = () => {
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         Add new movie
                     </Link>
-                    <Button color="secondary" variant="outlined" to="/login"
-                            className={classes.link} component={NavLink}>
-                        Login
-                    </Button>
+
+                    {
+                        currentUser ?
+                            <Button color="secondary" variant="outlined" to="/"
+                                    className={classes.link} component={NavLink}>
+                                Logout
+                            </Button> :
+                            <>
+                                <Link variant="button" color="inherit" to="/register"
+                                      className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                    Register
+                                </Link>
+                                <Button color="secondary" variant="outlined" to="/login"
+                                        className={classes.link} component={NavLink}>
+                                    Login
+                                </Button>
+                            </>
+                    }
 
                 </Toolbar>
             </AppBar>
