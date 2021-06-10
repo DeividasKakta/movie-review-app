@@ -71,7 +71,8 @@ public class ReviewController {
     }
 
     @DeleteMapping(BY_UUID)
-    public void deleteReview(@PathVariable(UUID) UUID uuid, @AuthenticationPrincipal String username) {
+    @PreAuthorize("#reviewUsername eq #username or hasRole('ADMIN')")
+    public void deleteReview(@PathVariable(UUID) UUID uuid, @RequestParam(name = "user") String reviewUsername, @AuthenticationPrincipal String username) {
         reviewService.deleteReviewById(uuid);
     }
 }
