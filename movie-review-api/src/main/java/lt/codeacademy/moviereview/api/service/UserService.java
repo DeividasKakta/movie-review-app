@@ -17,4 +17,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsernameWithRoles(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
     }
+
+    public void saveNewUser(User user) {
+        userRepository.save(user);
+    }
 }
