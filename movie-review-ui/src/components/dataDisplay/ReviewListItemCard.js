@@ -51,14 +51,15 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                                     </Typography>
                                     {
                                         currentUser?.username === username &&
-                                        <>
-                                            <Button color="secondary" onClick={handleOnEditReview}>
-                                                <EditIcon/>
-                                            </Button>
-                                            <Button color="primary" onClick={handleOnDeleteReview}>
-                                                <DeleteIcon/>
-                                            </Button>
-                                        </>
+                                        <Button color="secondary" onClick={handleOnEditReview}>
+                                            <EditIcon/>
+                                        </Button>
+                                    }
+                                    {
+                                        (currentUser?.username === username || currentUser?.roles.includes('ADMIN')) &&
+                                        <Button color="primary" onClick={handleOnDeleteReview}>
+                                            <DeleteIcon/>
+                                        </Button>
                                     }
 
                                 </div>
@@ -88,14 +89,15 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                                 <Hidden xsDown>
                                     {
                                         currentUser?.username === username &&
-                                        <>
-                                            <Button color="secondary" onClick={handleOnEditReview}>
-                                                <EditIcon/>
-                                            </Button>
-                                            <Button color="primary" onClick={handleOnDeleteReview}>
-                                                <DeleteIcon/>
-                                            </Button>
-                                        </>
+                                        <Button color="secondary" onClick={handleOnEditReview}>
+                                            <EditIcon/>
+                                        </Button>
+                                    }
+                                    {
+                                        (currentUser?.username === username || currentUser?.roles.includes('ADMIN')) &&
+                                        <Button color="primary" onClick={handleOnDeleteReview}>
+                                            <DeleteIcon/>
+                                        </Button>
                                     }
                                 </Hidden>
 
