@@ -7,8 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
@@ -23,12 +21,9 @@ public class User implements UserDetails {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @NotBlank
     @Column(unique = true)
     private String username;
 
-    @NotBlank
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
     private String password;
 
     @ManyToMany

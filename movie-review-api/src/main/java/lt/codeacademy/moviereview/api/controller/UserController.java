@@ -7,9 +7,9 @@ import lt.codeacademy.moviereview.api.model.entity.Role;
 import lt.codeacademy.moviereview.api.model.entity.User;
 import lt.codeacademy.moviereview.api.service.RoleService;
 import lt.codeacademy.moviereview.api.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -26,16 +26,18 @@ public class UserController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public void register(@Valid UserRegistrationDto userDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void register(@RequestBody @Valid UserRegistrationDto userDto) {
         User user = new User();
         Set<Role> roles = new HashSet<>();
 
         try {
             user.setRoles(roleService.addUserRoleToSet(roles));
             user.setUsername(userDto.getUsername());
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
             userService.saveNewUser(user);
         } catch (Exception e) {
