@@ -20,7 +20,7 @@ const validationSchema = Yup.object().shape({
         .min(4, "Username must be at least 4 symbols long")
         .max(16, "Username can not be longer than 16 symbols"),
     password: Yup.string()
-        .matches(/^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z\\d]{8,}/, "Password must contain at least 1 number and letter")
+        .matches(/(?=.*[0-9])(?=.*[A-Za-z])[A-Za-z\d]/, "Password must contain at least 1 number and letter")
         .required("Field can not be empty")
         .min(8, "Password must be at least 8 symbols long")
         .max(32, "Password can not be longer than 32 symbols"),
