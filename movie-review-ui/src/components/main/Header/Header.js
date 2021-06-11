@@ -1,5 +1,5 @@
 import {AppBar, Button, Container, Divider, Hidden, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loggedInUser, logout} from "../../../store/slices/userSlice";
 import MovieIcon from '@material-ui/icons/Movie';
@@ -46,6 +46,7 @@ const Header = () => {
     const classes = useStyles()
     const currentUser = useSelector(loggedInUser)
     const dispatch = useDispatch()
+    const location = useLocation()
 
     return (
         <>
@@ -75,7 +76,14 @@ const Header = () => {
                                       className={classes.link} activeClassName={classes.active} component={NavLink}>
                                     Register
                                 </Link>
-                                <Button color="secondary" variant="outlined" to="/login"
+                                <Button color="secondary"
+                                        variant="outlined"
+                                        to={{
+                                            pathname: "/login",
+                                            state: {
+                                                from: location
+                                            }
+                                        }}
                                         className={classes.link} component={NavLink}>
                                     Login
                                 </Button>

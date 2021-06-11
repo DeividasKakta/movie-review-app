@@ -1,7 +1,17 @@
-import {Button, Dialog, DialogActions, DialogTitle, Divider, List, makeStyles, Typography} from "@material-ui/core";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogTitle,
+    Divider,
+    Link,
+    List,
+    makeStyles,
+    Typography
+} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchRatedMovieById} from "../../api/moviesApi";
-import {useParams} from "react-router-dom";
+import {NavLink, useLocation, useParams} from "react-router-dom";
 import ReviewListItemCard from "../../components/dataDisplay/ReviewListItemCard/ReviewListItemCard";
 import {createReview, deleteReview, editReview, fetchReviewsByMovieId} from "../../api/reviewApi";
 import MovieMainCard from "../../components/dataDisplay/MovieMainCard/MovieMainCard";
@@ -22,11 +32,21 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         marginBottom: theme.spacing(2),
         marginTop: theme.spacing(1)
+    },
+    reviewButton: {
+        display: "inline-block"
+    },
+    loginErrorItem: {
+        display: "inline-block",
+        marginLeft: theme.spacing(1)
     }
 }));
 
 const MoviePage = () => {
-    const classes = useStyles();
+    const classes = useStyles()
+    const location = useLocation()
+    const currentUser = useSelector(loggedInUser)
+
     const [movie, setMovie] = useState({title: ''});
     const [reviews, setReviews] = useState([]);
     const [editableReview, setEditableReview] = useState({});
@@ -38,8 +58,6 @@ const MoviePage = () => {
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openEditSuccess, setOpenEditSuccess] = useState(false);
-
-    const currentUser = useSelector(loggedInUser)
 
     const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -189,12 +207,24 @@ const MoviePage = () => {
                     <Button variant="outlined" color="secondary" onClick={() => setOpenCreateReview(true)}>
                         Leave a review
                     </Button> :
-                    <>
-                        <Button variant="outlined" color="secondary" disabled>
+                    <div>
+                        <Button variant="outlined" color="secondary" className={classes.reviewButton} disabled>
                             Leave a review
                         </Button>
-                        <Typography variant="subtitle1" color="secondary">Login to leave a review</Typography>
-                    </>
+                        <Link variant="subtitle1"
+                              color="secondary"
+                              className={classes.loginErrorItem}
+                              to={{
+                                  pathname: "/login",
+                                  state: {
+                                      from: location
+                                  }
+                              }}
+                              component={NavLink}>
+                            Login to leave a review
+                        </Link>
+                        {/*<Typography variant="subtitle1" color="secondary" className={classes.loginErrorItem}>Login to leave a review</Typography>*/}
+                    </div>
 
             }
 

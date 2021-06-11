@@ -7,7 +7,7 @@ import {useState} from "react";
 import {login} from "../../../api/userApi";
 import {useDispatch} from "react-redux";
 import {login as setLogin} from "../../../store/slices/userSlice";
-import {useHistory} from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     mainHeader: {
@@ -33,6 +33,7 @@ const LoginForm = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
 
     const [openError, setOpenError] = useState(false);
 
@@ -51,7 +52,9 @@ const LoginForm = () => {
                 dispatch(setLogin({loggedInUser, jwt: authorization}))
 
                 setSubmitting(false)
-                history.push('/')
+
+                const from = location.state?.from
+                history.push(from || '/')
             })
             .catch(() => {
                 setSubmitting(false)
