@@ -54,8 +54,6 @@ public class ReviewController {
     public void createReview(@Valid @RequestBody Review review,
                              @RequestParam(name = MOVIE) UUID uuid,
                              @AuthenticationPrincipal String username) {
-//        String principal = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         User user = userService.loadUserByUsername(username);
 
         review.setUser(user);
@@ -72,6 +70,7 @@ public class ReviewController {
 
         oldReview.setContent(review.getContent());
         oldReview.setRating(review.getRating());
+        oldReview.setTitle(review.getTitle());
 
 //        User user = userService.loadUserByUsername(username);
 //
