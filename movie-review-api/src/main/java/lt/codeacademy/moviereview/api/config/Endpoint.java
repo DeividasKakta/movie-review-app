@@ -13,5 +13,6 @@ public interface Endpoint {
     String REVIEW_BY_MOVIE = "/movie" + BY_UUID;
     String LOGIN = "/login";
     String REGISTER = "/register";
+    String TOP = "/top";
 
 }

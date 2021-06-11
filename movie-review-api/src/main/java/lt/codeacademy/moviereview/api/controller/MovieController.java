@@ -34,6 +34,16 @@ public class MovieController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(TOP)
+    public List<RatedMovieDto> getTopMovies() {
+        List<Movie> movies = movieService.getAllMovies();
+
+        return movies.stream()
+                .map(movieDtoMapper::mapToDto)
+                .sorted(Comparator.comparing(RatedMovieDto::getAverageRating).reversed())
+                .collect(Collectors.toList());
+    }
+
     @GetMapping(BY_UUID)
     public RatedMovieDto getRatedMovieById(@PathVariable(UUID) UUID uuid) {
         Movie movie = movieService.getMovieById(uuid);
