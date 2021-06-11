@@ -1,4 +1,4 @@
-import {AppBar, Button, Container, Divider, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Container, Divider, Hidden, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loggedInUser, logout} from "../../../store/slices/userSlice";
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         margin: theme.spacing(1, 1.5),
+        fontSize: theme.spacing(2)
     },
     active: {
         color: theme.palette.secondary.dark
@@ -23,6 +24,21 @@ const useStyles = makeStyles((theme) => ({
     menu: {
         display: "flex",
         justifyContent: "space-evenly"
+    },
+    collapsedMenu: {
+        justifyContent: "space-between",
+        overflowX: 'auto',
+    },
+    collapsedLink: {
+        padding: theme.spacing(1),
+        flexShrink: 0,
+        fontSize: theme.spacing(2)
+    },
+    collapsedTitle: {
+        marginTop: theme.spacing(2)
+    },
+    divider: {
+        marginTop: theme.spacing(2)
     }
 }));
 
@@ -68,34 +84,69 @@ const Header = () => {
 
                 </Toolbar>
             </AppBar>
-            <Container maxWidth="md">
-                <Toolbar className={classes.menu}>
+            <Hidden smDown>
+                <Container maxWidth="md">
+                    <Toolbar className={classes.menu}>
+                        <Link variant="button" color="inherit" exact to="/"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            Home
+                        </Link>
+
+                        <Link variant="button" color="inherit" exact to="/movies/rated/top"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            Top movies
+                        </Link>
+
+                        <Typography variant="h4" color="primary">
+                            Movie Review
+                        </Typography>
+
+                        <Link variant="button" color="inherit" to="/reviews/newest"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            Newest reviews
+                        </Link>
+
+                        <Link variant="button" color="inherit" to="/about"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            About
+                        </Link>
+                    </Toolbar>
+                    <Divider/>
+                </Container>
+            </Hidden>
+
+            <Hidden mdUp>
+                <Typography variant="h4" color="primary" align="center" className={classes.collapsedTitle}>
+                    Movie Review
+                </Typography>
+
+                <Divider className={classes.divider}/>
+
+                <Toolbar component="nav" className={classes.collapsedMenu}>
                     <Link variant="button" color="inherit" exact to="/"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                          className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
                         Home
                     </Link>
+
                     <Link variant="button" color="inherit" exact to="/movies/rated/top"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                          className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
                         Top movies
                     </Link>
 
-                    <Typography variant="h4" color="primary">
-                        Movie Review
-                    </Typography>
-
                     <Link variant="button" color="inherit" to="/reviews/newest"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                          className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
                         Newest reviews
                     </Link>
+
                     <Link variant="button" color="inherit" to="/about"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                          className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
                         About
                     </Link>
-
-
                 </Toolbar>
+
                 <Divider/>
-            </Container>
+            </Hidden>
+
         </>
     )
 }
