@@ -14,6 +14,10 @@ import java.util.UUID;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
 
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
+    }
+
     public List<Review> getReviewsByMovieId(UUID uuid) {
         return reviewRepository.findAllByMovieId(uuid);
     }

@@ -39,6 +39,16 @@ public class ReviewController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping(NEWEST)
+    public List<ReviewDto> getNewestReviews() {
+        List<Review> allReviews = reviewService.getAllReviews();
+
+        return allReviews.stream()
+                .map(reviewDtoMapper::mapToDto)
+                .sorted(Comparator.comparing(ReviewDto::getReviewDate).reversed())
+                .collect(Collectors.toList());
+    }
+
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public void createReview(@Valid @RequestBody Review review,
@@ -72,7 +82,10 @@ public class ReviewController {
 
     @DeleteMapping(BY_UUID)
     @PreAuthorize("#reviewUsername eq #username or hasRole('ADMIN')")
-    public void deleteReview(@PathVariable(UUID) UUID uuid, @RequestParam(name = "user") String reviewUsername, @AuthenticationPrincipal String username) {
+    public void deleteReview(@PathVariable(UUID) UUID uuid,
+                             @RequestParam(name = "user") String reviewUsername,
+                             @AuthenticationPrincipal String username) {
+
         reviewService.deleteReviewById(uuid);
     }
 }

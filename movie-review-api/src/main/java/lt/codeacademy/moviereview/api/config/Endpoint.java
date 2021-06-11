@@ -14,5 +14,6 @@ public interface Endpoint {
     String LOGIN = "/login";
     String REGISTER = "/register";
     String TOP = "/top";
+    String NEWEST = "/newest";
 
 }
