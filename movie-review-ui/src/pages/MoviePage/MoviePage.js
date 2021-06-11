@@ -7,6 +7,8 @@ import {createReview, deleteReview, editReview, fetchReviewsByMovieId} from "../
 import MovieMainCard from "../../components/dataDisplay/MovieMainCard/MovieMainCard";
 import ReviewDialogForm from "../../components/forms/ReviewDialogForm/ReviewDialogForm";
 import CustomSnackbar from "../../components/feedback/CustomSnackbar";
+import {useSelector} from "react-redux";
+import {loggedInUser} from "../../store/slices/userSlice";
 
 const useStyles = makeStyles((theme) => ({
     cardDetails: {
@@ -32,6 +34,8 @@ const MoviePage = () => {
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openEditSuccess, setOpenEditSuccess] = useState(false);
+
+    const currentUser = useSelector(loggedInUser)
 
     const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -141,9 +145,20 @@ const MoviePage = () => {
                            rating={movie.averageRating}
                            picture={movie.picture}/>
 
-            <Button variant="outlined" color="primary" onClick={() => setOpenCreateReview(true)}>
-                Leave a review
-            </Button>
+            {
+                currentUser ?
+                    <Button variant="outlined" color="primary" onClick={() => setOpenCreateReview(true)}>
+                        Leave a review
+                    </Button> :
+                    <>
+                        <Button variant="outlined" color="primary" disabled>
+                            Leave a review
+                        </Button>
+                        <Typography variant="subtitle1" color="secondary">Login to leave a review</Typography>
+                    </>
+
+            }
+
 
 
             <Dialog open={openCreateReview}
@@ -155,7 +170,7 @@ const MoviePage = () => {
                 <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
                                   handleOnSubmit={postReview}
                                   handleErrorClose={() => setOpenError(false)}
-                                  openError={openError} />
+                                  openError={openError}/>
 
             </Dialog>
 
@@ -180,7 +195,6 @@ const MoviePage = () => {
             </Typography>
 
 
-
             <Dialog open={openEditReview}
                     onClose={() => setOpenEditReview(false)}
                     aria-labelledby="edit-review">
@@ -198,19 +212,13 @@ const MoviePage = () => {
             </Dialog>
 
 
-
             <Dialog
                 open={openDeleteReview}
                 onClose={() => setOpenDeleteReview(false)}
                 aria-labelledby="delete-review"
             >
                 <DialogTitle id="delete-review">{"Delete this review?"}</DialogTitle>
-                {/*<DialogContent>*/}
-                {/*    <DialogContentText id="alert-dialog-description">*/}
-                {/*        Let Google help apps determine location. This means sending anonymous location data to*/}
-                {/*        Google, even when no apps are running.*/}
-                {/*    </DialogContentText>*/}
-                {/*</DialogContent>*/}
+
                 <DialogActions>
                     <Button onClick={() => setOpenDeleteReview(false)} color="primary">
                         Cancel
@@ -220,7 +228,6 @@ const MoviePage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-
 
 
             <List>
