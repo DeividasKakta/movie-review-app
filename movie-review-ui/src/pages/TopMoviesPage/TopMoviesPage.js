@@ -1,5 +1,6 @@
 import {
-    CardMedia, makeStyles,
+    CardMedia,
+    makeStyles,
     Paper,
     Table,
     TableBody,
@@ -66,7 +67,13 @@ const TopMoviesPage = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="left">{movie.title}</StyledTableCell>
                                 <StyledTableCell align="right">{new Date(movie.releaseDate).getFullYear()}</StyledTableCell>
-                                <StyledTableCell align="right">{movie.averageRating?.toFixed(1)}</StyledTableCell>
+                                <StyledTableCell align="right">
+                                    {
+                                        movie.averageRating === 0 ?
+                                            "N/A" :
+                                            movie.averageRating?.toFixed(1)
+                                    }
+                                </StyledTableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -10,9 +10,6 @@ import {useState} from "react";
 import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2, 1)
-    },
     mainHeader: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white

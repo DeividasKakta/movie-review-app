@@ -199,7 +199,7 @@ const MoviePage = () => {
                     onClose={() => setOpenEditReview(false)}
                     aria-labelledby="edit-review">
 
-                <DialogTitle id="edit-review">Write your review</DialogTitle>
+                <DialogTitle id="edit-review">Edit your review</DialogTitle>
 
                 <ReviewDialogForm handleCloseDialog={() => setOpenEditReview(false)}
                                   handleOnSubmit={postEditReview}
