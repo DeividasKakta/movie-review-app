@@ -13,30 +13,44 @@ import {
 } from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchTopMovies} from "../../api/moviesApi";
+import {useHistory} from "react-router-dom";
 
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: theme.spacing(3),
-    },
+        fontSize: theme.spacing(2)
+    }
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
     cardMedia: {
-        width: theme.spacing(5),
-        height: theme.spacing(8)
+        width: theme.spacing(8),
+        height: theme.spacing(10),
     },
     mainHeader: {
         marginBottom: theme.spacing(3),
+    },
+    tableRow: {
+        textDecoration: 0,
+        cursor: "pointer"
+    },
+    tableCell: {
+        fontSize: theme.spacing(3),
+    },
+    imageCell: {
+        padding: theme.spacing(0.5),
+    },
+    ratingCell: {
+        color: theme.palette.secondary.dark
     }
 }))
 
 const TopMoviesPage = () => {
     const classes = useStyles()
+    const history = useHistory()
+
     const [topMovies, setTopMovies] = useState([])
 
 
@@ -53,27 +67,45 @@ const TopMoviesPage = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell colSpan={2} align="center">Title</StyledTableCell>
-                            <StyledTableCell align="right">Release year</StyledTableCell>
-                            <StyledTableCell align="right">Rating</StyledTableCell>
+                            <StyledTableCell colSpan={2} align="center">
+                                Title
+                            </StyledTableCell>
+
+                            <StyledTableCell align="right">
+                                Release year
+                            </StyledTableCell>
+
+                            <StyledTableCell align="right">
+                                Rating
+                            </StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {topMovies.map((movie) => (
-                            <TableRow key={movie.movieId}>
-                                <StyledTableCell component="th" scope="row">
+                            <TableRow key={movie.movieId}
+                                      onClick={() => history.push("/movies/" + movie.movieId)}
+                                      hover
+                                      className={classes.tableRow}>
+                                <TableCell className={classes.imageCell}>
                                     <CardMedia className={classes.cardMedia} image={movie.picture}
                                                title="Random"/>
-                                </StyledTableCell>
-                                <StyledTableCell align="left">{movie.title}</StyledTableCell>
-                                <StyledTableCell align="right">{new Date(movie.releaseDate).getFullYear()}</StyledTableCell>
-                                <StyledTableCell align="right">
+                                </TableCell>
+
+                                <TableCell align="left" className={classes.tableCell}>
+                                    {movie.title}
+                                </TableCell>
+
+                                <TableCell align="right" className={classes.tableCell}>
+                                    {new Date(movie.releaseDate).getFullYear()}
+                                </TableCell>
+
+                                <TableCell align="right" className={`${classes.tableCell} ${classes.ratingCell}`}>
                                     {
                                         movie.averageRating === 0 ?
                                             "N/A" :
                                             movie.averageRating?.toFixed(1)
                                     }
-                                </StyledTableCell>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
