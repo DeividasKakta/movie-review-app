@@ -69,7 +69,7 @@ const Header = () => {
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         Home
                     </Link>
-                    <Link variant="button" color="inherit" to="/movies/create"
+                    <Link variant="button" color="inherit" exact to="/movies/rated/top"
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         Top movies
                     </Link>
@@ -78,11 +78,11 @@ const Header = () => {
                         Movie Review
                     </Typography>
 
-                    <Link variant="button" color="inherit" to="/register"
+                    <Link variant="button" color="inherit" to="/reviews/newest"
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         Newest reviews
                     </Link>
-                    <Link variant="button" color="inherit" to="/register"
+                    <Link variant="button" color="inherit" to="/about"
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         About
                     </Link>
