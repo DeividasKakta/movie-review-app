@@ -11,6 +11,7 @@ import java.util.UUID;
 public class ReviewDto {
     private final UUID reviewId;
     private final UUID movieId;
+    private final String movieTitle;
     private final String username;
     private final Date reviewDate;
     private final Integer rating;
