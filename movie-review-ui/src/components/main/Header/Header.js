@@ -1,4 +1,4 @@
-import {AppBar, Button, Container, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Button, Container, Divider, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loggedInUser, logout} from "../../../store/slices/userSlice";
@@ -89,6 +89,7 @@ const Header = () => {
 
 
                 </Toolbar>
+                <Divider/>
             </Container>
         </>
     )
