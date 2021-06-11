@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import {Button, Container, Grid, makeStyles, Paper} from "@material-ui/core";
+import {Button, Card, CardActions, CardContent, CardHeader, Container, Grid, makeStyles} from "@material-ui/core";
 import {Form, Formik} from "formik";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
@@ -10,8 +10,15 @@ import {login as setLogin} from "../../../store/slices/userSlice";
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2, 1)
+    mainHeader: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white
+    },
+    mainCard: {
+        marginBottom: theme.spacing(4)
+    },
+    cardActions: {
+        justifyContent: "center"
     }
 }));
 
@@ -24,11 +31,10 @@ const validationSchema = Yup.object().shape({
 
 const LoginForm = () => {
     const classes = useStyles()
-    const [openError, setOpenError] = useState(false);
-
     const dispatch = useDispatch()
     const history = useHistory()
-    // const location = useLocation()
+
+    const [openError, setOpenError] = useState(false);
 
     const handleErrorClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -37,7 +43,7 @@ const LoginForm = () => {
         setOpenError(false);
     };
 
-    const postForm = (data, {setSubmitting}) => {
+    const postLogin = (data, {setSubmitting}) => {
         setSubmitting(true)
 
         login(data)
@@ -55,44 +61,56 @@ const LoginForm = () => {
             username: '',
             password: ''
         }}
-                onSubmit={postForm}
+                onSubmit={postLogin}
                 validationSchema={validationSchema}
         >
             {props => (
                 <Container maxWidth="sm">
-                    <Paper elevation={3} className={classes.root}>
-                        <Form>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="username"
-                                                         label="Username"
-                                                         error={props.touched.username && !!props.errors.username}
-                                                         placeholder="Enter your username..."/>
+                    <Form>
+
+                        <Card className={classes.mainCard}>
+                            <CardHeader title="Login" titleTypographyProps={{align: "center", variant: "h4"}}
+                                        className={classes.mainHeader}/>
+                            <CardContent>
+
+                                <Grid container spacing={2}>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="username"
+                                                             label="Username"
+                                                             error={props.touched.username && !!props.errors.username}
+                                                             placeholder="Enter your username..."/>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="password"
+                                                             label="Password"
+                                                             type="password"
+                                                             error={props.touched.password && !!props.errors.password}
+                                                             placeholder="Enter your password..."/>
+                                    </Grid>
+
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="password"
-                                                         label="Password"
-                                                         type="password"
-                                                         error={props.touched.password && !!props.errors.password}
-                                                         placeholder="Enter your password..."/>
-                                </Grid>
+                            </CardContent>
+                            <CardActions disableSpacing className={classes.cardActions}>
 
-                            </Grid>
+                                <Button variant="contained"
+                                        fullWidth
+                                        color="secondary"
+                                        disabled={props.isSubmitting}
+                                        type="submit">Submit</Button>
 
-                            <Button variant="contained"
-                                    fullWidth
-                                    color="primary"
-                                    type="submit"
-                                    disabled={props.isSubmitting}>Submit</Button>
+                            </CardActions>
 
-                        </Form>
-                    </Paper>
+                        </Card>
+
+                    </Form>
 
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleErrorClose}
-                                    message="Error while trying to login"
+                                    message="Incorrect username or password"
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>

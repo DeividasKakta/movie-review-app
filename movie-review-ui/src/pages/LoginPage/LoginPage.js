@@ -1,21 +1,19 @@
-import {Grid, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import LoginForm from "../../components/forms/LoginForm/LoginForm";
 
+const useStyles = makeStyles((theme) => ({
+    mainContainer: {
+        marginTop: theme.spacing(4)
+    }
+}))
 
 const LoginPage = () => {
-
+    const classes = useStyles()
 
     return (
         <>
-            <main>
-                <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                        <Typography variant="h2" align="center">
-                            Login
-                        </Typography>
-                    </Grid>
-                    <LoginForm/>
-                </Grid>
+            <main className={classes.mainContainer}>
+                <LoginForm/>
             </main>
         </>
     )
