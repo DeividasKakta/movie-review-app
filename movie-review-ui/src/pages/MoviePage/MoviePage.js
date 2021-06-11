@@ -16,11 +16,12 @@ const useStyles = makeStyles((theme) => ({
         overflowWrap: "anywhere"
     },
     mainContainer: {
-        paddingTop: theme.spacing(1),
+        paddingTop: theme.spacing(2),
         paddingBottom: theme.spacing(1)
     },
     divider: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(1)
     }
 }));
 
