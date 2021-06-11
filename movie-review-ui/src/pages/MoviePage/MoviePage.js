@@ -39,6 +39,11 @@ const useStyles = makeStyles((theme) => ({
     loginErrorItem: {
         display: "inline-block",
         marginLeft: theme.spacing(1)
+    },
+    reviewDialogTitle: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        textAlign: "center"
     }
 }));
 
@@ -135,7 +140,7 @@ const MoviePage = () => {
                 fetchReviewsByMovieId(id)
                     .then(({data}) => {
                         setReviews(data)
-                        setOpenEditSuccess(true) // change msg
+                        setOpenEditSuccess(true)
                     })
             })
             .catch(() => setOpenError(true))
@@ -171,7 +176,7 @@ const MoviePage = () => {
                     onClose={() => setOpenCreateReview(false)}
                     aria-labelledby="form-dialog-title">
 
-                <DialogTitle id="form-dialog-title">Write your review</DialogTitle>
+                <DialogTitle id="form-dialog-title" className={classes.reviewDialogTitle}>Write your review</DialogTitle>
 
                 <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
                                   handleOnSubmit={postReview}
@@ -223,7 +228,6 @@ const MoviePage = () => {
                               component={NavLink}>
                             Login to leave a review
                         </Link>
-                        {/*<Typography variant="subtitle1" color="secondary" className={classes.loginErrorItem}>Login to leave a review</Typography>*/}
                     </div>
 
             }
@@ -232,13 +236,14 @@ const MoviePage = () => {
                     onClose={() => setOpenEditReview(false)}
                     aria-labelledby="edit-review">
 
-                <DialogTitle id="edit-review">Edit your review</DialogTitle>
+                <DialogTitle id="edit-review" className={classes.reviewDialogTitle}>Edit your review</DialogTitle>
 
                 <ReviewDialogForm handleCloseDialog={() => setOpenEditReview(false)}
                                   handleOnSubmit={postEditReview}
                                   handleErrorClose={() => setOpenError(false)}
                                   openError={openError}
                                   errorMessage="Error updating review"
+                                  title={editableReview.title}
                                   content={editableReview.content}
                                   rating={editableReview.rating}/>
 

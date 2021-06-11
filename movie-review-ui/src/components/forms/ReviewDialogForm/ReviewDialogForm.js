@@ -16,22 +16,36 @@ import CustomSnackbar from "../../feedback/CustomSnackbar";
 
 const validationSchema = Yup.object().shape({
     content: Yup.string()
-        .min(5)
-        .max(1000)
-        .required(),
+        .min(5, "Content must be at least 5 symbols long")
+        .max(1000, "Content must be at least 5 symbols long")
+        .required("Field can not be empty"),
+    title: Yup.string()
+        .min(5, "Title must be at least 5 symbols long")
+        .max(100, "Title must be at least 5 symbols long")
+        .required("Field can not be empty"),
     rating: Yup.number()
-        .min(1)
-        .max(10)
-        .required()
+        .min(1, "Minimum rating is 1")
+        .max(10, "Maximum rating is 10")
+        .required("Field can not be empty")
 })
 
-const ReviewDialogForm = ({content = '', rating = '', handleCloseDialog, handleOnSubmit, openError, handleErrorClose, errorMessage = 'Unexpected error'}) => {
+const ReviewDialogForm = ({
+                              content = '',
+                              rating = '',
+                              title = '',
+                              handleCloseDialog,
+                              handleOnSubmit,
+                              openError,
+                              handleErrorClose,
+                              errorMessage = 'Unexpected error'
+                          }) => {
     const ratingArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     return (
         <Formik initialValues={{
             content: content,
             rating: rating,
+            title: title
         }}
                 onSubmit={handleOnSubmit}
                 validationSchema={validationSchema}
@@ -41,8 +55,15 @@ const ReviewDialogForm = ({content = '', rating = '', handleCloseDialog, handleO
 
                     <DialogContent style={{width: 450}}>
 
-
                         <Grid container spacing={2}>
+
+                            <Grid item xs={12}>
+                                <OutlinedFormikInput name="title"
+                                                     label="Title"
+                                                     error={props.touched.title && !!props.errors.title}
+                                                     placeholder="Enter your review title..."/>
+                            </Grid>
+
                             <Grid item xs={12}>
                                 <OutlinedFormikInput name="content"
                                                      label="Content"
@@ -71,7 +92,6 @@ const ReviewDialogForm = ({content = '', rating = '', handleCloseDialog, handleO
 
                         </Grid>
 
-
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseDialog} color="primary">
@@ -79,7 +99,7 @@ const ReviewDialogForm = ({content = '', rating = '', handleCloseDialog, handleO
                         </Button>
 
                         <Button variant="contained"
-                                color="primary"
+                                color="secondary"
                                 type="submit"
                                 disabled={props.isSubmitting}>Submit</Button>
 
