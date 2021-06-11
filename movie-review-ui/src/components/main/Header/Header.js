@@ -2,6 +2,7 @@ import {AppBar, Button, Container, Divider, Link, makeStyles, Toolbar, Typograph
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loggedInUser, logout} from "../../../store/slices/userSlice";
+import MovieIcon from '@material-ui/icons/Movie';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -9,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
     },
     link: {
         margin: theme.spacing(1, 1.5),
@@ -31,9 +35,9 @@ const Header = () => {
         <>
             <AppBar position="static" color="primary">
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        Movie Review
-                    </Typography>
+                    <div className={classes.title}>
+                        <MovieIcon fontSize="large"/>
+                    </div>
 
                     {
                         currentUser?.roles.includes("ADMIN") &&
