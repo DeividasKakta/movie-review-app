@@ -15,6 +15,7 @@ public class ReviewDto {
     private final String username;
     private final Date reviewDate;
     private final Integer rating;
+    private final String title;
     private final String content;
 
 }

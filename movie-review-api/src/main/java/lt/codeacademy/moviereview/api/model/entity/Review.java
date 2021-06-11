@@ -30,6 +30,10 @@ public class Review {
     private Movie movie;
 
     @NotBlank
+    @Size(min = 5, max = 100)
+    private String title;
+
+    @NotBlank
     @Size(min = 5, max = 1000)
     @Column(columnDefinition = "VARCHAR(1000)")
     private String content;
