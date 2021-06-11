@@ -58,6 +58,13 @@ const useStyles = makeStyles((theme) => ({
     },
     userHeader: {
         paddingBottom: 0
+    },
+    ratingText: {
+        marginBottom: theme.spacing(1)
+    },
+    divider: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1)
     }
 }))
 
@@ -86,7 +93,6 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                                         {username}
                                     </Typography>
                                 </div>
-
                             </Hidden>
 
                             <Hidden smUp>
@@ -110,7 +116,6 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                                             <DeleteIcon/>
                                         </Button>
                                     }
-
                                 </div>
                             </Hidden>
 
@@ -128,9 +133,21 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                     </Hidden>
 
                     <Grid item xs={12} sm={10} md={11}>
-                        <CardContent>
+                        <CardContent style={{paddingBottom: 8}}>
 
-                            <div className={classes.reviewHeader}>
+                            <div>
+                                <Typography variant="h6" className={classes.leftItem}>
+                                    A very good movie with bad pacing
+                                </Typography>
+                            </div>
+
+                            <Typography variant="body1">
+                                {content}
+                            </Typography>
+
+                            <Divider className={classes.divider}/>
+
+                            <div className={`${classes.ratingText} ${classes.reviewHeader}`}>
                                 <Typography variant="subtitle2" display="inline" component="pre">
                                     {"Rating: "}
                                 </Typography>
@@ -162,10 +179,6 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
                                     }
                                 </Typography>
                             </div>
-
-                            <Typography variant="body1">
-                                {content}
-                            </Typography>
 
                         </CardContent>
                     </Grid>
