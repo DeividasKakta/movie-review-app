@@ -50,10 +50,13 @@ const LoginForm = () => {
             .then(({data: loggedInUser, headers: {authorization}}) => {
                 dispatch(setLogin({loggedInUser, jwt: authorization}))
 
+                setSubmitting(false)
                 history.push('/')
             })
-            .catch(() => setOpenError(true))
-            .finally(() => setSubmitting(false))
+            .catch(() => {
+                setSubmitting(false)
+                setOpenError(true)
+            })
     }
 
     return (
