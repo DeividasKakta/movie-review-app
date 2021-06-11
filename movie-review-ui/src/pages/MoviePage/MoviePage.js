@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogActions, DialogTitle, List, makeStyles, Typography} from "@material-ui/core";
+import {Button, Dialog, DialogActions, DialogTitle, Divider, List, makeStyles, Typography} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchRatedMovieById} from "../../api/moviesApi";
 import {useParams} from "react-router-dom";
@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     mainContainer: {
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1)
+    },
+    divider: {
+        marginBottom: theme.spacing(2)
     }
 }));
 
@@ -145,22 +148,6 @@ const MoviePage = () => {
                            rating={movie.averageRating}
                            picture={movie.picture}/>
 
-            {
-                currentUser ?
-                    <Button variant="outlined" color="primary" onClick={() => setOpenCreateReview(true)}>
-                        Leave a review
-                    </Button> :
-                    <>
-                        <Button variant="outlined" color="primary" disabled>
-                            Leave a review
-                        </Button>
-                        <Typography variant="subtitle1" color="secondary">Login to leave a review</Typography>
-                    </>
-
-            }
-
-
-
             <Dialog open={openCreateReview}
                     onClose={() => setOpenCreateReview(false)}
                     aria-labelledby="form-dialog-title">
@@ -194,6 +181,21 @@ const MoviePage = () => {
                 Reviews
             </Typography>
 
+            <Divider className={classes.divider} />
+
+            {
+                currentUser ?
+                    <Button variant="outlined" color="secondary" onClick={() => setOpenCreateReview(true)}>
+                        Leave a review
+                    </Button> :
+                    <>
+                        <Button variant="outlined" color="secondary" disabled>
+                            Leave a review
+                        </Button>
+                        <Typography variant="subtitle1" color="secondary">Login to leave a review</Typography>
+                    </>
+
+            }
 
             <Dialog open={openEditReview}
                     onClose={() => setOpenEditReview(false)}
@@ -237,6 +239,7 @@ const MoviePage = () => {
                                         rating={review.rating}
                                         date={review.reviewDate}
                                         content={review.content}
+                                        title={review.title}
                                         handleOnEditReview={() => handleEditReviewClick(review)}
                                         handleOnDeleteReview={() => handleDeleteReviewClick(review)}/>
                 ))}

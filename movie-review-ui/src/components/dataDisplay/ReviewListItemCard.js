@@ -65,10 +65,18 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1)
+    },
+    usernameAlign: {
+        paddingLeft: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        fontSize: theme.spacing(2.25)
     }
 }))
 
-const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview, handleOnDeleteReview}) => {
+const ReviewListItemCard = ({username, rating, date, title, content, handleOnEditReview, handleOnDeleteReview}) => {
     const classes = useStyles();
     const currentUser = useSelector(loggedInUser)
 
@@ -97,11 +105,17 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
 
                             <Hidden smUp>
                                 <div className={classes.reviewHeader}>
+                                    <div>
+                                        <Avatar className={`${classes.userItem} ${classes.avatarColor}`}>
+                                            {username?.substring(0, 1).toUpperCase()}
+                                        </Avatar>
+                                    </div>
                                     <Typography variant="subtitle2"
                                                 display="inline"
-                                                className={`${classes.usernameTextColor} ${classes.leftItem}`}>
+                                                className={`${classes.usernameTextColor} ${classes.leftItem} ${classes.usernameAlign}`}>
                                         {username}
                                     </Typography>
+
                                     {
                                         currentUser?.username === username &&
                                         <Button color="secondary" className={classes.actionIcons}
@@ -137,7 +151,7 @@ const ReviewListItemCard = ({username, rating, date, content, handleOnEditReview
 
                             <div>
                                 <Typography variant="h6" className={classes.leftItem}>
-                                    A very good movie with bad pacing
+                                    {title}
                                 </Typography>
                             </div>
 
