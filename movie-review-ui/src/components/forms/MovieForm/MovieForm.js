@@ -2,12 +2,15 @@ import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {
     Button,
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
     Container,
     FormControl,
     FormHelperText,
     Grid,
-    makeStyles,
-    Paper
+    makeStyles
 } from "@material-ui/core";
 import {KeyboardDatePicker} from "@material-ui/pickers";
 import {createMovie} from "../../../api/moviesApi";
@@ -16,8 +19,15 @@ import {useState} from "react";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: theme.spacing(2, 1)
+    mainHeader: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white
+    },
+    mainCard: {
+        marginBottom: theme.spacing(4)
+    },
+    cardActions: {
+        justifyContent: "center"
     }
 }));
 
@@ -29,8 +39,6 @@ const validationSchema = Yup.object().shape({
     cast: Yup.string()
         .required(),
     picture: Yup.string()
-        .required(),
-    releaseDate: Yup.date()
         .required()
 })
 
@@ -81,65 +89,74 @@ const MovieForm = () => {
         >
             {props => (
                 <Container maxWidth="sm">
-                    <Paper elevation={3} className={classes.root}>
-                        <Form>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <OutlinedFormikInput name="title"
-                                                         label="Title"
-                                                         error={props.touched.title && !!props.errors.title}
-                                                         placeholder="Enter movie title..."/>
+                    <Form>
+                        <Card className={classes.mainCard}>
+                            <CardHeader title="Add new movie" titleTypographyProps={{align: "center", variant: "h4"}}
+                                        className={classes.mainHeader}/>
+                            <CardContent>
+
+                                <Grid container spacing={2}>
+                                    <Grid item xs={6}>
+                                        <OutlinedFormikInput name="title"
+                                                             label="Title"
+                                                             error={props.touched.title && !!props.errors.title}
+                                                             placeholder="Enter movie title..."/>
+                                    </Grid>
+
+                                    <Grid item xs={6}>
+                                        <FormControl error={props.touched.releaseDate && !!props.errors.releaseDate}
+                                                     variant="standard" margin="normal">
+                                            <Field id="releaseDate" name="releaseDate" label="Release date"
+                                                   format="yyyy/MM/dd" inputVariant="outlined"
+                                                   onChange={val => {
+                                                       props.setFieldValue("releaseDate", val);
+                                                   }}
+                                                   as={KeyboardDatePicker}/>
+                                            <ErrorMessage name="releaseDate" component={FormHelperText}/>
+                                        </FormControl>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="description"
+                                                             label="Description"
+                                                             error={props.touched.description && !!props.errors.description}
+                                                             placeholder="Enter movie description..."
+                                                             multiline
+                                                             rows={4}/>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="cast"
+                                                             label="Cast"
+                                                             error={props.touched.cast && !!props.errors.cast}
+                                                             placeholder="Enter movie cast..."
+                                                             multiline
+                                                             rows={2}/>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="picture"
+                                                             label="Picture URL"
+                                                             error={props.touched.picture && !!props.errors.picture}
+                                                             placeholder="Enter movie picture URL..."/>
+                                    </Grid>
+
                                 </Grid>
 
-                                <Grid item xs={6}>
-                                    <FormControl error={props.touched.releaseDate && !!props.errors.releaseDate}
-                                                 variant="standard" margin="normal">
-                                        <Field id="releaseDate" name="releaseDate" label="Release date"
-                                               format="yyyy/MM/dd" inputVariant="outlined"
-                                               onChange={val => {
-                                                   props.setFieldValue("releaseDate", val);
-                                               }}
-                                               as={KeyboardDatePicker}/>
-                                        <ErrorMessage name="releaseDate" component={FormHelperText}/>
-                                    </FormControl>
-                                </Grid>
+                            </CardContent>
+                            <CardActions disableSpacing className={classes.cardActions}>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="description"
-                                                         label="Description"
-                                                         error={props.touched.description && !!props.errors.description}
-                                                         placeholder="Enter movie description..."
-                                                         multiline
-                                                         rows={4}/>
-                                </Grid>
+                                <Button variant="contained"
+                                        fullWidth
+                                        color="secondary"
+                                        disabled={props.isSubmitting}
+                                        type="submit">Submit</Button>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="cast"
-                                                         label="Cast"
-                                                         error={props.touched.cast && !!props.errors.cast}
-                                                         placeholder="Enter movie cast..."
-                                                         multiline
-                                                         rows={2}/>
-                                </Grid>
+                            </CardActions>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="picture"
-                                                         label="Picture URL"
-                                                         error={props.touched.picture && !!props.errors.picture}
-                                                         placeholder="Enter movie picture URL..."
-                                                         />
-                                </Grid>
+                        </Card>
 
-                            </Grid>
-
-                            <Button variant="contained"
-                                    fullWidth
-                                    color="primary"
-                                    type="submit"
-                                    disabled={props.isSubmitting}>Submit</Button>
-
-                        </Form>
-                    </Paper>
+                    </Form>
 
                     <CustomSnackbar open={openError}
                                     duration={5000}

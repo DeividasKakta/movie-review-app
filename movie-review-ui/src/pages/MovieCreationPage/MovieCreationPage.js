@@ -1,19 +1,19 @@
 import MovieForm from "../../components/forms/MovieForm/MovieForm";
-import {Grid, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+    mainContainer: {
+        marginTop: theme.spacing(4)
+    }
+}))
 
 const MovieCreationPage = () => {
+    const classes = useStyles()
 
     return (
         <>
-            <main>
-                <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                        <Typography variant="h2" align="center">
-                            Add new movie
-                        </Typography>
-                    </Grid>
-                    <MovieForm/>
-                </Grid>
+            <main className={classes.mainContainer}>
+                <MovieForm/>
             </main>
         </>
     )
