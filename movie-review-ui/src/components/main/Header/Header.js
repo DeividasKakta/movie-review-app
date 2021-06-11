@@ -34,14 +34,15 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         Movie Review
                     </Typography>
-                    <Link variant="button" color="inherit" exact to="/"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
-                        Home
-                    </Link>
-                    <Link variant="button" color="inherit" to="/movies/create"
-                          className={classes.link} activeClassName={classes.active} component={NavLink}>
-                        Add new movie
-                    </Link>
+
+                    {
+                        currentUser?.roles.includes("ADMIN") &&
+
+                        <Link variant="button" color="inherit" to="/movies/create"
+                              className={classes.link} activeClassName={classes.active} component={NavLink}>
+                            Add new movie
+                        </Link>
+                    }
 
                     {
                         currentUser ?

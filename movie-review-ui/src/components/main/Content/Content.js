@@ -7,6 +7,7 @@ import RegisterPage from "../../../pages/RegisterPage/RegisterPage";
 import TopMoviesPage from "../../../pages/TopMoviesPage/TopMoviesPage";
 import NewestReviewsPage from "../../../pages/NewestReviewsPage/NewestReviewsPage";
 import AboutPage from "../../../pages/AboutPage/AboutPage";
+import SecuredRoute from "../../security/SecuredRoute/SecuredRoute";
 
 const Content = () => {
 
@@ -17,9 +18,9 @@ const Content = () => {
                     <LandingPage/>
                 </Route>
 
-                <Route path="/movies/create">
+                <SecuredRoute path="/movies/create" roles={["ADMIN"]}>
                     <MovieCreationPage/>
-                </Route>
+                </SecuredRoute>
 
                 <Route exact path="/movies/:id" children={<MoviePage/>}/>
 
