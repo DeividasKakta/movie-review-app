@@ -2,7 +2,7 @@ import {Button, Dialog, DialogActions, DialogTitle, Divider, List, makeStyles, T
 import {useEffect, useState} from "react";
 import {fetchRatedMovieById} from "../../api/moviesApi";
 import {useParams} from "react-router-dom";
-import ReviewListItemCard from "../../components/dataDisplay/ReviewListItemCard";
+import ReviewListItemCard from "../../components/dataDisplay/ReviewListItemCard/ReviewListItemCard";
 import {createReview, deleteReview, editReview, fetchReviewsByMovieId} from "../../api/reviewApi";
 import MovieMainCard from "../../components/dataDisplay/MovieMainCard/MovieMainCard";
 import ReviewDialogForm from "../../components/forms/ReviewDialogForm/ReviewDialogForm";

@@ -13,7 +13,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useSelector} from "react-redux";
-import {loggedInUser} from "../../store/slices/userSlice";
+import {loggedInUser} from "../../../store/slices/userSlice";
 import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
