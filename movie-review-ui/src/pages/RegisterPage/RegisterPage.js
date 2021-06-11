@@ -1,21 +1,19 @@
-import {Grid, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import RegisterForm from "../../components/forms/RegisterForm/RegisterForm";
 
+const useStyles = makeStyles((theme) => ({
+    mainContainer: {
+        marginTop: theme.spacing(4)
+    }
+}))
 
 const RegisterPage = () => {
-
+    const classes = useStyles()
 
     return (
         <>
-            <main>
-                <Grid container spacing={4}>
-                    <Grid item xs={12}>
-                        <Typography variant="h2" align="center">
-                            Register
-                        </Typography>
-                    </Grid>
-                    <RegisterForm/>
-                </Grid>
+            <main className={classes.mainContainer}>
+                <RegisterForm/>
             </main>
         </>
     )

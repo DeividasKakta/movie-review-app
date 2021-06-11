@@ -1,5 +1,5 @@
 import Container from "@material-ui/core/Container";
-import {Grid, makeStyles, Paper} from "@material-ui/core";
+import {Card, CardActions, CardContent, CardHeader, Grid, makeStyles} from "@material-ui/core";
 import {Form, Formik} from "formik";
 import Button from "@material-ui/core/Button";
 import * as Yup from "yup";
@@ -7,10 +7,21 @@ import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
 import {register} from "../../../api/userApi";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
 import {useState} from "react";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         padding: theme.spacing(2, 1)
+    },
+    mainHeader: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white
+    },
+    mainCard: {
+        marginBottom: theme.spacing(4)
+    },
+    cardActions: {
+        justifyContent: "center"
     }
 }));
 
@@ -31,14 +42,29 @@ const validationSchema = Yup.object().shape({
 
 const RegisterForm = () => {
     const classes = useStyles()
-    const [openError, setOpenError] = useState(false);
+    const [openError, setOpenError] = useState(false)
+    const [openSuccess, setOpenSuccess] = useState(false)
 
-    const handleErrorClose = (event, reason) => {
+    const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpenError(false);
+        setOpenSuccess(false)
+        setOpenError(false)
     };
+
+    const postRegister = (data, {setSubmitting}) => {
+        setSubmitting(true)
+
+        register(data)
+            .then(() => setOpenSuccess(true))
+            .catch(() => setOpenError(true))
+            .finally(() => {
+                setTimeout(() => {
+                    setSubmitting(false)
+                }, 300)
+            })
+    }
 
     return (
         <Formik initialValues={{
@@ -46,67 +72,80 @@ const RegisterForm = () => {
             password: '',
             repeatPassword: ''
         }}
-                onSubmit={
-                    (values, helpers) => {
-
-                        register(values)
-                            .then(() => console.log(values))
-                            .catch(() => setOpenError(true))
-
-                        helpers.setSubmitting(true)
-                        setTimeout(() => {
-                            helpers.setSubmitting(false)
-                        }, 300)
-                    }
-                }
+                onSubmit={postRegister}
                 validationSchema={validationSchema}
         >
             {props => (
                 <Container maxWidth="sm">
-                    <Paper elevation={3} className={classes.root}>
-                        <Form>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="username"
-                                                         label="Username"
-                                                         placeholder="Enter an username..."
-                                                         error={props.touched.username && !!props.errors.username}/>
+                    <Form>
+                        <Card className={classes.mainCard}>
+                            <CardHeader title="Register" titleTypographyProps={{align: "center", variant: "h4"}}
+                                        className={classes.mainHeader}/>
+                            <CardContent>
+
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="username"
+                                                             label="Username"
+                                                             placeholder="Enter an username..."
+                                                             error={props.touched.username && !!props.errors.username}/>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="password"
+                                                             label="Password"
+                                                             type="password"
+                                                             placeholder="Enter a password..."
+                                                             error={props.touched.password && !!props.errors.password}/>
+                                    </Grid>
+
+                                    <Grid item xs={12}>
+                                        <OutlinedFormikInput name="repeatPassword"
+                                                             label="Repeat password"
+                                                             type="password"
+                                                             placeholder="Repeat password..."
+                                                             error={props.touched.repeatPassword && !!props.errors.repeatPassword}/>
+                                    </Grid>
+
                                 </Grid>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="password"
-                                                         label="Password"
-                                                         type="password"
-                                                         placeholder="Enter a password..."
-                                                         error={props.touched.password && !!props.errors.password}/>
-                                </Grid>
+                            </CardContent>
+                            <CardActions disableSpacing className={classes.cardActions}>
 
-                                <Grid item xs={12}>
-                                    <OutlinedFormikInput name="repeatPassword"
-                                                         label="Repeat password"
-                                                         type="password"
-                                                         placeholder="Repeat password..."
-                                                         error={props.touched.repeatPassword && !!props.errors.repeatPassword}/>
-                                </Grid>
+                                <Button variant="contained"
+                                        fullWidth
+                                        color="secondary"
+                                        disabled={props.isSubmitting}
+                                        type="submit">Submit</Button>
 
-                            </Grid>
+                            </CardActions>
 
-                            <Button variant="contained"
-                                    fullWidth
-                                    color="primary"
-                                    disabled={props.isSubmitting}
-                                    type="submit">Submit</Button>
-
-                        </Form>
-                    </Paper>
+                        </Card>
+                    </Form>
 
                     <CustomSnackbar open={openError}
                                     duration={5000}
-                                    handleClose={handleErrorClose}
+                                    handleClose={handleSnackbarClose}
                                     message="Username already exists"
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>
+
+                    <CustomSnackbar open={openSuccess}
+                                    duration={5000}
+                                    handleClose={handleSnackbarClose}
+                                    message="Username created successfully"
+                                    action={
+                                        <>
+                                            <Button color="primary" variant="outlined" to="/login"
+                                                    component={NavLink}>
+                                                Login
+                                            </Button>
+                                        </>
+                                    }
+                                    elevation={3}
+                                    variant="filled"
+                                    severity="success"/>
 
                 </Container>
             )}
