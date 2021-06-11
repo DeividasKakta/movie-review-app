@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loadFromSessionStorage, saveToSessionStorage} from "../../utils/sessionStorage";
+import {loadFromSessionStorage, removeItemFromSessionStorage, saveToSessionStorage} from "../../utils/sessionStorage";
 
 
 const initialState = {
@@ -13,6 +13,10 @@ const userSlice = createSlice({
     reducers: {
         login(user, { payload }) {
             return payload
+        },
+        logout() {
+            removeItemFromSessionStorage('user')
+            return initialState
         }
     }
 })
@@ -36,4 +40,4 @@ export const loadUserFromSessionStorage = () => loadFromSessionStorage("user") |
 export const loggedInUser = ( { user } ) => user.loggedInUser
 
 export default userSlice.reducer
-export const { login } = userSlice.actions
+export const { login, logout } = userSlice.actions

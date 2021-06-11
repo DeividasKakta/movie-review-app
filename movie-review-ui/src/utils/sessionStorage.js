@@ -15,3 +15,11 @@ export const loadFromSessionStorage = (key) => {
 
     return JSON.parse(serializedValue)
 }
+
+export const removeItemFromSessionStorage = (key) => {
+    try {
+        sessionStorage.removeItem(key)
+    } catch {
+        //
+    }
+}
