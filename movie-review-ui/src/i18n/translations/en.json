@@ -1,5 +1,13 @@
 {
   "header": {
-
+    "appTitle": "MovieReview",
+    "home": "Home",
+    "topMovies": "Top movies",
+    "newestReviews": "Newest reviews",
+    "about": "About",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "addMovie": "Add new movie"
   }
 }

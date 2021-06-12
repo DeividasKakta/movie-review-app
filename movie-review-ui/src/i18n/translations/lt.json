@@ -1,5 +1,13 @@
 {
   "header": {
-
+    "appTitle": "MovieReview",
+    "home": "Pradžia",
+    "topMovies": "Geriausi filmai",
+    "newestReviews": "Naujausios apžvalgos",
+    "about": "Apie mus",
+    "login": "Prisijungti",
+    "register": "Registruotis",
+    "logout": "Atsijungti",
+    "addMovie": "Sukurti naują filmą"
   }
 }

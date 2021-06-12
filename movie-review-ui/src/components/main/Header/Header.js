@@ -87,7 +87,7 @@ const Header = () => {
 
                         <Link variant="button" color="inherit" to="/movies/create"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Add new movie
+                            {t('addMovie')}
                         </Link>
                     }
 
@@ -95,12 +95,12 @@ const Header = () => {
                         currentUser ?
                             <Button color="secondary" variant="outlined" onClick={() => dispatch(logout())}
                                     className={classes.link}>
-                                Logout
+                                {t('logout')}
                             </Button> :
                             <>
                                 <Link variant="button" color="inherit" to="/register"
                                       className={classes.link} activeClassName={classes.active} component={NavLink}>
-                                    Register
+                                    {t('register')}
                                 </Link>
                                 <Button color="secondary"
                                         variant="outlined"
@@ -111,7 +111,7 @@ const Header = () => {
                                             }
                                         }}
                                         className={classes.link} component={NavLink}>
-                                    Login
+                                    {t('login')}
                                 </Button>
                             </>
                     }
@@ -135,26 +135,26 @@ const Header = () => {
                     <Toolbar className={classes.menu}>
                         <Link variant="button" color="inherit" exact to="/"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Home
+                            {t('home')}
                         </Link>
 
                         <Link variant="button" color="inherit" exact to="/movies/rated/top"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Top movies
+                            {t('topMovies')}
                         </Link>
 
                         <Typography variant="h4" color="primary">
-                            Movie Review
+                            {t('appTitle')}
                         </Typography>
 
                         <Link variant="button" color="inherit" to="/reviews/newest"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            Newest reviews
+                            {t('newestReviews')}
                         </Link>
 
                         <Link variant="button" color="inherit" to="/about"
                               className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            About
+                            {t('about')}
                         </Link>
                     </Toolbar>
                     <Divider/>
@@ -163,7 +163,7 @@ const Header = () => {
 
             <Hidden mdUp>
                 <Typography variant="h4" color="primary" align="center" className={classes.collapsedTitle}>
-                    Movie Review
+                    {t('appTitle')}
                 </Typography>
 
                 <Divider className={classes.divider}/>
@@ -171,22 +171,22 @@ const Header = () => {
                 <Toolbar component="nav" className={classes.collapsedMenu}>
                     <Link variant="button" color="inherit" exact to="/"
                           className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
-                        Home
+                        {t('home')}
                     </Link>
 
                     <Link variant="button" color="inherit" exact to="/movies/rated/top"
                           className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
-                        Top movies
+                        {t('topMovies')}
                     </Link>
 
                     <Link variant="button" color="inherit" to="/reviews/newest"
                           className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
-                        Newest reviews
+                        {t('newestReviews')}
                     </Link>
 
                     <Link variant="button" color="inherit" to="/about"
                           className={classes.collapsedLink} activeClassName={classes.active} component={NavLink}>
-                        About
+                        {t('about')}
                     </Link>
                 </Toolbar>
 
