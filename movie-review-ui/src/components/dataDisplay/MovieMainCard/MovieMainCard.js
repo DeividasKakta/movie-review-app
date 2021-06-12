@@ -29,7 +29,7 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating, picture})
                         picture ?
                             <CardMedia className={classes.cardMedia}
                                        image={picture}
-                                       title="Random"
+                                       title={title}
                             /> :
                             <CircularProgress/>
                     }

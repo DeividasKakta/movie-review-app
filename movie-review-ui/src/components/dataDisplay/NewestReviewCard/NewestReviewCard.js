@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     },
     movieArea: {
         backgroundColor: theme.palette.primary.light,
-        color: theme.palette.secondary.main,
+        color: theme.palette.common.white,
     },
     coloredDivider: {
         backgroundColor: theme.palette.secondary.dark
@@ -72,7 +72,8 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1)
     },
     movieAreaIcon: {
-        fontSize: theme.spacing(4)
+        fontSize: theme.spacing(4),
+        color: theme.palette.secondary.main
     },
     movieAreaIconContainer: {
         display: "flex",
