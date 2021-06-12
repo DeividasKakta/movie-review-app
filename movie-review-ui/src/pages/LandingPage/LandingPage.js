@@ -1,7 +1,8 @@
-import {Card, CardActionArea, CardContent, CardMedia, Grid, Hidden, makeStyles, Typography} from "@material-ui/core";
+import {Grid, List, makeStyles, Typography} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchMovies} from "../../api/moviesApi";
-import {Link} from "react-router-dom";
+import FeaturedMovieCard from "../../components/dataDisplay/FeaturedMovieCard/FeaturedMovieCard";
+import SecondaryMovieItem from "../../components/dataDisplay/SecondaryMovieItem/SecondaryMovieItem";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -26,52 +27,60 @@ const useStyles = makeStyles((theme) => ({
 
 const LandingPage = () => {
     const classes = useStyles();
+    const [newMovies, setNewMovies] = useState([])
     const [movies, setMovies] = useState([])
 
     useEffect(() => {
         fetchMovies()
-            .then(({data}) => setMovies(data))
+            .then(({data}) => {
+                let firstMovies = [...data]
+                let restMovies = [...data]
+                setMovies(firstMovies.splice(2))
+                setNewMovies(restMovies.splice(0, 2))
+            })
     }, [])
 
     return (
         <main>
             <Grid container spacing={4} className={classes.gridContainer}>
                 <Grid item xs={12}>
-                    <Typography variant="h2">
-                        Landing page
+                    <Typography variant="h1" align="center">
+                        Welcome to Movie Review
                     </Typography>
                 </Grid>
 
-                {movies.map((movie) => (
-                    <Grid key={movie.movieId} item xs={12} md={6} className={classes.centeredGrid}>
-                        <CardActionArea  component={Link} to={"/movies/" + movie.movieId}>
-                            <Card className={classes.card}>
-                                <div className={classes.cardDetails}>
-                                    <CardContent>
-                                        <Typography component="h2" variant="h5">
-                                            {movie.title}
-                                            {movie.averageRating?.toFixed(1)}
-                                        </Typography>
-                                        <Typography variant="subtitle1" color="textSecondary">
-                                            {new Date(movie.releaseDate).getFullYear()}
-                                        </Typography>
-                                            <Typography variant="subtitle1" paragraph>
-                                                {movie.description}
-                                            </Typography>
-                                        <Typography variant="subtitle1" color="primary">
-                                            {movie.cast}
-                                        </Typography>
-                                    </CardContent>
-                                </div>
-                                <Hidden xsDown>
-                                    <CardMedia className={classes.cardMedia} image={movie.picture}
-                                               title="Random"/>
-                                </Hidden>
-                            </Card>
-                        </CardActionArea>
-                    </Grid>
-                ))}
             </Grid>
+
+            <Grid container spacing={4}>
+                {
+                    newMovies.map((movie) => (
+                        <Grid key={movie.movieId} item xs={12} md={6}>
+
+                            <FeaturedMovieCard actionURL={"/movies/" + movie.movieId}
+                                               title={movie.title}
+                                               releaseDate={movie.releaseDate}
+                                               description={movie.description}
+                                               cast={movie.cast}
+                                               image={movie.picture}/>
+
+                        </Grid>
+                    ))
+                }
+            </Grid>
+
+            <List>
+                {
+                    movies.map((movie) => (
+                        <Grid key={movie.movieId}>
+                            <SecondaryMovieItem actionURL={"/movies/" + movie.movieId}
+                                                description={movie.description}
+                                                title={movie.title}
+                                                releaseDate={movie.releaseDate}/>
+                        </Grid>
+                    ))
+                }
+            </List>
+
         </main>
     )
 }
