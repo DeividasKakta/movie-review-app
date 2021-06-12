@@ -1,8 +1,22 @@
-import {AppBar, Button, Container, Divider, Hidden, Link, makeStyles, Toolbar, Typography} from "@material-ui/core";
+import {
+    AppBar,
+    Button,
+    Container,
+    Divider,
+    FormControl,
+    Hidden,
+    Link,
+    makeStyles,
+    MenuItem,
+    Select,
+    Toolbar,
+    Typography
+} from "@material-ui/core";
 import {NavLink, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loggedInUser, logout} from "../../../store/slices/userSlice";
 import MovieIcon from '@material-ui/icons/Movie';
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
     },
     divider: {
         marginTop: theme.spacing(2)
+    },
+    languageSelect: {
+        color: theme.palette.secondary.main,
+        '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: theme.palette.secondary.dark,
+        }
     }
 }));
 
@@ -47,6 +67,12 @@ const Header = () => {
     const currentUser = useSelector(loggedInUser)
     const dispatch = useDispatch()
     const location = useLocation()
+
+    const {t, i18n} = useTranslation("header")
+
+    const changeLanguage = (e) => {
+        i18n.changeLanguage(e.target.value);
+    }
 
     return (
         <>
@@ -89,6 +115,18 @@ const Header = () => {
                                 </Button>
                             </>
                     }
+                    <FormControl variant="outlined" size="small" color="secondary">
+                        <Select
+                            className={classes.languageSelect}
+                            defaultValue={i18n.language}
+                            value={i18n.language}
+                            onChange={changeLanguage}
+                        >
+                            <MenuItem value="en">EN</MenuItem>
+                            <MenuItem value="lt">LT</MenuItem>
+                        </Select>
+                    </FormControl>
+
 
                 </Toolbar>
             </AppBar>

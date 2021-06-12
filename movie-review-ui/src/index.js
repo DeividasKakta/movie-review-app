@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import '@fontsource/roboto';
 import {CssBaseline} from "@material-ui/core";
+import "./i18n/i18n";
 
 ReactDOM.render(
     <React.StrictMode>
