@@ -17,6 +17,7 @@ import {createMovie} from "../../../api/moviesApi";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
 import {useState} from "react";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     mainHeader: {
@@ -33,18 +34,20 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
-        .max(100, "Must not exceed 100 symbols")
-        .required("Field is required"),
+        .max(100, "validation:movieTitleMax")
+        .required("validation:required"),
     description: Yup.string()
-        .min(20, "Description can not be shorter than 20 symbols")
-        .max(512, "Description can not be longer than 512 symbols")
-        .required("Field is required"),
+        .min(20, "validation:movieDescriptionMin")
+        .max(512, "validation:movieDescriptionMax")
+        .required("validation:required"),
     cast: Yup.string()
-        .min(5, "Cast can not be shorter than 5 symbols")
-        .max(256, "Cast can not be longer than 256 symbols")
-        .required("Field is required"),
+        .min(5, "validation:movieCastMin")
+        .max(256, "validation:movieCastMax")
+        .required("validation:required"),
     picture: Yup.string()
-        .required("Field is required")
+        .required("validation:required"),
+    releaseDate: Yup.mixed()
+        .required("validation:required")
 })
 
 const MovieForm = () => {
@@ -53,6 +56,8 @@ const MovieForm = () => {
 
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
+
+    const {t} = useTranslation("forms")
 
     const handleErrorClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -96,54 +101,62 @@ const MovieForm = () => {
                 <Container maxWidth="sm">
                     <Form>
                         <Card className={classes.mainCard}>
-                            <CardHeader title="Add new movie" titleTypographyProps={{align: "center", variant: "h4"}}
+                            <CardHeader title={t('createMovieTitle')} titleTypographyProps={{align: "center", variant: "h4"}}
                                         className={classes.mainHeader}/>
                             <CardContent>
 
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                         <OutlinedFormikInput name="title"
-                                                             label="Title"
+                                                             label={t('movieTitle')}
                                                              error={props.touched.title && !!props.errors.title}
-                                                             placeholder="Enter movie title..."/>
+                                                             placeholder={t('movieTitlePlaceholder')}/>
                                     </Grid>
 
                                     <Grid item xs={6}>
                                         <FormControl error={props.touched.releaseDate && !!props.errors.releaseDate}
                                                      variant="standard" margin="normal">
-                                            <Field id="releaseDate" name="releaseDate" label="Release date"
-                                                   format="yyyy/MM/dd" inputVariant="outlined"
+                                            <Field id="releaseDate"
+                                                   name="releaseDate"
+                                                   label={t('releaseDate')}
+                                                   format="yyyy/MM/dd"
+                                                   inputVariant="outlined"
+                                                   invalidDateMessage={t('validation:dateError')}
                                                    onChange={val => {
                                                        props.setFieldValue("releaseDate", val);
                                                    }}
                                                    as={KeyboardDatePicker}/>
-                                            <ErrorMessage name="releaseDate" component={FormHelperText}/>
+                                            <ErrorMessage name="releaseDate" component={FormHelperText}>
+                                                {
+                                                    (msg) => <FormHelperText>{t(msg)}</FormHelperText>
+                                                }
+                                            </ErrorMessage>
                                         </FormControl>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="description"
-                                                             label="Description"
+                                                             label={t('description')}
                                                              error={props.touched.description && !!props.errors.description}
-                                                             placeholder="Enter movie description..."
+                                                             placeholder={t('descriptionPlaceholder')}
                                                              multiline
                                                              rows={4}/>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="cast"
-                                                             label="Cast"
+                                                             label={t('cast')}
                                                              error={props.touched.cast && !!props.errors.cast}
-                                                             placeholder="Enter movie cast..."
+                                                             placeholder={t('castPlaceholder')}
                                                              multiline
                                                              rows={2}/>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="picture"
-                                                             label="Picture URL"
+                                                             label={t('pictureURL')}
                                                              error={props.touched.picture && !!props.errors.picture}
-                                                             placeholder="Enter movie picture URL..."/>
+                                                             placeholder={t('pictureURLPlaceholder')}/>
                                     </Grid>
 
                                 </Grid>
@@ -155,7 +168,10 @@ const MovieForm = () => {
                                         fullWidth
                                         color="secondary"
                                         disabled={props.isSubmitting}
-                                        type="submit">Submit</Button>
+                                        type="submit"
+                                >
+                                    {t('submit')}
+                                </Button>
 
                             </CardActions>
 
@@ -166,7 +182,7 @@ const MovieForm = () => {
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleErrorClose}
-                                    message="Error creating movie"
+                                    message={t('createMovieError')}
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>
@@ -174,7 +190,7 @@ const MovieForm = () => {
                     <CustomSnackbar open={openSuccess}
                                     duration={5000}
                                     handleClose={handleSuccessClose}
-                                    message="Created successfully!"
+                                    message={t('createMovieSuccess')}
                                     elevation={3}
                                     variant="filled"
                                     severity="success"/>

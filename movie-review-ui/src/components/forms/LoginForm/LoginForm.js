@@ -8,6 +8,7 @@ import {login} from "../../../api/userApi";
 import {useDispatch} from "react-redux";
 import {login as setLogin} from "../../../store/slices/userSlice";
 import {useHistory, useLocation} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     mainHeader: {
@@ -24,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
-        .required(),
+        .required("validation:required"),
     password: Yup.string()
-        .required()
+        .required("validation:required")
 })
 
 const LoginForm = () => {
@@ -34,6 +35,8 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const location = useLocation()
+
+    const {t} = useTranslation("forms")
 
     const [openError, setOpenError] = useState(false);
 
@@ -75,7 +78,7 @@ const LoginForm = () => {
                     <Form>
 
                         <Card className={classes.mainCard}>
-                            <CardHeader title="Login" titleTypographyProps={{align: "center", variant: "h4"}}
+                            <CardHeader title={t('loginTitle')} titleTypographyProps={{align: "center", variant: "h4"}}
                                         className={classes.mainHeader}/>
                             <CardContent>
 
@@ -83,17 +86,17 @@ const LoginForm = () => {
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="username"
-                                                             label="Username"
+                                                             label={t('username')}
                                                              error={props.touched.username && !!props.errors.username}
-                                                             placeholder="Enter your username..."/>
+                                                             placeholder={t('usernamePlaceholder')}/>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="password"
-                                                             label="Password"
+                                                             label={t('password')}
                                                              type="password"
                                                              error={props.touched.password && !!props.errors.password}
-                                                             placeholder="Enter your password..."/>
+                                                             placeholder={t('passwordPlaceholder')}/>
                                     </Grid>
 
                                 </Grid>
@@ -105,7 +108,10 @@ const LoginForm = () => {
                                         fullWidth
                                         color="secondary"
                                         disabled={props.isSubmitting}
-                                        type="submit">Submit</Button>
+                                        type="submit"
+                                >
+                                    {t('submit')}
+                                </Button>
 
                             </CardActions>
 
@@ -116,7 +122,7 @@ const LoginForm = () => {
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleErrorClose}
-                                    message="Incorrect username or password"
+                                    message={t('loginError')}
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>

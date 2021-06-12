@@ -8,6 +8,7 @@ import {register} from "../../../api/userApi";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
 import {useState} from "react";
 import {NavLink} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     mainHeader: {
@@ -24,23 +25,25 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
-        .required("Field can not be empty")
-        .min(4, "Username must be at least 4 symbols long")
-        .max(16, "Username can not be longer than 16 symbols"),
+        .required("validation:required")
+        .min(4, "validation:usernameMin")
+        .max(16, "validation:usernameMax"),
     password: Yup.string()
-        .matches(/(?=.*[0-9])(?=.*[A-Za-z])[A-Za-z\d]/, "Password must contain at least 1 number and letter")
-        .required("Field can not be empty")
-        .min(8, "Password must be at least 8 symbols long")
-        .max(32, "Password can not be longer than 32 symbols"),
+        .matches(/(?=.*[0-9])(?=.*[A-Za-z])[A-Za-z\d]/, "validation:passwordRegex")
+        .required("validation:required")
+        .min(8, "validation:passwordMin")
+        .max(32, "validation:passwordMax"),
     repeatPassword: Yup.string()
-        .required("Field can not be empty")
-        .oneOf([Yup.ref('password')], 'Passwords must match')
+        .required("validation:required")
+        .oneOf([Yup.ref('password')], "validation:repeatPassword")
 })
 
 const RegisterForm = () => {
     const classes = useStyles()
     const [openError, setOpenError] = useState(false)
     const [openSuccess, setOpenSuccess] = useState(false)
+
+    const {t} = useTranslation("forms")
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -76,31 +79,31 @@ const RegisterForm = () => {
                 <Container maxWidth="sm">
                     <Form>
                         <Card className={classes.mainCard}>
-                            <CardHeader title="Register" titleTypographyProps={{align: "center", variant: "h4"}}
+                            <CardHeader title={t('registerTitle')} titleTypographyProps={{align: "center", variant: "h4"}}
                                         className={classes.mainHeader}/>
                             <CardContent>
 
                                 <Grid container spacing={2}>
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="username"
-                                                             label="Username"
-                                                             placeholder="Enter an username..."
+                                                             label={t('username')}
+                                                             placeholder={t('usernamePlaceholder')}
                                                              error={props.touched.username && !!props.errors.username}/>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="password"
-                                                             label="Password"
+                                                             label={t('password')}
                                                              type="password"
-                                                             placeholder="Enter a password..."
+                                                             placeholder={t('passwordPlaceholder')}
                                                              error={props.touched.password && !!props.errors.password}/>
                                     </Grid>
 
                                     <Grid item xs={12}>
                                         <OutlinedFormikInput name="repeatPassword"
-                                                             label="Repeat password"
+                                                             label={t('repeatPassword')}
                                                              type="password"
-                                                             placeholder="Repeat password..."
+                                                             placeholder={t('repeatPasswordPlaceholder')}
                                                              error={props.touched.repeatPassword && !!props.errors.repeatPassword}/>
                                     </Grid>
 
@@ -113,7 +116,10 @@ const RegisterForm = () => {
                                         fullWidth
                                         color="secondary"
                                         disabled={props.isSubmitting}
-                                        type="submit">Submit</Button>
+                                        type="submit"
+                                >
+                                    {t('submit')}
+                                </Button>
 
                             </CardActions>
 
@@ -123,7 +129,7 @@ const RegisterForm = () => {
                     <CustomSnackbar open={openError}
                                     duration={5000}
                                     handleClose={handleSnackbarClose}
-                                    message="Username already exists"
+                                    message={t('usernameExistsError')}
                                     elevation={3}
                                     variant="filled"
                                     severity="error"/>
@@ -131,12 +137,12 @@ const RegisterForm = () => {
                     <CustomSnackbar open={openSuccess}
                                     duration={5000}
                                     handleClose={handleSnackbarClose}
-                                    message="Username created successfully"
+                                    message={t('accountCreationSuccess')}
                                     action={
                                         <>
                                             <Button color="primary" variant="outlined" to="/login"
                                                     component={NavLink}>
-                                                Login
+                                                {t('header:login')}
                                             </Button>
                                         </>
                                     }
