@@ -33,13 +33,18 @@ const useStyles = makeStyles((theme) => ({
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
-        .required(),
+        .max(100, "Must not exceed 100 symbols")
+        .required("Field is required"),
     description: Yup.string()
-        .required(),
+        .min(20, "Description can not be shorter than 20 symbols")
+        .max(512, "Description can not be longer than 512 symbols")
+        .required("Field is required"),
     cast: Yup.string()
-        .required(),
+        .min(5, "Cast can not be shorter than 5 symbols")
+        .max(256, "Cast can not be longer than 256 symbols")
+        .required("Field is required"),
     picture: Yup.string()
-        .required()
+        .required("Field is required")
 })
 
 const MovieForm = () => {
