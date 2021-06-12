@@ -19,5 +19,30 @@
     "rating": "Įvertinimas",
     "description": "Aprašymas",
     "cast": "Aktoriai"
+  },
+  "pages": {
+    "topMovies": "Geriausi filmai",
+    "title": "Pavadinimas",
+    "releaseYear": "Išleidimo metai",
+    "rating": "Įvertinimas",
+    "newestReviews": "Naujausios apžvalgos",
+    "about": "Apie mus",
+    "welcome": "Sveiki atvykę į MovieReview"
+  },
+  "moviePage": {
+    "writeReview": "Parašykite savo apžvalgą",
+    "reviews": "Apžvalgos",
+    "reviewCreateSuccess": "Apžvalga sukurta sėkmingai.",
+    "reviewUpdateSuccess": "Apžvalga atnaujinta sėkmingai.",
+    "reviewDeleteSuccess": "Apžvalga ištrinta sėkmingai.",
+    "leaveReview": "Palikite apžvalgą",
+    "loginToReview": "Prašome prisijungti norint palikti apžvalgą.",
+    "editReview": "Redaguokite savo apžvalgą",
+    "createReviewError": "Kuriant apžvalgą įvyko netikėta klaida",
+    "updateReviewError": "Atnaujinant apžvalgą įvyko netikėta klaida",
+    "deleteReviewError": "Trinant apžvalgą įvyko netikėta klaida",
+    "deleteThisReview": "Ištrinti šią apžvalgą?",
+    "cancel": "Atšaukti",
+    "delete": "Ištrinti"
   }
 }

@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {fetchMovies} from "../../api/moviesApi";
 import FeaturedMovieCard from "../../components/dataDisplay/FeaturedMovieCard/FeaturedMovieCard";
 import SecondaryMovieItem from "../../components/dataDisplay/SecondaryMovieItem/SecondaryMovieItem";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -30,6 +31,8 @@ const LandingPage = () => {
     const [newMovies, setNewMovies] = useState([])
     const [movies, setMovies] = useState([])
 
+    const {t} = useTranslation("pages")
+
     useEffect(() => {
         fetchMovies()
             .then(({data}) => {
@@ -45,7 +48,7 @@ const LandingPage = () => {
             <Grid container spacing={4} className={classes.gridContainer}>
                 <Grid item xs={12}>
                     <Typography variant="h1" align="center">
-                        Welcome to Movie Review
+                        {t('welcome')}
                     </Typography>
                 </Grid>
 

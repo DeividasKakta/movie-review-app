@@ -14,6 +14,8 @@ import {
 import {useEffect, useState} from "react";
 import {fetchTopMovies} from "../../api/moviesApi";
 import {useHistory} from "react-router-dom";
+import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -53,6 +55,7 @@ const TopMoviesPage = () => {
 
     const [topMovies, setTopMovies] = useState([])
 
+    const {t} = useTranslation("pages")
 
     useEffect(() => {
         fetchTopMovies()
@@ -61,22 +64,24 @@ const TopMoviesPage = () => {
 
     return (
         <>
-            <Typography variant="h1" align="center" className={classes.mainHeader}>Top movies</Typography>
+            <Typography variant="h1" align="center" className={classes.mainHeader}>
+                {t('topMovies')}
+            </Typography>
 
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <StyledTableCell colSpan={2} align="center">
-                                Title
+                                {t('title')}
                             </StyledTableCell>
 
                             <StyledTableCell align="right">
-                                Release year
+                                {t('releaseYear')}
                             </StyledTableCell>
 
                             <StyledTableCell align="right">
-                                Rating
+                                {t('rating')}
                             </StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -88,7 +93,7 @@ const TopMoviesPage = () => {
                                       className={classes.tableRow}>
                                 <TableCell className={classes.imageCell}>
                                     <CardMedia className={classes.cardMedia} image={movie.picture}
-                                               title="Random"/>
+                                               title={movie.title}/>
                                 </TableCell>
 
                                 <TableCell align="left" className={classes.tableCell}>
@@ -96,7 +101,9 @@ const TopMoviesPage = () => {
                                 </TableCell>
 
                                 <TableCell align="right" className={classes.tableCell}>
-                                    {new Date(movie.releaseDate).getFullYear()}
+                                    {
+                                        moment(movie.releaseDate)?.format("YYYY")
+                                    }
                                 </TableCell>
 
                                 <TableCell align="right" className={`${classes.tableCell} ${classes.ratingCell}`}>

@@ -19,5 +19,30 @@
     "rating": "Rating",
     "description": "Description",
     "cast": "Cast"
+  },
+  "pages": {
+    "topMovies": "Top movies",
+    "title": "Title",
+    "releaseYear": "Release year",
+    "rating": "Rating",
+    "newestReviews": "Newest Reviews",
+    "about": "About",
+    "welcome": "Welcome to MovieReview"
+  },
+  "moviePage": {
+    "writeReview": "Write your review",
+    "reviews": "Reviews",
+    "reviewCreateSuccess": "Review created successfully.",
+    "reviewUpdateSuccess": "Review updated successfully.",
+    "reviewDeleteSuccess": "Review deleted successfully.",
+    "leaveReview": "Leave a review",
+    "loginToReview": "Please login to leave a review",
+    "editReview": "Edit your review",
+    "createReviewError": "Unexpected error occurred while creating review",
+    "updateReviewError": "Unexpected error occurred while editing review",
+    "deleteReviewError": "Unexpected error occurred while deleting review",
+    "deleteThisReview": "Delete this review?",
+    "cancel": "Cancel",
+    "delete": "Delete"
   }
 }
