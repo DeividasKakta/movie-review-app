@@ -63,6 +63,7 @@ const MoviePage = () => {
     const [openError, setOpenError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
     const [openEditSuccess, setOpenEditSuccess] = useState(false);
+    const [openDeleteSuccess, setOpenDeleteSuccess] = useState(false);
 
     const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -70,10 +71,10 @@ const MoviePage = () => {
         }
         setOpenSuccess(false);
         setOpenEditSuccess(false);
+        setOpenDeleteSuccess(false);
     };
 
-    const postReview = (data, {setSubmitting}) => {
-        setSubmitting(true)
+    const postReview = (data) => {
 
         createReview(data, movie.movieId)
             .then(() => {
@@ -89,11 +90,6 @@ const MoviePage = () => {
                     })
             })
             .catch(() => setOpenError(true))
-            .finally(() => {
-                setTimeout(() => {
-                    setSubmitting(false)
-                }, 300)
-            })
     }
 
     const handleEditReviewClick = (review) => {
@@ -102,8 +98,7 @@ const MoviePage = () => {
         setOpenEditReview(true)
     }
 
-    const postEditReview = (data, {setSubmitting}) => {
-        setSubmitting(true)
+    const postEditReview = (data) => {
 
         editReview(data, editableReview.reviewId)
             .then(() => {
@@ -119,16 +114,10 @@ const MoviePage = () => {
                     })
             })
             .catch(() => setOpenError(true))
-            .finally(() => {
-                setTimeout(() => {
-                    setSubmitting(false)
-                }, 300)
-            })
+
     }
 
-    const postDeleteReview = (review) => {
-        let reviewId = review.reviewId
-        let reviewUsername = review.username
+    const postDeleteReview = ({reviewId, username: reviewUsername}) => {
 
         deleteReview(reviewId, reviewUsername)
             .then(() => {
@@ -140,7 +129,7 @@ const MoviePage = () => {
                 fetchReviewsByMovieId(id)
                     .then(({data}) => {
                         setReviews(data)
-                        setOpenEditSuccess(true)
+                        setOpenDeleteSuccess(true)
                     })
             })
             .catch(() => setOpenError(true))
@@ -176,7 +165,8 @@ const MoviePage = () => {
                     onClose={() => setOpenCreateReview(false)}
                     aria-labelledby="form-dialog-title">
 
-                <DialogTitle id="form-dialog-title" className={classes.reviewDialogTitle}>Write your review</DialogTitle>
+                <DialogTitle id="form-dialog-title" className={classes.reviewDialogTitle}>Write your
+                    review</DialogTitle>
 
                 <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
                                   handleOnSubmit={postReview}
@@ -188,7 +178,7 @@ const MoviePage = () => {
             <CustomSnackbar open={openSuccess}
                             duration={5000}
                             handleClose={handleSuccessClose}
-                            message="Review created successfully!"
+                            message="Review created successfully."
                             elevation={3}
                             variant="filled"
                             severity="success"/>
@@ -196,7 +186,15 @@ const MoviePage = () => {
             <CustomSnackbar open={openEditSuccess}
                             duration={5000}
                             handleClose={handleSuccessClose}
-                            message="Review updated successfully!"
+                            message="Review updated successfully."
+                            elevation={3}
+                            variant="filled"
+                            severity="success"/>
+
+            <CustomSnackbar open={openDeleteSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message="Review deleted successfully."
                             elevation={3}
                             variant="filled"
                             severity="success"/>
@@ -205,7 +203,7 @@ const MoviePage = () => {
                 Reviews
             </Typography>
 
-            <Divider className={classes.divider} />
+            <Divider className={classes.divider}/>
 
             {
                 currentUser ?
@@ -266,7 +264,6 @@ const MoviePage = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-
 
             <List>
                 {reviews.map((review) => (

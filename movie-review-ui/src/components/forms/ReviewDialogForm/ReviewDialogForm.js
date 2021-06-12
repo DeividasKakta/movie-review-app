@@ -100,8 +100,7 @@ const ReviewDialogForm = ({
 
                         <Button variant="contained"
                                 color="secondary"
-                                type="submit"
-                                disabled={props.isSubmitting}>Submit</Button>
+                                type="submit">Submit</Button>
 
                     </DialogActions>
 
