@@ -1,4 +1,6 @@
-import {makeStyles, Typography} from "@material-ui/core";
+import {Link, makeStyles, Typography} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     footer: {
@@ -11,11 +13,18 @@ const useStyles = makeStyles((theme) => ({
 const Footer = () => {
     const classes = useStyles()
 
+    const {t} = useTranslation("footer")
+
     return (
         <>
             <footer className={classes.footer}>
-                <Typography variant="h6" align="center">
-                    {'Copyright © 2021'}
+                <Typography variant="button" align="center" component="pre">
+                    {t('copyright')}{' © '}
+                    <Link variant="button" color="primary" exact to="/"
+                          className={classes.link} component={NavLink}>
+                    {t('appTitle')}
+                    </Link>
+                    {' 2021'}
                 </Typography>
             </footer>
         </>

@@ -9,5 +9,9 @@
     "register": "Register",
     "logout": "Logout",
     "addMovie": "Add new movie"
+  },
+  "footer": {
+    "copyright": "Copyright",
+    "appTitle": "MovieReview"
   }
 }

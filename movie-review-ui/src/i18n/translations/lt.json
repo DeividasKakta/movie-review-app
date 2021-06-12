@@ -9,5 +9,9 @@
     "register": "Registruotis",
     "logout": "Atsijungti",
     "addMovie": "Sukurti naują filmą"
+  },
+  "footer": {
+    "copyright": "Autorių teisės saugomos",
+    "appTitle": "MovieReview"
   }
 }
