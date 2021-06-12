@@ -1,4 +1,4 @@
-import {makeStyles, Typography} from "@material-ui/core";
+import {List, makeStyles, Typography} from "@material-ui/core";
 import {useEffect, useState} from "react";
 import {fetchNewestReviews} from "../../api/reviewApi";
 import NewestReviewCard from "../../components/dataDisplay/NewestReviewCard/NewestReviewCard";
@@ -22,17 +22,20 @@ const NewestReviewsPage = () => {
         <>
             <Typography variant="h1" align="center" className={classes.mainHeader}>Newest reviews</Typography>
 
-            {
-                newestReviews?.map((review) => (
-                    <NewestReviewCard key={review.reviewId}
-                                      username={review.username}
-                                      rating={review.rating}
-                                      date={review.reviewDate}
-                                      content={review.content}
-                                      movieId={review.movieId}
-                                      movieTitle={review.movieTitle}/>
-                ))
-            }
+            <List>
+                {
+                    newestReviews?.map((review) => (
+                        <NewestReviewCard key={review.reviewId}
+                                          username={review.username}
+                                          rating={review.rating}
+                                          date={review.reviewDate}
+                                          content={review.content}
+                                          title={review.title}
+                                          movieId={review.movieId}
+                                          movieTitle={review.movieTitle}/>
+                    ))
+                }
+            </List>
         </>
     )
 }
