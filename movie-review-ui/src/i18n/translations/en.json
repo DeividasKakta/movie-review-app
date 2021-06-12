@@ -13,5 +13,11 @@
   "footer": {
     "copyright": "Copyright",
     "appTitle": "MovieReview"
+  },
+  "dataDisplay": {
+    "continueReading": "Continue reading...",
+    "rating": "Rating",
+    "description": "Description",
+    "cast": "Cast"
   }
 }

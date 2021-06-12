@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {Card, CardActionArea, CardContent, CardMedia, Hidden, makeStyles, Typography} from "@material-ui/core";
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 const FeaturedMovieCard = ({title, releaseDate, description, cast, image, actionURL}) => {
     const classes = useStyles();
+
+    const {t} = useTranslation("dataDisplay")
 
     return (
         <Card className={classes.card}>
@@ -43,11 +46,15 @@ const FeaturedMovieCard = ({title, releaseDate, description, cast, image, action
                                         moment(releaseDate)?.format("YYYY")
                                     }
                                 </Typography>
-                                <Typography variant="subtitle2">Description</Typography>
+                                <Typography variant="subtitle2">
+                                    {t('description')}
+                                </Typography>
                                 <Typography variant="subtitle1" paragraph>
                                     {description}
                                 </Typography>
-                                <Typography variant="subtitle2">Cast</Typography>
+                                <Typography variant="subtitle2">
+                                    {t('cast')}
+                                </Typography>
                                 <Typography variant="subtitle1" color="primary">
                                     {cast}
                                 </Typography>
@@ -75,8 +82,14 @@ const FeaturedMovieCard = ({title, releaseDate, description, cast, image, action
                                         moment(releaseDate)?.format("YYYY")
                                     }
                                 </Typography>
+                                <Typography variant="subtitle2">
+                                    {t('description')}
+                                </Typography>
                                 <Typography variant="subtitle1" paragraph>
                                     {description}
+                                </Typography>
+                                <Typography variant="subtitle2">
+                                    {t('cast')}
                                 </Typography>
                                 <Typography variant="subtitle1" color="primary">
                                     {cast}

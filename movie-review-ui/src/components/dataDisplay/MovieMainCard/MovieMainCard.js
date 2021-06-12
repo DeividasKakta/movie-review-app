@@ -1,6 +1,7 @@
 import {Card, CardContent, CardMedia, Divider, Grid, makeStyles, Typography} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     cardMedia: {
@@ -20,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MovieMainCard = ({title, releaseDate, description, cast, rating, picture}) => {
     const classes = useStyles();
+
+    const {t} = useTranslation("dataDisplay")
 
     return (
         <Card>
@@ -63,7 +66,7 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating, picture})
 
                         <div>
                             <Typography variant="subtitle2">
-                                Description
+                                {t('description')}
                             </Typography>
                             <Typography variant="body1">
                                 {description}
@@ -74,7 +77,7 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating, picture})
 
                         <div>
                             <Typography variant="subtitle2">
-                                Cast
+                                {t('cast')}
                             </Typography>
                             <Typography variant="body1">
                                 {cast}

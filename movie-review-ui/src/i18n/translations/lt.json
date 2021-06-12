@@ -13,5 +13,11 @@
   "footer": {
     "copyright": "Autorių teisės saugomos",
     "appTitle": "MovieReview"
+  },
+  "dataDisplay": {
+    "continueReading": "Skaitykite toliau...",
+    "rating": "Įvertinimas",
+    "description": "Aprašymas",
+    "cast": "Aktoriai"
   }
 }

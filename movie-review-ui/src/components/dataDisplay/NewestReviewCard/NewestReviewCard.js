@@ -13,6 +13,7 @@ import {
 import {Link} from "react-router-dom";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -85,6 +86,8 @@ const useStyles = makeStyles((theme) => ({
 
 const NewestReviewCard = ({username, rating, date, content, movieTitle, title, movieId}) => {
     const classes = useStyles();
+
+    const {t} = useTranslation("dataDisplay")
 
     return (
         <ListItem alignItems="flex-start" className={classes.listItem}>
@@ -165,12 +168,12 @@ const NewestReviewCard = ({username, rating, date, content, movieTitle, title, m
                             <Divider className={classes.divider}/>
 
                             <div className={`${classes.ratingText} ${classes.reviewHeader}`}>
-                                <Typography variant="subtitle2" display="inline" component="pre">
-                                    {"Rating: "}
+                                <Typography variant="subtitle2" display="inline" component="span">
+                                    {t('rating')}
                                 </Typography>
-                                <Typography variant="subtitle2" color="textSecondary" component="span" display="inline"
+                                <Typography variant="subtitle2" color="textSecondary" component="pre" display="inline"
                                             className={classes.leftItem}>
-                                    {rating}/10
+                                    {": "}{rating}/10
                                 </Typography>
 
                                 <Typography variant="subtitle1" color="textSecondary" align="right" display="inline">

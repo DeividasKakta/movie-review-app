@@ -1,6 +1,7 @@
 import {Card, CardActionArea, CardContent, Grid, ListItem, makeStyles, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import moment from "moment";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -31,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SecondaryMovieItem = ({actionURL, description, title, releaseDate}) => {
     const classes = useStyles();
+
+    const {t} = useTranslation("dataDisplay")
 
     return (
         <>
@@ -66,7 +69,9 @@ const SecondaryMovieItem = ({actionURL, description, title, releaseDate}) => {
                                         {description}
                                     </Typography>
 
-                                    <Typography variant="subtitle2" color="secondary">Continue reading...</Typography>
+                                    <Typography variant="subtitle2" color="secondary">
+                                        {t('continueReading')}
+                                    </Typography>
                                 </CardContent>
                             </Grid>
 
