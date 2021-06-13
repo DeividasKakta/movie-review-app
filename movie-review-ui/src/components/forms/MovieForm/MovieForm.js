@@ -94,7 +94,6 @@ const MovieForm = ({movie}) => {
         setSubmitting(true)
 
         const uuid = movie?.movieId
-        console.log(uuid)
 
         editMovie(data, uuid)
             .then(() => setOpenEditSuccess(true))
