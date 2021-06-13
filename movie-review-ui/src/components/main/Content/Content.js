@@ -22,6 +22,8 @@ const Content = () => {
                     <MovieCreationPage/>
                 </SecuredRoute>
 
+                <SecuredRoute path="/movies/edit/:id" roles={["ADMIN"]} children={<MovieCreationPage/>} />
+
                 <Route exact path="/movies/:id" children={<MoviePage/>}/>
 
                 <Route path="/login">

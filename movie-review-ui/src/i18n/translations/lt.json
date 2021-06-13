@@ -41,9 +41,13 @@
     "createReviewError": "Kuriant apžvalgą įvyko netikėta klaida",
     "updateReviewError": "Atnaujinant apžvalgą įvyko netikėta klaida",
     "deleteReviewError": "Trinant apžvalgą įvyko netikėta klaida",
-    "deleteThisReview": "Ištrinti šią apžvalgą?",
+    "deleteThisReview": "Ar ištrinti šią apžvalgą?",
     "cancel": "Atšaukti",
-    "delete": "Ištrinti"
+    "delete": "Ištrinti",
+    "editMovie": "Redaguoti filmą",
+    "deleteMovie": "Ištrinti filmą",
+    "deleteThisMovie": "Ar ištrinti šį filmą?",
+    "deleteMovieError": "Trinant filmą įvyko netikėta klaida"
   },
   "forms": {
     "loginTitle": "Prisijungimas prie paskyros",
@@ -67,6 +71,9 @@
     "rating": "Įvertinimas",
     "cancel": "Atšaukti",
     "createMovieTitle": "Filmo kūrimas",
+    "editMovieTitle": "Filmo redagavimas",
+    "updateMovieError": "Atnaujinant filmą įvyko netikėta klaida.",
+    "updateMovieSuccess": "Filmas atnaujintas sėkmingai.",
     "movieTitle": "Pavadinimas",
     "movieTitlePlaceholder": "Įveskite filmo pavadinimą...",
     "releaseDate": "Išleidimo data",

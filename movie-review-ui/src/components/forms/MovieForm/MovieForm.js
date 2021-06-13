@@ -13,7 +13,7 @@ import {
     makeStyles
 } from "@material-ui/core";
 import {KeyboardDatePicker} from "@material-ui/pickers";
-import {createMovie} from "../../../api/moviesApi";
+import {createMovie, editMovie} from "../../../api/moviesApi";
 import CustomSnackbar from "../../feedback/CustomSnackbar";
 import {useState} from "react";
 import OutlinedFormikInput from "../../inputs/OutlinedFormikInput";
@@ -50,12 +50,14 @@ const validationSchema = Yup.object().shape({
         .required("validation:required")
 })
 
-const MovieForm = () => {
+const MovieForm = ({movie}) => {
     const classes = useStyles()
     const now = new Date()
 
     const [openError, setOpenError] = useState(false);
+    const [openEditError, setOpenEditError] = useState(false);
     const [openSuccess, setOpenSuccess] = useState(false);
+    const [openEditSuccess, setOpenEditSuccess] = useState(false);
 
     const {t} = useTranslation("forms")
 
@@ -64,6 +66,7 @@ const MovieForm = () => {
             return;
         }
         setOpenError(false);
+        setOpenEditError(false)
     };
 
     const handleSuccessClose = (event, reason) => {
@@ -71,6 +74,7 @@ const MovieForm = () => {
             return;
         }
         setOpenSuccess(false);
+        setOpenEditSuccess(false)
     };
 
     const postForm = (data, {setSubmitting}) => {
@@ -86,22 +90,48 @@ const MovieForm = () => {
             })
     }
 
+    const postEditMovie = (data, {setSubmitting}) => {
+        setSubmitting(true)
+
+        const uuid = movie?.movieId
+        console.log(uuid)
+
+        editMovie(data, uuid)
+            .then(() => setOpenEditSuccess(true))
+            .catch(() => setOpenEditError(true))
+            .finally(() => {
+                setTimeout(() => {
+                    setSubmitting(false)
+                }, 300)
+            })
+    }
+
     return (
         <Formik initialValues={{
-            title: '',
-            description: '',
-            cast: '',
-            releaseDate: now,
-            picture: ''
+            title: movie?.title || '',
+            description: movie?.description || '',
+            cast: movie?.cast || '',
+            releaseDate: movie?.releaseDate || now,
+            picture: movie?.picture || ''
         }}
-                onSubmit={postForm}
+                onSubmit={
+                    movie ?
+                        postEditMovie :
+                        postForm
+                }
                 validationSchema={validationSchema}
+                enableReinitialize={true}
         >
             {props => (
                 <Container maxWidth="sm">
                     <Form>
                         <Card className={classes.mainCard}>
-                            <CardHeader title={t('createMovieTitle')} titleTypographyProps={{align: "center", variant: "h4"}}
+                            <CardHeader title={
+                                movie ?
+                                    t('editMovieTitle') :
+                                    t('createMovieTitle')
+                            }
+                                        titleTypographyProps={{align: "center", variant: "h4"}}
                                         className={classes.mainHeader}/>
                             <CardContent>
 
@@ -191,6 +221,22 @@ const MovieForm = () => {
                                     duration={5000}
                                     handleClose={handleSuccessClose}
                                     message={t('createMovieSuccess')}
+                                    elevation={3}
+                                    variant="filled"
+                                    severity="success"/>
+
+                    <CustomSnackbar open={openEditError}
+                                    duration={5000}
+                                    handleClose={handleErrorClose}
+                                    message={t('updateMovieError')}
+                                    elevation={3}
+                                    variant="filled"
+                                    severity="error"/>
+
+                    <CustomSnackbar open={openEditSuccess}
+                                    duration={5000}
+                                    handleClose={handleSuccessClose}
+                                    message={t('updateMovieSuccess')}
                                     elevation={3}
                                     variant="filled"
                                     severity="success"/>

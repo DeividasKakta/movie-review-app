@@ -10,8 +10,8 @@ import {
     Typography
 } from "@material-ui/core";
 import {useEffect, useState} from "react";
-import {fetchRatedMovieById} from "../../api/moviesApi";
-import {NavLink, useLocation, useParams} from "react-router-dom";
+import {deleteMovie, fetchRatedMovieById} from "../../api/moviesApi";
+import {NavLink, useHistory, useLocation, useParams} from "react-router-dom";
 import ReviewListItemCard from "../../components/dataDisplay/ReviewListItemCard/ReviewListItemCard";
 import {createReview, deleteReview, editReview, fetchReviewsByMovieId} from "../../api/reviewApi";
 import MovieMainCard from "../../components/dataDisplay/MovieMainCard/MovieMainCard";
@@ -45,12 +45,22 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
         textAlign: "center"
+    },
+    adminPanel: {
+        margin: theme.spacing(2),
+        marginLeft: 0
+    },
+    deleteButton: {
+        color: theme.palette.error.main,
+        borderColor: theme.palette.error.main,
+        marginLeft: theme.spacing(2)
     }
 }));
 
 const MoviePage = () => {
     const classes = useStyles()
     const location = useLocation()
+    const history = useHistory()
     const currentUser = useSelector(loggedInUser)
 
     const {t} = useTranslation("moviePage")
@@ -68,6 +78,8 @@ const MoviePage = () => {
     const [openEditSuccess, setOpenEditSuccess] = useState(false);
     const [openDeleteSuccess, setOpenDeleteSuccess] = useState(false);
     const [openDeleteError, setOpenDeleteError] = useState(false);
+    const [openDeleteMovie, setOpenDeleteMovie] = useState(false);
+    const [openDeleteMovieError, setOpenDeleteMovieError] = useState(false);
 
     const handleSuccessClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -77,6 +89,7 @@ const MoviePage = () => {
         setOpenEditSuccess(false);
         setOpenDeleteSuccess(false);
         setOpenDeleteError(false);
+        setOpenDeleteMovieError(false);
     };
 
     const postReview = (data) => {
@@ -138,7 +151,15 @@ const MoviePage = () => {
                     })
             })
             .catch(() => setOpenDeleteError(true))
+    }
 
+    const postDeleteMovie = () => {
+
+        deleteMovie(id)
+            .then(() => {
+                history.push('/')
+            })
+            .catch(() => setOpenDeleteMovieError(true))
     }
 
     const handleDeleteReviewClick = (review) => {
@@ -167,9 +188,22 @@ const MoviePage = () => {
                            picture={movie.picture}
             />
 
-            <div>
-                
-            </div>
+            {
+                currentUser?.roles?.includes("ADMIN") &&
+                <>
+                    <div className={classes.adminPanel}>
+                        <Button variant="outlined" color="secondary" to={"/movies/edit/" + movie.movieId}
+                                component={NavLink}>
+                            {t('editMovie')}
+                        </Button>
+                        <Button variant="outlined" className={classes.deleteButton}
+                                onClick={() => setOpenDeleteMovie(true)}>
+                            {t('deleteMovie')}
+                        </Button>
+                    </div>
+                    <Divider className={classes.divider}/>
+                </>
+            }
 
             <Typography variant="h4" style={{paddingTop: 8}}>
                 {t('reviews')}
@@ -270,6 +304,25 @@ const MoviePage = () => {
                 </DialogActions>
             </Dialog>
 
+            <Dialog
+                open={openDeleteMovie}
+                onClose={() => setOpenDeleteMovie(false)}
+                aria-labelledby="delete-movie"
+            >
+                <DialogTitle id="delete-movie">
+                    {t('deleteThisMovie')}
+                </DialogTitle>
+
+                <DialogActions>
+                    <Button onClick={() => setOpenDeleteMovie(false)} color="primary" autoFocus>
+                        {t('cancel')}
+                    </Button>
+                    <Button onClick={() => postDeleteMovie()} color="primary">
+                        {t('delete')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
             <CustomSnackbar open={openSuccess}
                             duration={5000}
                             handleClose={handleSuccessClose}
@@ -301,6 +354,15 @@ const MoviePage = () => {
                             duration={5000}
                             handleClose={handleSuccessClose}
                             message={t('deleteReviewError')}
+                            elevation={3}
+                            variant="filled"
+                            severity="error"
+            />
+
+            <CustomSnackbar open={openDeleteMovieError}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message={t('deleteMovieError')}
                             elevation={3}
                             variant="filled"
                             severity="error"

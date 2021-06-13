@@ -43,7 +43,11 @@
     "deleteReviewError": "Unexpected error occurred while deleting review",
     "deleteThisReview": "Delete this review?",
     "cancel": "Cancel",
-    "delete": "Delete"
+    "delete": "Delete",
+    "editMovie": "Edit movie",
+    "deleteMovie": "Delete movie",
+    "deleteThisMovie": "Delete this movie?",
+    "deleteMovieError": "Unexpected error occurred while deleting movie"
   },
   "forms": {
     "loginTitle": "Account login",
@@ -67,6 +71,9 @@
     "rating": "Rating",
     "cancel": "Cancel",
     "createMovieTitle": "Movie creation",
+    "editMovieTitle": "Edit movie",
+    "updateMovieError": "Unexpected error occurred while updating movie.",
+    "updateMovieSuccess": "Movie updated successfully.",
     "movieTitle": "Title",
     "movieTitlePlaceholder": "Enter movie title...",
     "releaseDate": "Release date",
