@@ -1,4 +1,4 @@
-import {Card, CardActionArea, CardContent, Grid, ListItem, makeStyles, Typography} from "@material-ui/core";
+import {Card, CardActionArea, CardContent, Divider, Grid, ListItem, makeStyles, Typography} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import moment from "moment";
 import {useTranslation} from "react-i18next";
@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.common.white
     },
     itemContent: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
+        paddingTop: theme.spacing(1),
     },
     verticalDivider: {
         marginRight: "-1px"
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const SecondaryMovieItem = ({actionURL, description, title, releaseDate}) => {
+const SecondaryMovieItem = ({actionURL, description, cast, title, releaseDate}) => {
     const classes = useStyles();
 
     const {t} = useTranslation("dataDisplay")
@@ -65,9 +66,25 @@ const SecondaryMovieItem = ({actionURL, description, title, releaseDate}) => {
 
                             <Grid item xs={12}>
                                 <CardContent className={classes.itemContent} style={{paddingBottom: 8}}>
+                                    <Typography variant="subtitle2" noWrap>
+                                        {t('description')}
+                                    </Typography>
+
                                     <Typography variant="body1" noWrap>
                                         {description}
                                     </Typography>
+
+                                    <Divider/>
+
+                                    <Typography variant="subtitle2" noWrap>
+                                        {t('cast')}
+                                    </Typography>
+
+                                    <Typography variant="body1" noWrap>
+                                        {cast}
+                                    </Typography>
+
+                                    <Divider/>
 
                                     <Typography variant="subtitle2" color="secondary">
                                         {t('continueReading')}

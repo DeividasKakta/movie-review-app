@@ -164,55 +164,12 @@ const MoviePage = () => {
                            description={movie.description}
                            cast={movie.cast}
                            rating={movie.averageRating}
-                           picture={movie.picture}/>
+                           picture={movie.picture}
+            />
 
-            <Dialog open={openCreateReview}
-                    onClose={() => setOpenCreateReview(false)}
-                    aria-labelledby="form-dialog-title">
-
-                <DialogTitle id="form-dialog-title" className={classes.reviewDialogTitle}>
-                    {t('writeReview')}
-                </DialogTitle>
-
-                <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
-                                  handleOnSubmit={postReview}
-                                  errorMessage={t('createReviewError')}
-                                  handleErrorClose={() => setOpenError(false)}
-                                  openError={openError}/>
-
-            </Dialog>
-
-            <CustomSnackbar open={openSuccess}
-                            duration={5000}
-                            handleClose={handleSuccessClose}
-                            message={t('reviewCreateSuccess')}
-                            elevation={3}
-                            variant="filled"
-                            severity="success"/>
-
-            <CustomSnackbar open={openEditSuccess}
-                            duration={5000}
-                            handleClose={handleSuccessClose}
-                            message={t('reviewUpdateSuccess')}
-                            elevation={3}
-                            variant="filled"
-                            severity="success"/>
-
-            <CustomSnackbar open={openDeleteSuccess}
-                            duration={5000}
-                            handleClose={handleSuccessClose}
-                            message={t('reviewDeleteSuccess')}
-                            elevation={3}
-                            variant="filled"
-                            severity="success"/>
-
-            <CustomSnackbar open={openDeleteError}
-                            duration={5000}
-                            handleClose={handleSuccessClose}
-                            message={t('deleteReviewError')}
-                            elevation={3}
-                            variant="filled"
-                            severity="error"/>
+            <div>
+                
+            </div>
 
             <Typography variant="h4" style={{paddingTop: 8}}>
                 {t('reviews')}
@@ -245,10 +202,40 @@ const MoviePage = () => {
 
             }
 
+            <List>
+                {reviews.map((review) => (
+                    <ReviewListItemCard key={review.reviewId}
+                                        username={review.username}
+                                        rating={review.rating}
+                                        date={review.reviewDate}
+                                        content={review.content}
+                                        title={review.title}
+                                        handleOnEditReview={() => handleEditReviewClick(review)}
+                                        handleOnDeleteReview={() => handleDeleteReviewClick(review)}
+                    />
+                ))}
+            </List>
+
+            <Dialog open={openCreateReview}
+                    onClose={() => setOpenCreateReview(false)}
+                    aria-labelledby="create-review"
+            >
+                <DialogTitle id="create-review" className={classes.reviewDialogTitle}>
+                    {t('writeReview')}
+                </DialogTitle>
+
+                <ReviewDialogForm handleCloseDialog={() => setOpenCreateReview(false)}
+                                  handleOnSubmit={postReview}
+                                  errorMessage={t('createReviewError')}
+                                  handleErrorClose={() => setOpenError(false)}
+                                  openError={openError}
+                />
+            </Dialog>
+
             <Dialog open={openEditReview}
                     onClose={() => setOpenEditReview(false)}
-                    aria-labelledby="edit-review">
-
+                    aria-labelledby="edit-review"
+            >
                 <DialogTitle id="edit-review" className={classes.reviewDialogTitle}>
                     {t('editReview')}
                 </DialogTitle>
@@ -260,10 +247,9 @@ const MoviePage = () => {
                                   errorMessage={t('updateReviewError')}
                                   title={editableReview.title}
                                   content={editableReview.content}
-                                  rating={editableReview.rating}/>
-
+                                  rating={editableReview.rating}
+                />
             </Dialog>
-
 
             <Dialog
                 open={openDeleteReview}
@@ -278,25 +264,47 @@ const MoviePage = () => {
                     <Button onClick={() => setOpenDeleteReview(false)} color="primary" autoFocus>
                         {t('cancel')}
                     </Button>
-                    <Button onClick={() => postDeleteReview(deletableReview)} color="primary" >
+                    <Button onClick={() => postDeleteReview(deletableReview)} color="primary">
                         {t('delete')}
                     </Button>
                 </DialogActions>
             </Dialog>
 
-            <List>
-                {reviews.map((review) => (
-                    <ReviewListItemCard key={review.reviewId}
-                                        username={review.username}
-                                        rating={review.rating}
-                                        date={review.reviewDate}
-                                        content={review.content}
-                                        title={review.title}
-                                        handleOnEditReview={() => handleEditReviewClick(review)}
-                                        handleOnDeleteReview={() => handleDeleteReviewClick(review)}/>
-                ))}
+            <CustomSnackbar open={openSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message={t('reviewCreateSuccess')}
+                            elevation={3}
+                            variant="filled"
+                            severity="success"
+            />
 
-            </List>
+            <CustomSnackbar open={openEditSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message={t('reviewUpdateSuccess')}
+                            elevation={3}
+                            variant="filled"
+                            severity="success"
+            />
+
+            <CustomSnackbar open={openDeleteSuccess}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message={t('reviewDeleteSuccess')}
+                            elevation={3}
+                            variant="filled"
+                            severity="success"
+            />
+
+            <CustomSnackbar open={openDeleteError}
+                            duration={5000}
+                            handleClose={handleSuccessClose}
+                            message={t('deleteReviewError')}
+                            elevation={3}
+                            variant="filled"
+                            severity="error"
+            />
 
         </main>
     )

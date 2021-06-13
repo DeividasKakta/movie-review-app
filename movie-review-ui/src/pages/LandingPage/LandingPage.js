@@ -78,6 +78,7 @@ const LandingPage = () => {
                             <SecondaryMovieItem actionURL={"/movies/" + movie.movieId}
                                                 description={movie.description}
                                                 title={movie.title}
+                                                cast={movie.cast}
                                                 releaseDate={movie.releaseDate}/>
                         </Grid>
                     ))

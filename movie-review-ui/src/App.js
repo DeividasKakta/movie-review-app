@@ -5,7 +5,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {
     Container,
     makeStyles,
-    MuiThemeProvider,
+    MuiThemeProvider, responsiveFontSizes,
     unstable_createMuiStrictModeTheme as createMuiTheme
 } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
@@ -13,7 +13,7 @@ import {MuiPickersUtilsProvider} from "@material-ui/pickers";
 import {Provider} from "react-redux";
 import store from "./store/store";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const theme = createMuiTheme({
+let theme = createMuiTheme({
     palette: {
         primary: {
             light: '#62727b',
@@ -40,6 +40,7 @@ const theme = createMuiTheme({
 
 function App() {
     const classes = useStyles();
+    theme = responsiveFontSizes(theme)
 
     return (
         <Provider store={store}>

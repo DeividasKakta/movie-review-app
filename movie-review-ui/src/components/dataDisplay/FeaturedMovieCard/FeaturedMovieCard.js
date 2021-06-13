@@ -3,7 +3,7 @@ import {Card, CardActionArea, CardContent, CardMedia, Hidden, makeStyles, Typogr
 import moment from "moment";
 import {useTranslation} from "react-i18next";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     card: {
         display: 'flex',
         height: "100%"
@@ -38,7 +38,7 @@ const FeaturedMovieCard = ({title, releaseDate, description, cast, image, action
 
                         <div className={classes.cardDetails}>
                             <CardContent>
-                                <Typography component="h2" variant="h5">
+                                <Typography component="h2" variant="h4">
                                     {title}
                                 </Typography>
                                 <Typography variant="subtitle1" color="textSecondary">
@@ -74,7 +74,7 @@ const FeaturedMovieCard = ({title, releaseDate, description, cast, image, action
                                        title={title}/>
                             <CardContent>
 
-                                <Typography component="h2" variant="h5">
+                                <Typography component="h2" variant="h4">
                                     {title}
                                 </Typography>
                                 <Typography variant="subtitle1" color="textSecondary">

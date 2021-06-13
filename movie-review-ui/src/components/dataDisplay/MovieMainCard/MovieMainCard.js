@@ -5,7 +5,8 @@ import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     cardMedia: {
-        height: 450
+        height: 450,
+        minHeight: "100%"
     },
     flexItem: {
         display: "flex"
