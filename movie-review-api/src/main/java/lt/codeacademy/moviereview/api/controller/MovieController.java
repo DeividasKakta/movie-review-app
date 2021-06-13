@@ -6,6 +6,7 @@ import lt.codeacademy.moviereview.api.model.entity.Movie;
 import lt.codeacademy.moviereview.api.service.MovieService;
 import lt.codeacademy.moviereview.api.utils.mapper.RatedMovieDtoMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -53,11 +54,13 @@ public class MovieController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public void createMovie(@Valid @RequestBody Movie movie) {
         movieService.createMovie(movie);
     }
 
     @PutMapping(BY_UUID)
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateMovie(@PathVariable(UUID) UUID uuid, @Valid @RequestBody Movie movie) {
         movie.setId(uuid);
         movieService.updateMovie(movie);
@@ -65,6 +68,7 @@ public class MovieController {
 
     @DeleteMapping(BY_UUID)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteMovie(@PathVariable(UUID) UUID uuid) {
         movieService.deleteMovieById(uuid);
     }
