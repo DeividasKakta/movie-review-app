@@ -62,19 +62,22 @@ const useStyles = makeStyles((theme) => ({
         fontSize: theme.spacing(2.25)
     },
     movieArea: {
-        backgroundColor: theme.palette.primary.light,
-        color: theme.palette.common.white,
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.primary.main
     },
     coloredDivider: {
         backgroundColor: theme.palette.secondary.dark
     },
     movieAreaTitle: {
         fontSize: theme.spacing(2.75),
-        padding: theme.spacing(1)
+        padding: theme.spacing(1),
+        marginLeft: theme.spacing(1),
+        color: theme.palette.primary.main
     },
     movieAreaIcon: {
         fontSize: theme.spacing(4),
-        color: theme.palette.secondary.main
+        color: theme.palette.primary.main,
+        marginRight: theme.spacing(1)
     },
     movieAreaIconContainer: {
         display: "flex",
@@ -94,28 +97,9 @@ const NewestReviewCard = ({username, rating, date, content, movieTitle, title, m
 
             <Card className={classes.mainCard}>
 
-                <CardActionArea className={classes.movieArea} component={Link} to={"/movies/" + movieId}>
-                    <div className={classes.reviewHeader}>
-                        <Typography className={`${classes.movieAreaTitle} ${classes.leftItem}`} display="inline">
-                            {movieTitle}
-                        </Typography>
-                        <span className={classes.movieAreaIconContainer}>
-                            <ArrowForwardIcon className={classes.movieAreaIcon}/>
-                        </span>
-                    </div>
-
-                    <Hidden smUp>
-                        <Divider className={classes.coloredDivider}/>
-                    </Hidden>
-
-                </CardActionArea>
 
                 <Grid container>
                     <Grid item xs={12} sm={2} md={1} className={classes.userArea}>
-                        <Hidden xsDown>
-                            <Divider className={classes.coloredDivider}/>
-                        </Hidden>
-
                         <CardContent style={{paddingBottom: 8}}>
 
                             <Hidden xsDown>
@@ -152,9 +136,25 @@ const NewestReviewCard = ({username, rating, date, content, movieTitle, title, m
                         </CardContent>
                     </Grid>
 
-                    <Grid item xs={12} sm={10} md={11}>
-                        <CardContent style={{paddingBottom: 8}}>
 
+                    <Grid item xs={12} sm={10} md={11}>
+
+                        <CardActionArea className={classes.movieArea} component={Link} to={"/movies/" + movieId}>
+                            <div className={classes.reviewHeader}>
+
+                                <Typography className={`${classes.movieAreaTitle} ${classes.leftItem}`}
+                                            display="inline">
+                                    {movieTitle}
+                                </Typography>
+
+                                <span className={classes.movieAreaIconContainer}>
+                                    <ArrowForwardIcon className={classes.movieAreaIcon}/>
+                                </span>
+
+                            </div>
+                        </CardActionArea>
+
+                        <CardContent style={{paddingBottom: 8,paddingTop: 8}}>
                             <div>
                                 <Typography variant="h6" className={classes.leftItem}>
                                     {title}
