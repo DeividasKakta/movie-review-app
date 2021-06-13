@@ -56,7 +56,7 @@ const ReviewDialogForm = ({
             {props => (
                 <Form>
 
-                    <DialogContent style={{width: 450}}>
+                    <DialogContent style={{width: 430}}>
 
                         <Grid container spacing={2}>
 
@@ -79,7 +79,7 @@ const ReviewDialogForm = ({
                             <Grid item xs={12}>
                                 <FormControl error={props.touched.rating && !!props.errors.rating}
                                              variant="outlined"
-                                             style={{width: '30%'}}
+                                             style={{width: '33%'}}
                                              margin="normal">
                                     <InputLabel htmlFor="rating">{t('rating')}</InputLabel>
                                     <Field id="rating" name="rating" label={t('rating')} as={Select}>

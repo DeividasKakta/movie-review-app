@@ -118,7 +118,7 @@ const RegisterForm = () => {
                                         disabled={props.isSubmitting}
                                         type="submit"
                                 >
-                                    {t('submit')}
+                                    {t('registerButton')}
                                 </Button>
 
                             </CardActions>

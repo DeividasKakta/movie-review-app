@@ -8,7 +8,7 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "addMovie": "Add new movie"
+    "addMovie": "Add movie"
   },
   "footer": {
     "copyright": "Copyright",
@@ -36,7 +36,7 @@
     "reviewUpdateSuccess": "Review updated successfully.",
     "reviewDeleteSuccess": "Review deleted successfully.",
     "leaveReview": "Leave a review",
-    "loginToReview": "Please login to leave a review",
+    "loginToReview": "Please login to leave a review.",
     "editReview": "Edit your review",
     "createReviewError": "Unexpected error occurred while creating review",
     "updateReviewError": "Unexpected error occurred while editing review",
@@ -46,11 +46,13 @@
     "delete": "Delete"
   },
   "forms": {
-    "loginTitle": "Login",
+    "loginTitle": "Account login",
     "username": "Username",
     "usernamePlaceholder": "Enter your username...",
     "password": "Password",
     "passwordPlaceholder": "Enter your password...",
+    "loginButton": "Login",
+    "registerButton": "Register",
     "submit": "Submit",
     "loginError": "Incorrect username or password",
     "registerTitle": "Account creation",

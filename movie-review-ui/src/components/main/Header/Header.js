@@ -1,5 +1,5 @@
 import {
-    AppBar,
+    AppBar, Avatar,
     Button,
     Container,
     Divider,
@@ -59,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.secondary.dark,
         }
+    },
+    avatar: {
+        backgroundColor: theme.palette.secondary.dark,
+        color: theme.palette.primary.dark
     }
 }));
 
@@ -93,10 +97,17 @@ const Header = () => {
 
                     {
                         currentUser ?
-                            <Button color="secondary" variant="outlined" onClick={() => dispatch(logout())}
-                                    className={classes.link}>
-                                {t('logout')}
-                            </Button> :
+                            <>
+                                <div>
+                                    <Avatar className={classes.avatar}>
+                                        {currentUser.username?.substring(0, 1).toUpperCase()}
+                                    </Avatar>
+                                </div>
+                                <Button color="secondary" variant="outlined" onClick={() => dispatch(logout())}
+                                        className={classes.link}>
+                                    {t('logout')}
+                                </Button>
+                            </> :
                             <>
                                 <Link variant="button" color="inherit" to="/register"
                                       className={classes.link} activeClassName={classes.active} component={NavLink}>

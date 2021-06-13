@@ -8,7 +8,7 @@
     "login": "Prisijungti",
     "register": "Registruotis",
     "logout": "Atsijungti",
-    "addMovie": "Sukurti naują filmą"
+    "addMovie": "Pridėti filmą"
   },
   "footer": {
     "copyright": "Autorių teisės saugomos",
@@ -35,8 +35,8 @@
     "reviewCreateSuccess": "Apžvalga sukurta sėkmingai.",
     "reviewUpdateSuccess": "Apžvalga atnaujinta sėkmingai.",
     "reviewDeleteSuccess": "Apžvalga ištrinta sėkmingai.",
-    "leaveReview": "Palikite apžvalgą",
-    "loginToReview": "Prašome prisijungti norint palikti apžvalgą.",
+    "leaveReview": "Rašykite apžvalgą",
+    "loginToReview": "Prašome prisijungti norint parašyti apžvalgą.",
     "editReview": "Redaguokite savo apžvalgą",
     "createReviewError": "Kuriant apžvalgą įvyko netikėta klaida",
     "updateReviewError": "Atnaujinant apžvalgą įvyko netikėta klaida",
@@ -46,11 +46,13 @@
     "delete": "Ištrinti"
   },
   "forms": {
-    "loginTitle": "Prisijungimas",
+    "loginTitle": "Prisijungimas prie paskyros",
     "username": "Prisijungimo vardas",
     "usernamePlaceholder": "Įveskite prisijungimo vardą...",
     "password": "Slaptažodis",
     "passwordPlaceholder": "Įveskite slaptažodį...",
+    "loginButton": "Prisijungti",
+    "registerButton": "Registruotis",
     "submit": "Pateikti",
     "loginError": "Neteisingas prisijungimo vardas arba slaptažodis",
     "registerTitle": "Paskyros sukūrimas",

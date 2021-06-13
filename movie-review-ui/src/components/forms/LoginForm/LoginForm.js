@@ -110,7 +110,7 @@ const LoginForm = () => {
                                         disabled={props.isSubmitting}
                                         type="submit"
                                 >
-                                    {t('submit')}
+                                    {t('loginButton')}
                                 </Button>
 
                             </CardActions>
