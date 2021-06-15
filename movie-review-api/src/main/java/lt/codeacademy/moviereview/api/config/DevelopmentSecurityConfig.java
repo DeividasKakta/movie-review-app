@@ -36,7 +36,8 @@ public class DevelopmentSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                    .anyRequest().permitAll()
+                    .antMatchers("/reviews/movie/**", "/movies/**", "/register", "/reviews/newest").permitAll()
+                    .anyRequest().authenticated()
                     .and()
                 .exceptionHandling()
                     .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
@@ -53,9 +54,8 @@ public class DevelopmentSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder);
     }
 
-
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/**");
+        web.ignoring().antMatchers("/h2/**");
     }
 }
