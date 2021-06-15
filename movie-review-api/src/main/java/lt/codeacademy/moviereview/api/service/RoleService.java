@@ -1,6 +1,7 @@
 package lt.codeacademy.moviereview.api.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.exception.RoleNotFoundException;
 import lt.codeacademy.moviereview.api.model.entity.Role;
 import lt.codeacademy.moviereview.api.repository.RoleRepository;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,10 @@ public class RoleService {
         roles.add(roleRepository.getUserRole());
 
         return roles;
+    }
+
+    public Role getRoleByName(String name) {
+        return roleRepository.findByName(name)
+                .orElseThrow(RoleNotFoundException::new);
     }
 }

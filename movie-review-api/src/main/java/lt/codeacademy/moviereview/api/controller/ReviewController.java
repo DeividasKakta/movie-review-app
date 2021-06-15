@@ -1,11 +1,13 @@
 package lt.codeacademy.moviereview.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.exception.UnauthorizedException;
 import lt.codeacademy.moviereview.api.model.dto.ReviewDto;
 import lt.codeacademy.moviereview.api.model.entity.Review;
 import lt.codeacademy.moviereview.api.model.entity.User;
 import lt.codeacademy.moviereview.api.service.MovieService;
 import lt.codeacademy.moviereview.api.service.ReviewService;
+import lt.codeacademy.moviereview.api.service.RoleService;
 import lt.codeacademy.moviereview.api.service.UserService;
 import lt.codeacademy.moviereview.api.utils.mapper.ReviewDtoMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +30,7 @@ public class ReviewController {
     private final MovieService movieService;
     private final ReviewDtoMapper reviewDtoMapper;
     private final UserService userService;
+    private final RoleService roleService;
 
     @GetMapping(REVIEW_BY_MOVIE)
     public List<ReviewDto> getReviewsByMovieId(@PathVariable(UUID) UUID uuid) {
@@ -66,25 +69,31 @@ public class ReviewController {
     public void updateReview(@Valid @RequestBody Review review,
                              @PathVariable(UUID) UUID uuid,
                              @AuthenticationPrincipal String username) {
-        Review oldReview = reviewService.getReviewById(uuid);
+        Review originalReview = reviewService.getReviewById(uuid);
 
-        oldReview.setContent(review.getContent());
-        oldReview.setRating(review.getRating());
-        oldReview.setTitle(review.getTitle());
+        if (originalReview.getUser().getUsername().equals(username)) {
+            originalReview.setContent(review.getContent());
+            originalReview.setRating(review.getRating());
+            originalReview.setTitle(review.getTitle());
 
-//        User user = userService.loadUserByUsername(username);
-//
-//        review.setUser(user);
+            reviewService.updateReview(originalReview);
+        } else {
+            throw new UnauthorizedException();
+        }
 
-        reviewService.updateReview(oldReview);
     }
 
     @DeleteMapping(BY_UUID)
-    @PreAuthorize("#reviewUsername eq #username or hasRole('ADMIN')")
     public void deleteReview(@PathVariable(UUID) UUID uuid,
-                             @RequestParam(name = "user") String reviewUsername,
                              @AuthenticationPrincipal String username) {
+        User user = userService.loadUserByUsername(username);
+        Review review = reviewService.getReviewById(uuid);
 
-        reviewService.deleteReviewById(uuid);
+        if (review.getUser().getUsername().equals(username) || user.getRoles().contains(roleService.getRoleByName("ADMIN"))) {
+            reviewService.deleteReviewById(uuid);
+        } else {
+            throw new UnauthorizedException();
+        }
+
     }
 }
