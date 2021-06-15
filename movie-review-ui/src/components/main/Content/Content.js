@@ -51,6 +51,10 @@ const Content = () => {
                     <ErrorPage/>
                 </Route>
 
+                <Route exact path="/error">
+                    <ErrorPage/>
+                </Route>
+
             </Switch>
         </>
     )

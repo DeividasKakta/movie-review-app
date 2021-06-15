@@ -8,6 +8,6 @@ const createReview = (review, params) => HTTP.post("/reviews?movie=" + params, r
 
 const editReview = (review, params) => HTTP.put("/reviews/" + params, review)
 
-const deleteReview = (reviewId, reviewUsername) => HTTP.delete("/reviews/" + reviewId + "?user=" + reviewUsername)
+const deleteReview = (reviewId) => HTTP.delete("/reviews/" + reviewId)
 
 export {fetchReviewsByMovieId, createReview, editReview, deleteReview, fetchNewestReviews}

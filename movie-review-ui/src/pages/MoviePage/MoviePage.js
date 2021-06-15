@@ -135,9 +135,9 @@ const MoviePage = () => {
 
     }
 
-    const postDeleteReview = ({reviewId, username: reviewUsername}) => {
+    const postDeleteReview = ({reviewId}) => {
 
-        deleteReview(reviewId, reviewUsername)
+        deleteReview(reviewId)
             .then(() => {
                 setOpenDeleteReview(false)
 
@@ -171,11 +171,12 @@ const MoviePage = () => {
     useEffect(() => {
         fetchRatedMovieById(id)
             .then(({data}) => setMovie(data))
+            .catch(() => history.push("/error"))
 
         fetchReviewsByMovieId(id)
             .then(({data}) => setReviews(data))
 
-    }, [id])
+    }, [id, history])
 
     return (
         <main className={classes.mainContainer}>
