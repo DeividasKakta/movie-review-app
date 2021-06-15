@@ -27,7 +27,9 @@
     "rating": "Įvertinimas",
     "newestReviews": "Naujausios apžvalgos",
     "about": "Apie mus",
-    "welcome": "Sveiki atvykę į MovieReview"
+    "welcome": "Sveiki atvykę į MovieReview",
+    "error": "Puslapis, kurį bandote pasiekti, neegzistuoja.",
+    "links": "Nuorodos"
   },
   "moviePage": {
     "writeReview": "Parašykite savo apžvalgą",

@@ -8,6 +8,7 @@ import TopMoviesPage from "../../../pages/TopMoviesPage/TopMoviesPage";
 import NewestReviewsPage from "../../../pages/NewestReviewsPage/NewestReviewsPage";
 import AboutPage from "../../../pages/AboutPage/AboutPage";
 import SecuredRoute from "../../security/SecuredRoute/SecuredRoute";
+import ErrorPage from "../../../pages/ErrorPage/ErrorPage";
 
 const Content = () => {
 
@@ -44,6 +45,10 @@ const Content = () => {
 
                 <Route path="/about">
                     <AboutPage/>
+                </Route>
+
+                <Route path="*">
+                    <ErrorPage/>
                 </Route>
 
             </Switch>

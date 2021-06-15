@@ -4,7 +4,7 @@
     "home": "Home",
     "topMovies": "Top movies",
     "newestReviews": "Newest reviews",
-    "about": "About",
+    "about": "About us",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
@@ -26,8 +26,10 @@
     "releaseYear": "Release year",
     "rating": "Rating",
     "newestReviews": "Newest Reviews",
-    "about": "About",
-    "welcome": "Welcome to MovieReview"
+    "about": "About us",
+    "welcome": "Welcome to MovieReview",
+    "error": "The page you are trying to reach does not exist.",
+    "links": "Links"
   },
   "moviePage": {
     "writeReview": "Write your review",
