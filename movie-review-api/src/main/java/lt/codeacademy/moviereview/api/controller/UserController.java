@@ -1,5 +1,8 @@
 package lt.codeacademy.moviereview.api.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.moviereview.api.model.dto.UserRegistrationDto;
@@ -12,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +24,7 @@ import static lt.codeacademy.moviereview.api.config.Endpoint.REGISTER;
 @RestController
 @RequestMapping(REGISTER)
 @RequiredArgsConstructor
+@Api(tags = "User controller")
 public class UserController {
 
     private final UserService userService;
@@ -30,6 +33,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Create new user")
+    @ApiResponse(code = 201, message = "User created successfully")
     public void register(@RequestBody @Valid UserRegistrationDto userDto) {
         User user = new User();
         Set<Role> roles = new HashSet<>();
