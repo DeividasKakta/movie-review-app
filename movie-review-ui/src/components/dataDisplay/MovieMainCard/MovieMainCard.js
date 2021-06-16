@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     divider: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1)
+    },
+    ratingItem: {
+        color: theme.palette.secondary.dark
     }
 }))
 
@@ -48,7 +51,7 @@ const MovieMainCard = ({title, releaseDate, description, cast, rating, picture})
                                     {title}
                                 </Typography>
 
-                                <Typography variant="h4" color="secondary">
+                                <Typography variant="h4" className={classes.ratingItem}>
                                     {
                                         rating === 0 ? "N/A" :
                                             rating?.toFixed(1)

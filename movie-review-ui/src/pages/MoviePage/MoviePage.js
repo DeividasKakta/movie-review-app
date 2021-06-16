@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     },
     loginErrorItem: {
         display: "inline-block",
-        marginLeft: theme.spacing(1)
+        marginLeft: theme.spacing(1),
+        color: theme.palette.secondary.dark
     },
     reviewDialogTitle: {
         backgroundColor: theme.palette.primary.main,
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.error.main,
         borderColor: theme.palette.error.main,
         marginLeft: theme.spacing(2)
+    },
+    buttonColor: {
+        color: theme.palette.secondary.dark,
+        borderColor: theme.palette.secondary.dark,
     }
 }));
 
@@ -193,7 +198,7 @@ const MoviePage = () => {
                 currentUser?.roles?.includes("ADMIN") &&
                 <>
                     <div className={classes.adminPanel}>
-                        <Button variant="outlined" color="secondary" to={"/movies/edit/" + movie.movieId}
+                        <Button variant="outlined" className={classes.buttonColor} to={"/movies/edit/" + movie.movieId}
                                 component={NavLink}>
                             {t('editMovie')}
                         </Button>
@@ -214,7 +219,7 @@ const MoviePage = () => {
 
             {
                 currentUser ?
-                    <Button variant="outlined" color="secondary" onClick={() => setOpenCreateReview(true)}>
+                    <Button variant="outlined" className={classes.buttonColor} onClick={() => setOpenCreateReview(true)}>
                         {t('leaveReview')}
                     </Button> :
                     <div>
@@ -222,7 +227,6 @@ const MoviePage = () => {
                             {t('leaveReview')}
                         </Button>
                         <Link variant="subtitle1"
-                              color="secondary"
                               className={classes.loginErrorItem}
                               to={{
                                   pathname: "/login",
