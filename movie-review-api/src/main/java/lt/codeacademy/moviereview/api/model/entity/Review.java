@@ -23,7 +23,6 @@ public class Review {
     @ManyToOne
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     private Movie movie;
 
