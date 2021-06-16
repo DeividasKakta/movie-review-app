@@ -51,7 +51,6 @@ public class JwtService {
         Claims parsedBody;
 
         try {
-            // Parse and validate JWT
             parsedBody = Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
