@@ -21,18 +21,22 @@ const AboutPage = () => {
 
             <Container maxWidth="sm">
                 <Typography variant="body1" paragraph>
-                    Eget egestas purus viverra accumsan in nisl nisi scelerisque. Amet justo donec enim diam vulputate
-                    ut pharetra sit. Velit sed ullamcorper morbi tincidunt ornare massa. Et sollicitudin ac orci
-                    phasellus egestas tellus rutrum. Eget aliquet nibh praesent tristique. Felis eget nunc lobortis
-                    mattis. Consequat ac felis donec et odio pellentesque diam.
+                    {t('aboutPartOne')}
                 </Typography>
                 <Typography variant="body1" paragraph>
-                    Auctor eu augue ut lectus arcu bibendum. Eu scelerisque felis imperdiet proin fermentum leo vel.
-                    Justo nec ultrices dui sapien eget mi. Volutpat ac tincidunt vitae semper quis lectus nulla at
-                    volutpat. Diam volutpat commodo sed egestas egestas.
+                    {t('aboutPartTwo')}
                 </Typography>
 
                 <Divider/>
+
+                <div align="center">
+                    <Typography color="primary" paragraph variant="h6">
+                        {t('author')}
+                    </Typography>
+                    <Typography variant="body1" paragraph align="center">
+                        {t('authorName')}
+                    </Typography>
+                </div>
 
                 <div align="center">
                     <Typography color="primary" paragraph variant="h6">

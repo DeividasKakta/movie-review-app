@@ -29,7 +29,11 @@
     "about": "Apie mus",
     "welcome": "Sveiki atvykę į MovieReview",
     "error": "Puslapis, kurį bandote pasiekti, neegzistuoja.",
-    "links": "Nuorodos"
+    "links": "Nuorodos",
+    "author": "Autorius",
+    "authorName": "Devidas Kakta",
+    "aboutPartOne": "Tai filmų ir apžvalgų aplikacija. Filmų duomenų bazė, kur vartotojai gali palikti savo apžvalgas ir reitingus prie pasirinkto filmo",
+    "aboutPartTwo": "Ji buvo sukurta naudojant Spring Boot su RESTful web service ir ReactJS."
   },
   "moviePage": {
     "writeReview": "Parašykite savo apžvalgą",

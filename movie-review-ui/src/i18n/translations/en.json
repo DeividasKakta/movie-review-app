@@ -4,7 +4,7 @@
     "home": "Home",
     "topMovies": "Top movies",
     "newestReviews": "Newest reviews",
-    "about": "About us",
+    "about": "About",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
@@ -26,10 +26,14 @@
     "releaseYear": "Release year",
     "rating": "Rating",
     "newestReviews": "Newest Reviews",
-    "about": "About us",
+    "about": "About",
     "welcome": "Welcome to MovieReview",
     "error": "The page you are trying to reach does not exist.",
-    "links": "Links"
+    "links": "Links",
+    "author": "Author",
+    "authorName": "Devidas Kakta",
+    "aboutPartOne": "This is a movie and review application. A database with movies where users can leave their reviews with a rating for select movies.",
+    "aboutPartTwo": "It was created using Spring Boot with RESTful web service and ReactJS."
   },
   "moviePage": {
     "writeReview": "Write your review",
