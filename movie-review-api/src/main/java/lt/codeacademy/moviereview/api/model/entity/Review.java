@@ -20,11 +20,9 @@ public class Review {
     @Type(type = "uuid-char")
     private UUID id;
 
-//    @NotNull
     @ManyToOne
     private User user;
 
-//    @NotNull
     @JsonIgnore
     @ManyToOne
     private Movie movie;
