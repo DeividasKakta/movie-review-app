@@ -26,11 +26,11 @@ public class Actor {
     private UUID id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 50)
     private String name;
 
     @NotBlank
-    @Size(min = 20, max = 512)
+    @Size(max = 50)
     private String surname;
 
     @NotNull
