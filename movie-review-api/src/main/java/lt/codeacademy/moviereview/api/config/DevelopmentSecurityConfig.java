@@ -36,7 +36,7 @@ public class DevelopmentSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/reviews/movie/**", "/movies/**", "/register", "/reviews/newest").permitAll()
+                    .antMatchers("/reviews/movie/**", "/movies/**", "/actors/**", "/register", "/reviews/newest").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .exceptionHandling()
