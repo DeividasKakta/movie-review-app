@@ -3,7 +3,7 @@ package lt.codeacademy.moviereview.api.model.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.UUID;
 
 @Builder
