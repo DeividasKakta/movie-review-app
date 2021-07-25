@@ -1,5 +1,6 @@
 import {
-    AppBar, Avatar,
+    AppBar,
+    Avatar,
     Button,
     Container,
     Divider,
@@ -94,10 +95,17 @@ const Header = () => {
                     {
                         currentUser?.roles.includes("ADMIN") &&
 
-                        <Link variant="button" color="inherit" to="/movies/create"
-                              className={classes.link} activeClassName={classes.active} component={NavLink}>
-                            {t('addMovie')}
-                        </Link>
+                        <>
+                            <Link variant="button" color="inherit" to="/movies/create"
+                                  className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                {t('addMovie')}
+                            </Link>
+
+                            <Link variant="button" color="inherit" to="/actors/create"
+                                  className={classes.link} activeClassName={classes.active} component={NavLink}>
+                                {t('addActor')}
+                            </Link>
+                        </>
                     }
 
                     {

@@ -10,6 +10,7 @@ import AboutPage from "../../../pages/AboutPage/AboutPage";
 import SecuredRoute from "../../security/SecuredRoute/SecuredRoute";
 import ErrorPage from "../../../pages/ErrorPage/ErrorPage";
 import ActorsPage from "../../../pages/ActorsPage/ActorsPage";
+import ActorCreationPage from "../../../pages/ActorCreationPage/ActorCreationPage";
 
 const Content = () => {
 
@@ -25,6 +26,12 @@ const Content = () => {
                 </SecuredRoute>
 
                 <SecuredRoute path="/movies/edit/:id" roles={["ADMIN"]} children={<MovieCreationPage/>} />
+
+                <SecuredRoute path="/actors/create" roles={["ADMIN"]}>
+                    <ActorCreationPage/>
+                </SecuredRoute>
+
+                <SecuredRoute path="/actors/edit/:id" roles={["ADMIN"]} children={<ActorCreationPage/>} />
 
                 <Route exact path="/movies/:id" children={<MoviePage/>}/>
 
