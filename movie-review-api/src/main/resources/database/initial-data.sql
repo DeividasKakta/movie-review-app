@@ -1,3 +1,9 @@
+INSERT INTO actor (id, name, surname, birth_date) VALUES
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105111', 'Lance', 'Doyle', '1985-07-02'),
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105133', 'Alyssa', 'Jimenez', '1988-03-09'),
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105144', 'Kierra', 'Gentry', '1992-11-12'),
+        ('0c9d9f98-c90a-459d-af35-0ff5c2105155', 'Pierre', 'Cox', '2001-04-02');
+
 INSERT INTO movie (id, title, picture, description, cast, release_date, creation_date) VALUES
         ('0c9d9f98-c90a-459d-af35-0ff5c2105127', 'Kodzilla versus Gong', 'https://images.unsplash.com/photo-1623042513067-1c5383626620?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
         'Faucibus a pellentesque sit amet porttitor eget. Egestas integer eget aliquet nibh praesent. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Lorem sed risus ultricies tristique nulla. Nunc eget lorem dolor sed viverra. Sed id semper risus in hendrerit gravida rutrum quisque.',
