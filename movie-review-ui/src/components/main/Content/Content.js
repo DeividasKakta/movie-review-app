@@ -9,6 +9,7 @@ import NewestReviewsPage from "../../../pages/NewestReviewsPage/NewestReviewsPag
 import AboutPage from "../../../pages/AboutPage/AboutPage";
 import SecuredRoute from "../../security/SecuredRoute/SecuredRoute";
 import ErrorPage from "../../../pages/ErrorPage/ErrorPage";
+import ActorsPage from "../../../pages/ActorsPage/ActorsPage";
 
 const Content = () => {
 
@@ -33,6 +34,10 @@ const Content = () => {
 
                 <Route path="/register">
                     <RegisterPage/>
+                </Route>
+
+                <Route path="/actors">
+                    <ActorsPage/>
                 </Route>
 
                 <Route path="/movies/rated/top">

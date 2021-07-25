@@ -86,6 +86,11 @@ const Header = () => {
                         <MovieIcon fontSize="large"/>
                     </div>
 
+                    <Link variant="button" color="inherit" to="/actors"
+                          className={classes.link} activeClassName={classes.active} component={NavLink}>
+                        {t('actors')}
+                    </Link>
+
                     {
                         currentUser?.roles.includes("ADMIN") &&
 
