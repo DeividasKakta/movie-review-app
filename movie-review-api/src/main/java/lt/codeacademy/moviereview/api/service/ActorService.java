@@ -52,4 +52,10 @@ public class ActorService {
             throw new ActorNotFoundException();
         }
     }
+
+    public ActorDto getActorById(UUID uuid) {
+        return actorRepository.findById(uuid)
+                .map(actorDtoMapper::mapToDto)
+                .orElseThrow(ActorNotFoundException::new);
+    }
 }

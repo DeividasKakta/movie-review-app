@@ -27,6 +27,11 @@ public class ActorController {
         return actorService.getAllActors();
     }
 
+    @GetMapping(BY_UUID)
+    public ActorDto getActorById(@PathVariable(UUID) UUID uuid) {
+        return actorService.getActorById(uuid);
+    }
+
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
