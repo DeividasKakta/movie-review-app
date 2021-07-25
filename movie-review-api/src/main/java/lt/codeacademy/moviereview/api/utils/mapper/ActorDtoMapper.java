@@ -9,6 +9,7 @@ public class ActorDtoMapper {
 
     public ActorDto mapToDto(Actor actor) {
         return ActorDto.builder()
+                .id(actor.getId())
                 .name(actor.getName())
                 .surname(actor.getSurname())
                 .birthDate(actor.getBirthDate())
