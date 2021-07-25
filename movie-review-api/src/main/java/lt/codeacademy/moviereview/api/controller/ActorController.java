@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
+
+import static lt.codeacademy.moviereview.api.config.Endpoint.BY_UUID;
+import static lt.codeacademy.moviereview.api.config.Endpoint.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,5 +32,12 @@ public class ActorController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createActor(@Valid @RequestBody Actor actor) {
         actorService.createActor(actor);
+    }
+
+    @PutMapping(BY_UUID)
+    @PreAuthorize("hasRole('ADMIN')")
+    public void updateMovie(@PathVariable(UUID) UUID uuid, @Valid @RequestBody Actor actor) {
+        actor.setId(uuid);
+        actorService.updateActor(actor);
     }
 }

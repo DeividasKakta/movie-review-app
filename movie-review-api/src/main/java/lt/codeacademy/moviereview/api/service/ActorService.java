@@ -1,6 +1,7 @@
 package lt.codeacademy.moviereview.api.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.moviereview.api.exception.ActorNotFoundException;
 import lt.codeacademy.moviereview.api.model.dto.ActorDto;
 import lt.codeacademy.moviereview.api.model.entity.Actor;
 import lt.codeacademy.moviereview.api.repository.ActorRepository;
@@ -33,5 +34,13 @@ public class ActorService {
 
     public void createActor(Actor actor) {
         actorRepository.save(actor);
+    }
+
+    public void updateActor(Actor actor) {
+        if (actorRepository.findById(actor.getId()).isPresent()) {
+            actorRepository.save(actor);
+        } else {
+            throw new ActorNotFoundException();
+        }
     }
 }
