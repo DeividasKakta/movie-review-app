@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 import java.util.UUID;
@@ -34,5 +35,6 @@ public class Actor {
     private String surname;
 
     @NotNull
+    @PastOrPresent
     private Date birthDate;
 }
