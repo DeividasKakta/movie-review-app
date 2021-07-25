@@ -31,4 +31,7 @@ public class ActorService {
         }
     }
 
+    public void createActor(Actor actor) {
+        actorRepository.save(actor);
+    }
 }
