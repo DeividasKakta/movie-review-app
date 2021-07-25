@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +41,14 @@ public class ActorService {
         if (actorRepository.findById(actor.getId()).isPresent()) {
             actorRepository.save(actor);
         } else {
+            throw new ActorNotFoundException();
+        }
+    }
+
+    public void deleteActorById(UUID uuid) {
+        try {
+            actorRepository.deleteById(uuid);
+        } catch (Exception e) {
             throw new ActorNotFoundException();
         }
     }

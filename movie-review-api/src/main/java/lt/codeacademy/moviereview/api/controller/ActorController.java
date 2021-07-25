@@ -40,4 +40,11 @@ public class ActorController {
         actor.setId(uuid);
         actorService.updateActor(actor);
     }
+
+    @DeleteMapping(BY_UUID)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteActor(@PathVariable(UUID) UUID uuid) {
+        actorService.deleteActorById(uuid);
+    }
 }
