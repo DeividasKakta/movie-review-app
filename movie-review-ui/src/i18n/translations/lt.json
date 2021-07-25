@@ -43,8 +43,6 @@
     "actorName": "Vardas",
     "actorBirthdate": "Gimimo data",
     "actions": "Veiksmai",
-    "editActor": "Redaguoti",
-    "removeActor": "Ištrinti",
     "deleteThisActor": "Ar ištrinti šį aktorių?",
     "cancel": "Atšaukti",
     "delete": "Ištrinti",

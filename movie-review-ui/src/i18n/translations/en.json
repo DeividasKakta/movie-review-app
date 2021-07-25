@@ -43,8 +43,6 @@
     "actorName": "Name",
     "actorBirthdate": "Date of birth",
     "actions": "Actions",
-    "editActor": "Edit",
-    "removeActor": "Remove",
     "deleteThisActor": "Delete this actor?",
     "cancel": "Cancel",
     "delete": "Delete",

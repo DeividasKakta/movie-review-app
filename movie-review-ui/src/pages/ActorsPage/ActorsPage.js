@@ -22,6 +22,8 @@ import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {loggedInUser} from "../../store/slices/userSlice";
 import CustomSnackbar from "../../components/feedback/CustomSnackbar";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -32,10 +34,6 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const useStyles = makeStyles((theme) => ({
-    cardMedia: {
-        width: theme.spacing(8),
-        height: theme.spacing(10),
-    },
     mainHeader: {
         marginBottom: theme.spacing(3),
     },
@@ -45,15 +43,14 @@ const useStyles = makeStyles((theme) => ({
     tableCell: {
         fontSize: theme.spacing(3),
     },
-    imageCell: {
-        padding: theme.spacing(0.5),
+    dateCell: {
+        color: theme.palette.primary.dark
     },
-    ratingCell: {
+    actionCell: {
         color: theme.palette.secondary.dark
     },
     deleteButton: {
-        color: theme.palette.error.main,
-        borderColor: theme.palette.error.main,
+        color: theme.palette.error.dark,
         marginLeft: theme.spacing(2)
     },
     buttonColor: {
@@ -151,7 +148,7 @@ const ActorsPage = () => {
                                     {actor.name}
                                 </TableCell>
 
-                                <TableCell align="right" className={`${classes.tableCell} ${classes.ratingCell}`}>
+                                <TableCell align="right" className={`${classes.tableCell} ${classes.dateCell}`}>
                                     {
                                         moment(actor.birthDate)?.format("YYYY-MM-DD")
                                     }
@@ -161,15 +158,15 @@ const ActorsPage = () => {
                                     currentUser?.roles?.includes("ADMIN") &&
                                     <>
                                         <TableCell align="right"
-                                                   className={`${classes.tableCell} ${classes.ratingCell}`}>
-                                            <Button variant="outlined" className={classes.buttonColor}
+                                                   className={`${classes.tableCell} ${classes.actionCell}`}>
+                                            <Button className={classes.buttonColor}
                                                     to={"/actors/edit/" + actor.id}
                                                     component={NavLink}>
-                                                {t('editActor')}
+                                                <EditIcon/>
                                             </Button>
-                                            <Button variant="outlined" className={classes.deleteButton}
+                                            <Button className={classes.deleteButton}
                                                     onClick={() => initiateActorDelete(actor.id)}>
-                                                {t('removeActor')}
+                                                <DeleteIcon/>
                                             </Button>
                                         </TableCell>
                                     </>

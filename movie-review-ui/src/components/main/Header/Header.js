@@ -87,7 +87,7 @@ const Header = () => {
                         <MovieIcon fontSize="large"/>
                     </div>
 
-                    <Link variant="button" color="inherit" to="/actors"
+                    <Link variant="button" color="inherit" exact to="/actors"
                           className={classes.link} activeClassName={classes.active} component={NavLink}>
                         {t('actors')}
                     </Link>
