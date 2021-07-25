@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActorsPage = () => {
     const classes = useStyles()
-    const {t} = useTranslation("pages")
+    const {t} = useTranslation("actorPage")
     const currentUser = useSelector(loggedInUser)
 
     const [actors, setActors] = useState([])

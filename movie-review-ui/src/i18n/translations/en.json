@@ -8,7 +8,9 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
-    "addMovie": "Add movie"
+    "addMovie": "Add movie",
+    "actors": "Actors",
+    "addActor": "Add actor"
   },
   "footer": {
     "copyright": "Copyright",
@@ -34,6 +36,20 @@
     "authorName": "Devidas Kakta",
     "aboutPartOne": "This is a movie and review application. A database with movies where users can leave their reviews with a rating for select movies.",
     "aboutPartTwo": "It was created using Spring Boot with RESTful web service and ReactJS."
+  },
+  "actorPage": {
+    "actors": "Actors",
+    "actorSurname": "Surname",
+    "actorName": "Name",
+    "actorBirthdate": "Date of birth",
+    "actions": "Actions",
+    "editActor": "Edit",
+    "removeActor": "Remove",
+    "deleteThisActor": "Delete this actor?",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "actorDeleteSuccess": "Actor deleted successfully.",
+    "actorDeleteError": "Unexpected error occurred while deleting actor"
   },
   "moviePage": {
     "writeReview": "Write your review",
@@ -90,7 +106,18 @@
     "pictureURL": "Picture URL",
     "pictureURLPlaceholder": "Enter movie picture URL...",
     "createMovieSuccess": "Movie created successfully.",
-    "createMovieError": "Unexpected error occurred while creating movie."
+    "createMovieError": "Unexpected error occurred while creating movie.",
+    "editActorTitle": "Edit actor",
+    "createActorTitle": "Create actor",
+    "actorName": "Actor name",
+    "actorNamePlaceholder": "Enter actor name...",
+    "actorSurname": "Actor surname",
+    "actorSurnamePlaceholder": "Enter actor surname...",
+    "actorBirthDate": "Actor date of birth",
+    "createActorError": "Unexpected error occurred while creating actor.",
+    "createActorSuccess": "Actor created successfully.",
+    "updateActorError": "Unexpected error occurred while updating actor.",
+    "updateActorSuccess": "Actor updated successfully."
   },
   "validation": {
     "required": "Field is required",
@@ -111,6 +138,9 @@
     "movieDescriptionMin": "Description can not be shorter than 20 symbols",
     "movieDescriptionMax": "Description can not be longer than 512 symbols",
     "movieCastMin": "Cast list can not be shorter than 5 symbols",
-    "movieCastMax": "Cast list can not be longer than 256 symbols"
+    "movieCastMax": "Cast list can not be longer than 256 symbols",
+    "actorNameMax": "Actor name can not be longer than 50 symbols",
+    "actorSurnameMax": "Actor surname can not be longer than 50 symbols",
+    "actorDateError": "Invalid date"
   }
 }

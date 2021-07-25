@@ -8,7 +8,9 @@
     "login": "Prisijungti",
     "register": "Registruotis",
     "logout": "Atsijungti",
-    "addMovie": "Pridėti filmą"
+    "addMovie": "Pridėti filmą",
+    "actors": "Aktoriai",
+    "addActor": "Pridėti aktorių"
   },
   "footer": {
     "copyright": "Autorių teisės saugomos",
@@ -34,6 +36,20 @@
     "authorName": "Devidas Kakta",
     "aboutPartOne": "Tai filmų ir apžvalgų aplikacija. Filmų duomenų bazė, kur vartotojai gali palikti savo apžvalgas ir reitingus prie pasirinkto filmo",
     "aboutPartTwo": "Ji buvo sukurta naudojant Spring Boot su RESTful web service ir ReactJS."
+  },
+  "actorPage": {
+    "actors": "Aktoriai",
+    "actorSurname": "Pavardė",
+    "actorName": "Vardas",
+    "actorBirthdate": "Gimimo data",
+    "actions": "Veiksmai",
+    "editActor": "Redaguoti",
+    "removeActor": "Ištrinti",
+    "deleteThisActor": "Ar ištrinti šį aktorių?",
+    "cancel": "Atšaukti",
+    "delete": "Ištrinti",
+    "actorDeleteSuccess": "Aktorius ištrintas sėkmingai.",
+    "actorDeleteError": "Trinant aktorių įvyko netikėta klaida"
   },
   "moviePage": {
     "writeReview": "Parašykite savo apžvalgą",
@@ -90,7 +106,18 @@
     "pictureURL": "Paveikslėlio URL",
     "pictureURLPlaceholder": "Įveskite filmo paveikslėlio URL...",
     "createMovieSuccess": "Filmas sukurtas sėkmingai.",
-    "createMovieError": "Kuriant filmą įvyko netikėta klaida."
+    "createMovieError": "Kuriant filmą įvyko netikėta klaida.",
+    "editActorTitle": "Redaguoti aktorių",
+    "createActorTitle": "Sukurti aktorių",
+    "actorName": "Aktoriaus vardas",
+    "actorNamePlaceholder": "Įveskite aktoriaus vardą...",
+    "actorSurname": "Aktoriaus vardas",
+    "actorSurnamePlaceholder": "Įveskite aktoriaus vardą...",
+    "actorBirthDate": "Aktoriaus gimimo data",
+    "createActorError": "Kuriant aktorių įvyko netikėta klaida.",
+    "createActorSuccess": "Aktorius sukurtas sėkmingai.",
+    "updateActorError": "Atnaujinant aktorių įvyko netikėta klaida.",
+    "updateActorSuccess": "Aktorius atnaujintas sėkmingai."
   },
   "validation": {
     "required": "Laukas yra privalomas",
@@ -111,6 +138,9 @@
     "movieDescriptionMin": "Aprašymas negali būti trumpesnis nei 20 simbolių",
     "movieDescriptionMax": "Aprašymas negali būti ilgesnis nei 512 simbolių",
     "movieCastMin": "Aktorių sąrašas negali būti trumpesnis nei 5 simboliai",
-    "movieCastMax": "Aktorių sąrašas negali būti ilgesnis nei 256 simboliai"
+    "movieCastMax": "Aktorių sąrašas negali būti ilgesnis nei 256 simboliai",
+    "actorNameMax": "Aktoriaus vardas negali būti ilgesnis nei 50 simbolių",
+    "actorSurnameMax": "Aktoriaus pavardė negali būti ilgesnė nei 50 simbolių",
+    "actorDateError": "Neteisinga data"
   }
 }
